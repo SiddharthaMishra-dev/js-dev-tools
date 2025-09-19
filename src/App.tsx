@@ -61,7 +61,7 @@ const App = () => {
 
  return (
   <div className="min-h-screen bg-gradient-to-br from-slate-50 to-slate-100 py-8 px-4 flex flex-col items-center justify-between">
-   <div className="max-w-4xl flex-1 flex flex-col items-center justify-center mx-auto">
+   <div className="w-full max-w-5xl flex-1 flex flex-col items-center justify-center mx-auto">
     <div className="text-center mb-8">
      <h1 className="text-2xl font-bold text-gray-800 mb-2">
       Image to <span className="text-blue-600">Base64</span> Converter
@@ -108,7 +108,7 @@ const App = () => {
      <input type="file" accept="image/*" ref={imageRef} className="hidden" onChange={handleFileChange} />
     </div>
     {base64Result && (
-     <div className="bg-white rounded-xl shadow-lg p-6">
+     <div className="bg-white w-full max-w-4xl rounded-xl shadow-lg p-6">
       <div className="flex justify-between items-center mb-4">
        <h3 className="text-xl font-semibold text-gray-800">Base64 Data URI</h3>
        <button
