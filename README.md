@@ -9,6 +9,7 @@ Try it out [here](https://image-to-base64-sidme.vercel.app/).
 ## Tech Stack
 
 - React with TypeScript
+- React Router DOM for routing
 - Tailwind CSS for styling
 - RsBuild as the build tool
 
