@@ -50,11 +50,14 @@ export default function Home() {
        </div>
       </Link>
 
-      <div className="bg-white rounded-xl shadow-lg p-8 border border-gray-100 opacity-60">
+      <Link
+       to="/image-format-converter"
+       className="group bg-white rounded-xl shadow-lg hover:shadow-xl transition-all duration-300 p-8 border border-gray-100 hover:border-blue-200"
+      >
        <div className="flex items-start space-x-4">
         <div className="flex-shrink-0">
-         <div className="w-12 h-12 bg-gray-100 rounded-lg flex items-center justify-center">
-          <svg className="w-6 h-6 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+         <div className="w-12 h-12 bg-blue-100 rounded-lg flex items-center justify-center group-hover:bg-blue-200 transition-colors">
+          <svg className="w-6 h-6 text-blue-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
            <path
             strokeLinecap="round"
             strokeLinejoin="round"
@@ -65,14 +68,14 @@ export default function Home() {
          </div>
         </div>
         <div className="flex-1">
-         <h3 className="text-xl font-semibold text-gray-600 mb-2">Image Format Converter</h3>
-         <p className="text-gray-500 text-sm leading-relaxed">Convert between different image formats</p>
-         <div className="mt-4">
-          <span className="inline-flex items-center px-3 py-1 rounded-full text-xs font-medium bg-gray-100 text-gray-600">Coming Soon</span>
+         <h3 className="text-xl font-semibold text-gray-800 mb-2 group-hover:text-blue-600 transition-colors">Image Format Converter</h3>
+         <p className="text-gray-600 text-sm leading-relaxed">Convert between different image formats</p>
+         <div className="mt-4 flex items-center text-blue-600 text-sm font-medium">
+          <span>Try it now</span>
          </div>
         </div>
        </div>
-      </div>
+      </Link>
      </div>
 
      <div className="mt-16 text-center">
