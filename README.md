@@ -1,8 +1,13 @@
 # Just For Fun
 
-## Image to Base 64 converter
+## JS Dev Tools
 
-It's a simple Image to Base 64 converter. Build using core browser API's (FileReader).
+Combination of multiple small tools for JavaScript developers.
+
+### - Image to Base 64 Converter
+
+### - Image converter
+
 Try it out [here](https://image-to-base64-sidme.vercel.app/).
 ![screenshot](./src/assets/screenshot.png)
 
