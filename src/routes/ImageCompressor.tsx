@@ -1,3 +1,4 @@
+import { IconCheck, IconCircleX, IconCloudUpload } from '@tabler/icons-react';
 import { useState, useRef } from 'react';
 
 interface CompressedFile {
@@ -212,19 +213,7 @@ export default function ImageCompressor() {
       }`}
      >
       <div className="flex flex-col items-center space-y-4">
-       <svg
-        className={`w-16 h-16 ${isDragging ? 'text-amber-500' : 'text-gray-400'} transition-colors`}
-        fill="none"
-        stroke="currentColor"
-        viewBox="0 0 24 24"
-       >
-        <path
-         strokeLinecap="round"
-         strokeLinejoin="round"
-         strokeWidth={2}
-         d="M7 16a4 4 0 01-.88-7.903A5 5 0 1115.9 6L16 6a5 5 0 011 9.9M15 13l-3-3m0 0l-3 3m3-3v12"
-        />
-       </svg>
+       <IconCloudUpload className={`w-16 h-16 ${isDragging ? 'text-amber-500' : 'text-gray-400'} transition-colors`} />
        <div>
         <p className="text-xl font-medium text-gray-100 mb-2">{isDragging ? 'Drop your images here' : 'Drag & drop your images here'}</p>
         <p className="text-gray-400 mb-4">or</p>
@@ -350,13 +339,7 @@ export default function ImageCompressor() {
           )}
           {file.status === 'completed' && (
            <div className="flex items-center space-x-2">
-            <svg className="w-4 h-4 text-green-400" fill="currentColor" viewBox="0 0 20 20">
-             <path
-              fillRule="evenodd"
-              d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z"
-              clipRule="evenodd"
-             />
-            </svg>
+            <IconCheck className="w-4 h-4 text-green-400" />
             <button
              onClick={() => downloadFile(file)}
              className="px-3 py-1 bg-green-700 text-green-100 text-sm rounded hover:bg-green-600 transition-colors"
@@ -367,13 +350,7 @@ export default function ImageCompressor() {
           )}
           {file.status === 'error' && (
            <div className="flex items-center space-x-2">
-            <svg className="w-4 h-4 text-red-400" fill="currentColor" viewBox="0 0 20 20">
-             <path
-              fillRule="evenodd"
-              d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-7 4a1 1 0 11-2 0 1 1 0 012 0zm-1-9a1 1 0 00-1 1v4a1 1 0 102 0V6a1 1 0 00-1-1z"
-              clipRule="evenodd"
-             />
-            </svg>
+            <IconCircleX className="w-4 h-4 text-red-400" />
             <span className="text-red-400 text-sm">Failed</span>
            </div>
           )}
@@ -383,8 +360,6 @@ export default function ImageCompressor() {
       </div>
      </div>
     )}
-
-    {/* Help Text */}
     <div className="text-center mt-4">
      <p className="text-gray-400 text-xs">
       <sup>*</sup>Images are resized and compressed to JPEG format for optimal file size reduction
