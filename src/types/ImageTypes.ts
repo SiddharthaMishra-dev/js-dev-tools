@@ -5,5 +5,6 @@ export interface ConversionItem {
  originalFormat: string;
  status: 'pending' | 'converting' | 'completed' | 'error';
  downloadUrl?: string;
- error?: string;
+    error?: string;
+    blob?: Blob;
 }

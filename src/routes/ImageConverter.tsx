@@ -1,6 +1,7 @@
 import { useRef, useState, useCallback } from 'react';
 import type { ConversionItem } from '../types/ImageTypes';
-import { IconCheck, IconCircleX, IconCloudUpload } from '@tabler/icons-react';
+import { IconCheck, IconCircleX, IconCloudUpload, IconDownload } from '@tabler/icons-react';
+import JSZip from 'jszip';
 
 export default function ImageConverter() {
  const uploadRef = useRef<HTMLInputElement>(null);
@@ -8,6 +9,7 @@ export default function ImageConverter() {
  const [conversions, setConversions] = useState<ConversionItem[]>([]);
  const [isDragging, setIsDragging] = useState(false);
  const [isConverting, setIsConverting] = useState(false);
+ const [isDownloadingZip, setIsDownloadingZip] = useState(false);
 
  const supportedFormats = [
   { value: 'png', label: 'PNG', mime: 'image/png' },
@@ -86,7 +88,7 @@ export default function ImageConverter() {
       (blob) => {
        if (blob) {
         const downloadUrl = URL.createObjectURL(blob);
-        setConversions((prev) => prev.map((conv) => (conv.id === item.id ? { ...conv, status: 'completed', downloadUrl } : conv)));
+        setConversions((prev) => prev.map((conv) => (conv.id === item.id ? { ...conv, status: 'completed', downloadUrl, blob } : conv)));
         resolve();
        } else {
         reject(new Error('Failed to convert image'));
@@ -140,6 +142,48 @@ export default function ImageConverter() {
   document.body.removeChild(link);
  };
 
+ const downloadAllAsZip = async () => {
+  const completedFiles = conversions.filter((item) => item.status === 'completed' && item.blob);
+
+  if (completedFiles.length === 0) {
+   alert('No converted files available for download');
+   return;
+  }
+
+  setIsDownloadingZip(true);
+
+  try {
+   const zip = new JSZip();
+
+   // Add each converted file to the ZIP
+   for (const item of completedFiles) {
+    if (item.blob) {
+     const fileName = `${item.name.split('.')[0]}.${selectedFormat}`;
+     zip.file(fileName, item.blob);
+    }
+   }
+
+   // Generate the ZIP file
+   const zipBlob = await zip.generateAsync({ type: 'blob' });
+
+   // Create download link
+   const link = document.createElement('a');
+   link.href = URL.createObjectURL(zipBlob);
+   link.download = `converted_images_${selectedFormat.toUpperCase()}_${Date.now()}.zip`;
+   document.body.appendChild(link);
+   link.click();
+   document.body.removeChild(link);
+
+   // Clean up
+   URL.revokeObjectURL(link.href);
+  } catch (error) {
+   console.error('Error creating ZIP file:', error);
+   alert('Failed to create ZIP file');
+  } finally {
+   setIsDownloadingZip(false);
+  }
+ };
+
  const clearAll = () => {
   conversions.forEach((item) => {
    if (item.downloadUrl) {
@@ -152,6 +196,8 @@ export default function ImageConverter() {
   }
  };
 
+ const completedCount = conversions.filter((item) => item.status === 'completed').length;
+
  return (
   <div className="min-h-screen bg-gradient-to-br from-gray-800 to-slate-900 py-8 px-4 flex flex-col items-center justify-between">
    <div className="w-full max-w-5xl flex-1 flex flex-col items-center justify-center mx-auto">
@@ -162,6 +208,7 @@ export default function ImageConverter() {
      </h1>
      <p className="text-md text-gray-200">Convert your images between different formats with ease</p>
     </div>
+
     <div className="bg-gray-800 rounded-xl shadow-lg p-8 mb-6 w-full max-w-2xl">
      <div
       onDragOver={handleDragOver}
@@ -187,6 +234,7 @@ export default function ImageConverter() {
      </div>
 
      <input type="file" accept="image/*" ref={uploadRef} className="hidden" multiple onChange={handleFileUpload} />
+
      {conversions.length > 0 && (
       <div className="mt-6 pt-6 border-t border-gray-600">
        <div className="flex flex-col sm:flex-row items-center justify-between gap-4">
@@ -209,6 +257,7 @@ export default function ImageConverter() {
          <button onClick={clearAll} className="px-4 py-2 text-red-400 hover:bg-red-900/20 rounded-lg transition-colors duration-200">
           Clear All
          </button>
+
          <button
           onClick={handleConvertAll}
           disabled={isConverting}
@@ -224,7 +273,29 @@ export default function ImageConverter() {
 
     {conversions.length > 0 && (
      <div className="bg-gray-800 rounded-xl shadow-lg p-6 w-full max-w-4xl">
-      <h3 className="text-xl font-semibold text-gray-100 mb-4">Conversion Results ({conversions.length} files)</h3>
+      <div className="w-full flex justify-between items-center mb-3">
+       <h3 className="text-xl font-semibold text-gray-100 mb-4">Conversion Results ({conversions.length} files)</h3>
+       {completedCount > 0 && (
+        <button
+         onClick={downloadAllAsZip}
+         disabled={isDownloadingZip}
+         className="px-4 py-2 bg-green-700 text-green-100 rounded-lg hover:bg-green-600 disabled:opacity-50 disabled:cursor-not-allowed transition-colors duration-200 font-medium shadow-md hover:shadow-lg flex items-center space-x-2"
+        >
+         {isDownloadingZip ? (
+          <>
+           <div className="w-4 h-4 border-2 border-green-300 border-t-transparent rounded-full animate-spin"></div>
+           <span>Creating ZIP...</span>
+          </>
+         ) : (
+          <>
+           <IconDownload className="w-4 h-4" />
+           <span>Download ZIP ({completedCount})</span>
+          </>
+         )}
+        </button>
+       )}
+      </div>
+
       <div className="space-y-3">
        {conversions.map((item) => (
         <div key={item.id} className="flex items-center justify-between p-4 border border-gray-600 rounded-lg bg-gray-700">

@@ -13,6 +13,7 @@ interface CompressedFile {
  compressionRatio?: number;
  error?: string;
  ext: string;
+ mimeType: string;
 }
 
 export default function ImageCompressor() {
@@ -22,6 +23,7 @@ export default function ImageCompressor() {
  const [maxHeight, setMaxHeight] = useState(1080);
  const [isDragging, setIsDragging] = useState(false);
  const [isCompressing, setIsCompressing] = useState(false);
+ const [preserveFormat, setPreserveFormat] = useState(true);
  const fileInputRef = useRef<HTMLInputElement>(null);
 
  const handleFileChange = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -60,7 +62,8 @@ export default function ImageCompressor() {
    originalSize: file.size,
    originalFile: file,
    status: 'ready',
-   ext: file.type.split('/')[1],
+   ext: file.name.split('.').pop()?.toLowerCase() || 'jpg',
+   mimeType: file.type,
   }));
 
   setFiles(filesObj);
@@ -81,6 +84,7 @@ export default function ImageCompressor() {
 
      let { width, height } = img;
 
+     // Calculate new dimensions if resizing is needed
      if (width > maxWidth || height > maxHeight) {
       const ratio = Math.min(maxWidth / width, maxHeight / height);
       width = Math.round(width * ratio);
@@ -90,7 +94,21 @@ export default function ImageCompressor() {
      canvas.width = width;
      canvas.height = height;
 
+     // Handle PNG transparency
+     if (fileObj.mimeType === 'image/png' && preserveFormat) {
+      // For PNG, preserve transparency
+      ctx.clearRect(0, 0, width, height);
+     } else {
+      // For JPEG or when converting to JPEG, use white background
+      ctx.fillStyle = '#FFFFFF';
+      ctx.fillRect(0, 0, width, height);
+     }
+
      ctx.drawImage(img, 0, 0, width, height);
+
+     // Determine output format and quality
+     const outputMimeType = preserveFormat ? fileObj.mimeType : 'image/jpeg';
+     const outputQuality = outputMimeType === 'image/jpeg' ? quality : undefined;
 
      canvas.toBlob(
       (blob) => {
@@ -118,8 +136,8 @@ export default function ImageCompressor() {
         reject(new Error('Compression failed'));
        }
       },
-      `image/jpeg`,
-      quality,
+      outputMimeType,
+      outputQuality,
      );
     } catch (error) {
      reject(error);
@@ -142,6 +160,7 @@ export default function ImageCompressor() {
 
   setIsCompressing(true);
   setFiles((prev) => prev.map((f) => ({ ...f, status: 'compressing' })));
+
   for (const fileObj of files) {
    try {
     await compressImage(fileObj);
@@ -158,7 +177,12 @@ export default function ImageCompressor() {
 
   const link = document.createElement('a');
   link.href = fileObj.downloadUrl;
-  link.download = `compressed_${fileObj.name.replace(/\.[^/.]+$/, '')}.jpg`;
+
+  // Preserve original extension or use jpg if converting
+  const originalName = fileObj.name.replace(/\.[^/.]+$/, '');
+  const extension = preserveFormat ? fileObj.ext : 'jpg';
+  link.download = `compressed_${originalName}.${extension}`;
+
   document.body.appendChild(link);
   link.click();
   document.body.removeChild(link);
@@ -202,7 +226,6 @@ export default function ImageCompressor() {
      <p className="text-md text-gray-200">Compress your images to reduce file size while maintaining quality</p>
     </div>
 
-    {/* Upload Area */}
     <div className="bg-gray-800 rounded-xl shadow-lg p-8 mb-6 w-full max-w-2xl">
      <div
       onDragOver={handleDragOver}
@@ -228,28 +251,48 @@ export default function ImageCompressor() {
      </div>
 
      <input type="file" accept="image/*" multiple ref={fileInputRef} className="hidden" onChange={handleFileChange} />
+
      {files.length > 0 && (
       <div className="mt-6 pt-6 border-t border-gray-600">
        <h3 className="text-lg font-semibold text-gray-100 mb-4">Compression Settings</h3>
+
+       {/* Format Preservation Toggle */}
        <div className="mb-4">
-        <div className="flex justify-between items-center mb-2">
-         <label className="text-sm font-medium text-gray-200">Quality</label>
-         <span className="text-sm text-amber-200 font-medium">{Math.round(quality * 100)}%</span>
-        </div>
-        <input
-         type="range"
-         min="0.1"
-         max="1"
-         step="0.05"
-         value={quality}
-         onChange={(e) => setQuality(parseFloat(e.target.value))}
-         className="w-full h-2 bg-gray-600 rounded-lg appearance-none cursor-pointer slider"
-        />
-        <div className="flex justify-between text-xs text-gray-400 mt-1">
-         <span>Lower quality</span>
-         <span>Higher quality</span>
-        </div>
+        <label className="flex items-center space-x-3 cursor-pointer">
+         <input
+          type="checkbox"
+          checked={preserveFormat}
+          onChange={(e) => setPreserveFormat(e.target.checked)}
+          className="w-4 h-4 text-amber-600 bg-gray-700 border-gray-600 rounded focus:ring-amber-500"
+         />
+         <span className="text-sm font-medium text-gray-200">Preserve original format</span>
+        </label>
+        <p className="text-xs text-gray-400 mt-1">
+         {preserveFormat ? 'Keep original file formats (PNG, JPEG, etc.)' : 'Convert all images to JPEG for better compression'}
+        </p>
        </div>
+
+       {(!preserveFormat || files.some((f) => f.mimeType === 'image/jpeg')) && (
+        <div className="mb-4">
+         <div className="flex justify-between items-center mb-2">
+          <label className="text-sm font-medium text-gray-200">Quality {!preserveFormat ? '' : '(JPEG only)'}</label>
+          <span className="text-sm text-amber-200 font-medium">{Math.round(quality * 100)}%</span>
+         </div>
+         <input
+          type="range"
+          min="0.1"
+          max="1"
+          step="0.05"
+          value={quality}
+          onChange={(e) => setQuality(parseFloat(e.target.value))}
+          className="w-full h-2 bg-gray-600 rounded-lg appearance-none cursor-pointer slider"
+         />
+         <div className="flex justify-between text-xs text-gray-400 mt-1">
+          <span>Lower quality</span>
+          <span>Higher quality</span>
+         </div>
+        </div>
+       )}
 
        <div className="grid grid-cols-1 md:grid-cols-2 gap-4 mb-6">
         <div>
@@ -310,7 +353,10 @@ export default function ImageCompressor() {
        {files.map((file) => (
         <div key={file.id} className="flex items-center justify-between p-4 border border-gray-600 rounded-lg bg-gray-700">
          <div className="flex-1 min-w-0">
-          <p className="font-medium text-gray-100 truncate">{file.name}</p>
+          <div className="flex items-center space-x-2 mb-1">
+           <p className="font-medium text-gray-100 truncate">{file.name}</p>
+           <span className="text-xs px-2 py-1 bg-gray-600 text-gray-300 rounded uppercase">{file.ext}</span>
+          </div>
           <div className="flex items-center space-x-4 mt-1 flex-wrap">
            <span className="text-xs text-gray-400">Original: {formatFileSize(file.originalSize)}</span>
            {file.compressedSize && (
@@ -360,9 +406,10 @@ export default function ImageCompressor() {
       </div>
      </div>
     )}
+
     <div className="text-center mt-4">
      <p className="text-gray-400 text-xs">
-      <sup>*</sup>Images are resized and compressed to JPEG format for optimal file size reduction
+      <sup>*</sup>PNG files are compressed by resizing only. JPEG files support quality compression.
      </p>
     </div>
    </div>
@@ -382,23 +429,23 @@ export default function ImageCompressor() {
    </div>
 
    <style>{`
-    .slider::-webkit-slider-thumb {
-     appearance: none;
-     height: 20px;
-     width: 20px;
-     border-radius: 50%;
-     background: #f59e0b;
-     cursor: pointer;
-    }
-    .slider::-moz-range-thumb {
-     height: 20px;
-     width: 20px;
-     border-radius: 50%;
-     background: #f59e0b;
-     cursor: pointer;
-     border: none;
-    }
-   `}</style>
+        .slider::-webkit-slider-thumb {
+          appearance: none;
+          height: 20px;
+          width: 20px;
+          border-radius: 50%;
+          background: #f59e0b;
+          cursor: pointer;
+        }
+        .slider::-moz-range-thumb {
+          height: 20px;
+          width: 20px;
+          border-radius: 50%;
+          background: #f59e0b;
+          cursor: pointer;
+          border: none;
+        }
+      `}</style>
   </div>
  );
 }
