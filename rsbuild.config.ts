@@ -5,5 +5,10 @@ export default defineConfig({
     html: {
       template:"./static/index.html"  
     },
-    plugins: [pluginReact()],
+  plugins: [pluginReact()],
+  performance: {
+    chunkSplit: {
+        strategy:"split-by-experience"
+      }
+    }
 });

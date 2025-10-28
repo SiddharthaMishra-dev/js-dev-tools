@@ -1,5 +1,6 @@
-import { IconCheck, IconCircleX, IconCloudUpload } from '@tabler/icons-react';
+import { IconCheck, IconCircleX, IconCloudUpload, IconDownload } from '@tabler/icons-react';
 import { useState, useRef } from 'react';
+import JSZip from 'jszip';
 
 interface CompressedFile {
  id: string;
@@ -18,13 +19,14 @@ interface CompressedFile {
 
 export default function ImageCompressor() {
  const [files, setFiles] = useState<CompressedFile[]>([]);
- const [quality, setQuality] = useState(0.7);
+ const [quality, setQuality] = useState(0.3);
  const [maxWidth, setMaxWidth] = useState(1920);
  const [maxHeight, setMaxHeight] = useState(1080);
  const [isDragging, setIsDragging] = useState(false);
  const [isCompressing, setIsCompressing] = useState(false);
  const [preserveFormat, setPreserveFormat] = useState(true);
  const fileInputRef = useRef<HTMLInputElement>(null);
+ const [isDownloadingZip, setIsDownloadingZip] = useState(false);
 
  const handleFileChange = (e: React.ChangeEvent<HTMLInputElement>) => {
   const selectedFiles = Array.from(e.target.files || []);
@@ -188,6 +190,40 @@ export default function ImageCompressor() {
   document.body.removeChild(link);
  };
 
+ const downloadAllAsZip = async () => {
+  const completedFiles = files.filter((f) => f.status === 'completed' && f.compressedBlob);
+
+  if (completedFiles.length === 0) {
+   alert('No compressed files available for download.');
+   return;
+  }
+
+  try {
+   const zip = new JSZip();
+   for (const item of completedFiles) {
+    if (item.compressedBlob) {
+     const filName = `${item.name.split('.')[0]}.${preserveFormat ? item.ext : 'jpg'}`;
+     zip.file(filName, item.compressedBlob);
+    }
+   }
+
+   const zipBlob = await zip.generateAsync({ type: 'blob' });
+
+   const link = document.createElement('a');
+   link.href = URL.createObjectURL(zipBlob);
+   link.download = `compressed_images_${Date.now()}.zip`;
+   document.body.appendChild(link);
+   link.click();
+   document.body.removeChild(link);
+   URL.revokeObjectURL(link.href);
+  } catch (error) {
+   console.error('Error creating ZIP file:', error);
+   alert('Failed to create ZIP file');
+  } finally {
+   setIsDownloadingZip(false);
+  }
+ };
+
  const formatFileSize = (bytes: number) => {
   if (bytes === 0) return '0 Bytes';
   const k = 1024;
@@ -215,6 +251,8 @@ export default function ImageCompressor() {
     downloadFile(file);
    });
  };
+
+ const completedCount = files.filter((f) => f.status === 'completed').length;
 
  return (
   <div className="min-h-screen bg-gradient-to-br from-gray-800 to-slate-900 py-8 px-4 flex flex-col items-center justify-between">
@@ -347,7 +385,28 @@ export default function ImageCompressor() {
 
     {files.length > 0 && (
      <div className="bg-gray-800 rounded-xl shadow-lg p-6 w-full max-w-5xl">
-      <h3 className="text-xl font-semibold text-gray-100 mb-4">Files ({files.length})</h3>
+      <div className="w-full flex justify-between items-center mb-3">
+       <h3 className="text-xl font-semibold text-gray-100 mb-4">Files ({files.length})</h3>
+       {completedCount > 0 && (
+        <button
+         onClick={downloadAllAsZip}
+         disabled={isDownloadingZip}
+         className="px-4 py-2 bg-green-700 text-green-100 rounded-lg hover:bg-green-600 disabled:opacity-50 disabled:cursor-not-allowed transition-colors duration-200 font-medium shadow-md hover:shadow-lg flex items-center space-x-2"
+        >
+         {isDownloadingZip ? (
+          <>
+           <div className="w-4 h-4 border-2 border-green-300 border-t-transparent rounded-full animate-spin"></div>
+           <span>Creating ZIP...</span>
+          </>
+         ) : (
+          <>
+           <IconDownload className="w-4 h-4" />
+           <span>Download ZIP ({completedCount})</span>
+          </>
+         )}
+        </button>
+       )}
+      </div>
 
       <div className="space-y-3">
        {files.map((file) => (

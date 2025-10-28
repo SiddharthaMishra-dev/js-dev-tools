@@ -1,8 +1,8 @@
 import './App.css';
 import { BrowserRouter, Routes, Route } from 'react-router';
 
-import ImageToBase64 from './routes/ImageToBase64';
 import Home from './routes/Home';
+import ImageToBase64 from './routes/ImageToBase64';
 import ImageConverter from './routes/ImageConverter';
 import ImageCompressor from './routes/ImageCompressor';
 
