@@ -1,25 +1,65 @@
 # Just For Fun
 
+Try it out: [https://js-devtools.vercel.app/](https://js-devtools.vercel.app/)
+
 ## JS Dev Tools
 
 Combination of multiple small tools for JavaScript developers.
 
-### - Image to Base 64 Converter
+## Why This Project?
 
-### - Image converter
+Tired of jumping between different websites for simple image tasks? Me too! 
+- Need to compress images? → CompressJPG
+- Convert to Base64? → Base64 Guru  
+- Change formats? → Convertio
 
-Try it out [here](https://image-to-base64-sidme.vercel.app/).
-![screenshot](./src/assets/screenshot.png)
+So I built them ALL in one place!
+
+## Features
+
+### Image to Base64 Converter
+- Drag & drop or click to upload
+- Instant Base64 conversion with data URI
+- One-click copy to clipboard
+- File size display
+- Supports all image formats
+
+### Image Format Converter  
+- Convert between PNG, JPEG, WebP, AVIF
+- Batch processing support
+- Individual or bulk downloads
+- Format preservation options
+- Visual conversion progress
+
+### Image Compressor
+- Adjustable quality control (10%-100%)
+- Custom dimension limits
+- Format preservation or JPEG conversion
+- Real-time compression ratio display
+- Batch compression with progress tracking
 
 ## Tech Stack
-
 - React with TypeScript
 - React Router DOM for routing
 - Tailwind CSS for styling
 - RsBuild as the build tool
 
-## Usage
 
-1. Click on the "Choose Image" button to select an image file from your device.
-2. The selected image will be converted to a Base 64 string and displayed in the textarea.
-3. You can copy the Base 64 string to your clipboard using the "Copy" button.
+## Project Structure
+src/
+├── routes/
+│   ├── Home.tsx              # Landing page with tool selection
+│   ├── ImageToBase64.tsx     # Base64 converter
+│   ├── ImageConverter.tsx    # Format converter
+│   └── ImageCompressor.tsx   # Image compressor
+├── types/
+│   └── ImageTypes.ts         # TypeScript type definitions
+└── [App.tsx]                 # Main app with routing
+
+
+## Contributing
+Contributions are welcome! Please open an issue or submit a pull request for any improvements or bug fixes.
+- Report Bugs
+- Suggest Features
+- Submit Pull Requests
+- Star the Repository if you find it useful!
