@@ -3,10 +3,17 @@ import type { ConversionItem } from '../types/ImageTypes';
 import { IconCheck, IconCircleX, IconCloudUpload, IconDownload } from '@tabler/icons-react';
 import JSZip from 'jszip';
 
+// Extended ConversionItem to include blob and preview for layout consistency
+interface ExtendedConversionItem extends ConversionItem {
+ blob?: Blob;
+ preview?: string;
+ ext?: string;
+}
+
 export default function ImageConverter() {
  const uploadRef = useRef<HTMLInputElement>(null);
  const [selectedFormat, setSelectedFormat] = useState('png');
- const [conversions, setConversions] = useState<ConversionItem[]>([]);
+ const [conversions, setConversions] = useState<ExtendedConversionItem[]>([]);
  const [isDragging, setIsDragging] = useState(false);
  const [isConverting, setIsConverting] = useState(false);
  const [isDownloadingZip, setIsDownloadingZip] = useState(false);
@@ -27,12 +34,14 @@ export default function ImageConverter() {
    return;
   }
 
-  const newConversions: ConversionItem[] = validFiles.map((file, index) => ({
+  const newConversions: ExtendedConversionItem[] = validFiles.map((file, index) => ({
    id: `${Date.now()}-${index}`,
    file,
    name: file.name,
    originalFormat: file.type.split('/')[1]?.toUpperCase() || 'Unknown',
    status: 'pending',
+   preview: URL.createObjectURL(file),
+   ext: file.name.split('.').pop()?.toLowerCase() || 'jpg',
   }));
 
   setConversions(newConversions);
@@ -64,7 +73,7 @@ export default function ImageConverter() {
   }
  };
 
- const convertImage = async (item: ConversionItem): Promise<void> => {
+ const convertImage = async (item: ExtendedConversionItem): Promise<void> => {
   return new Promise((resolve, reject) => {
    const img = new Image();
    img.onload = () => {
@@ -131,7 +140,7 @@ export default function ImageConverter() {
   setIsConverting(false);
  };
 
- const downloadFile = (item: ConversionItem) => {
+ const downloadFile = (item: ExtendedConversionItem) => {
   if (!item.downloadUrl) return;
 
   const link = document.createElement('a');
@@ -189,6 +198,9 @@ export default function ImageConverter() {
    if (item.downloadUrl) {
     URL.revokeObjectURL(item.downloadUrl);
    }
+   if (item.preview) {
+    URL.revokeObjectURL(item.preview);
+   }
   });
   setConversions([]);
   if (uploadRef.current) {
@@ -200,7 +212,7 @@ export default function ImageConverter() {
 
  return (
   <div className="min-h-screen bg-gradient-to-br from-gray-800 to-slate-900 py-8 px-4 flex flex-col items-center justify-between">
-   <div className="w-full max-w-5xl flex-1 flex flex-col items-center justify-center mx-auto">
+   <div className="w-full max-w-6xl flex-1 flex flex-col items-center justify-center mx-auto">
     {/* Header */}
     <div className="text-center mb-8">
      <h1 className="text-2xl font-bold text-gray-100 mb-2">
@@ -209,37 +221,43 @@ export default function ImageConverter() {
      <p className="text-md text-gray-200">Convert your images between different formats with ease</p>
     </div>
 
-    <div className="bg-gray-800 rounded-xl shadow-lg p-8 mb-6 w-full max-w-2xl">
-     <div
-      onDragOver={handleDragOver}
-      onDragLeave={handleDragLeave}
-      onDrop={handleDrop}
-      className={`border-3 border-dashed rounded-lg p-12 text-center transition-all duration-300 ${
-       isDragging ? 'border-amber-500 bg-amber-900/20' : 'border-gray-600 hover:border-amber-400 hover:bg-gray-700'
-      }`}
-     >
-      <div className="flex flex-col items-center space-y-4">
-       <IconCloudUpload className={`w-16 h-16 ${isDragging ? 'text-amber-500' : 'text-gray-400'} transition-colors`} />
-       <div>
-        <p className="text-xl font-medium text-gray-100 mb-2">{isDragging ? 'Drop your images here' : 'Drag & drop your images here'}</p>
-        <p className="text-gray-400 mb-4">or</p>
-        <button
-         onClick={() => uploadRef.current?.click()}
-         className="text-sm px-3 py-2 bg-amber-700 text-amber-100 rounded-lg hover:bg-amber-600 transition-colors duration-200 font-medium shadow-md hover:shadow-lg"
-        >
-         Choose Files
-        </button>
+    <div className="bg-gray-800 rounded-xl shadow-lg p-8 mb-6 w-full max-w-5xl">
+     {conversions.length === 0 ? (
+      <>
+       {/* Upload Area */}
+       <div
+        onDragOver={handleDragOver}
+        onDragLeave={handleDragLeave}
+        onDrop={handleDrop}
+        className={`border-3 border-dashed rounded-lg p-12 text-center transition-all duration-300 ${
+         isDragging ? 'border-amber-500 bg-amber-900/20' : 'border-gray-600 hover:border-amber-400 hover:bg-gray-700'
+        }`}
+       >
+        <div className="flex flex-col items-center space-y-4">
+         <IconCloudUpload className={`w-16 h-16 ${isDragging ? 'text-amber-500' : 'text-gray-400'} transition-colors`} />
+         <div>
+          <p className="text-xl font-medium text-gray-100 mb-2">{isDragging ? 'Drop your images here' : 'Drag & drop your images here'}</p>
+          <p className="text-gray-400 mb-4">or</p>
+          <button
+           onClick={() => uploadRef.current?.click()}
+           className="text-sm px-3 py-2 bg-amber-700 text-amber-100 rounded-lg hover:bg-amber-600 transition-colors duration-200 font-medium shadow-md hover:shadow-lg"
+          >
+           Choose Files
+          </button>
+         </div>
+        </div>
        </div>
-      </div>
-     </div>
 
-     <input type="file" accept="image/*" ref={uploadRef} className="hidden" multiple onChange={handleFileUpload} />
+       <input type="file" accept="image/*" ref={uploadRef} className="hidden" multiple onChange={handleFileUpload} />
+      </>
+     ) : (
+      <>
+       {/* Conversion Settings */}
+       <div className="">
+        <h3 className="text-lg font-semibold text-gray-100 mb-4">Conversion Settings</h3>
 
-     {conversions.length > 0 && (
-      <div className="mt-6 pt-6 border-t border-gray-600">
-       <div className="flex flex-col sm:flex-row items-center justify-between gap-4">
-        <div className="flex items-center space-x-3">
-         <label className="text-sm font-medium text-gray-200">Convert to:</label>
+        <div className="mb-6">
+         <label className="block text-sm font-medium text-gray-200 mb-2">Convert to:</label>
          <select
           value={selectedFormat}
           onChange={(e) => setSelectedFormat(e.target.value)}
@@ -252,94 +270,106 @@ export default function ImageConverter() {
           ))}
          </select>
         </div>
+       </div>
 
-        <div className="flex space-x-2">
-         <button onClick={clearAll} className="px-4 py-2 text-red-400 hover:bg-red-900/20 rounded-lg transition-colors duration-200">
-          Clear All
-         </button>
+       {/* Files Header */}
+       <div className="w-full flex justify-between items-center mb-3">
+        <h3 className="text-xl font-semibold text-gray-100 mb-4">Files ({conversions.length})</h3>
+        {conversions.length > 0 && (
+         <div className="flex items-center gap-2">
+          <div className="flex space-x-2">
+           <button onClick={clearAll} className="px-4 py-2 text-red-400 hover:bg-red-900/20 rounded-lg transition-colors duration-200">
+            Clear All
+           </button>
+          </div>
 
+          <button
+           onClick={handleConvertAll}
+           disabled={isConverting}
+           className="px-6 py-2 bg-amber-700 text-amber-100 rounded-lg hover:bg-amber-600 disabled:opacity-50 disabled:cursor-not-allowed transition-colors duration-200 font-medium shadow-md hover:shadow-lg"
+          >
+           {isConverting ? 'Converting...' : 'Convert All'}
+          </button>
+         </div>
+        )}
+       </div>
+
+       {/* Files List */}
+       <div className="space-y-3">
+        {conversions.map((item) => (
+         <div key={item.id} className="flex items-center justify-between p-4 border border-gray-600 rounded-lg bg-gray-700">
+          {/* Preview Image */}
+          <div className="mr-4 flex-shrink-0">
+           <img src={item.preview} alt={item.name} className="w-16 h-16 object-contain rounded-md" />
+          </div>
+
+          {/* File Info */}
+          <div className="flex-1 min-w-0">
+           <div className="flex items-center space-x-2 mb-1">
+            <p className="font-medium text-gray-100 truncate">{item.name}</p>
+            <span className="text-xs px-2 py-1 bg-gray-600 text-gray-300 rounded">
+             {item.originalFormat} → {selectedFormat.toUpperCase()}
+            </span>
+           </div>
+           {item.error && <p className="text-xs text-red-400 mt-1">{item.error}</p>}
+          </div>
+
+          {/* Status */}
+          <div className="flex items-center space-x-3 ml-4">
+           {item.status === 'pending' && <span className="text-gray-400 text-sm">Pending</span>}
+           {item.status === 'converting' && (
+            <div className="flex items-center space-x-2">
+             <div className="w-4 h-4 border-2 border-amber-500 border-t-transparent rounded-full animate-spin"></div>
+             <span className="text-amber-200 text-sm">Converting...</span>
+            </div>
+           )}
+           {item.status === 'completed' && (
+            <div className="flex items-center space-x-2">
+             <IconCheck className="w-4 h-4 text-green-400" />
+             <button
+              onClick={() => downloadFile(item)}
+              className="px-3 py-1 bg-green-700 text-green-100 text-sm rounded hover:bg-green-600 transition-colors"
+             >
+              Download
+             </button>
+            </div>
+           )}
+           {item.status === 'error' && (
+            <div className="flex items-center space-x-2">
+             <IconCircleX className="w-4 h-4 text-red-400" />
+             <span className="text-red-400 text-sm">Failed</span>
+            </div>
+           )}
+          </div>
+         </div>
+        ))}
+       </div>
+
+       {/* Download ZIP Button */}
+       {completedCount > 0 && (
+        <div className="mt-6 w-full flex justify-end">
          <button
-          onClick={handleConvertAll}
-          disabled={isConverting}
-          className="px-6 py-2 bg-amber-700 text-amber-100 rounded-lg hover:bg-amber-600 disabled:opacity-50 disabled:cursor-not-allowed transition-colors duration-200 font-medium shadow-md hover:shadow-lg"
+          onClick={downloadAllAsZip}
+          disabled={isDownloadingZip}
+          className="px-4 py-2 bg-green-700 text-green-100 rounded-lg hover:bg-green-600 disabled:opacity-50 disabled:cursor-not-allowed transition-colors duration-200 font-medium shadow-md hover:shadow-lg flex items-center space-x-2"
          >
-          {isConverting ? 'Converting...' : 'Convert All'}
+          {isDownloadingZip ? (
+           <>
+            <div className="w-4 h-4 border-2 border-green-300 border-t-transparent rounded-full animate-spin"></div>
+            <span>Creating ZIP...</span>
+           </>
+          ) : (
+           <>
+            <IconDownload className="w-4 h-4" />
+            <span>Download ZIP ({completedCount})</span>
+           </>
+          )}
          </button>
         </div>
-       </div>
-      </div>
+       )}
+      </>
      )}
     </div>
-
-    {conversions.length > 0 && (
-     <div className="bg-gray-800 rounded-xl shadow-lg p-6 w-full max-w-4xl">
-      <div className="w-full flex justify-between items-center mb-3">
-       <h3 className="text-xl font-semibold text-gray-100 mb-4">Conversion Results ({conversions.length} files)</h3>
-       {completedCount > 0 && (
-        <button
-         onClick={downloadAllAsZip}
-         disabled={isDownloadingZip}
-         className="px-4 py-2 bg-green-700 text-green-100 rounded-lg hover:bg-green-600 disabled:opacity-50 disabled:cursor-not-allowed transition-colors duration-200 font-medium shadow-md hover:shadow-lg flex items-center space-x-2"
-        >
-         {isDownloadingZip ? (
-          <>
-           <div className="w-4 h-4 border-2 border-green-300 border-t-transparent rounded-full animate-spin"></div>
-           <span>Creating ZIP...</span>
-          </>
-         ) : (
-          <>
-           <IconDownload className="w-4 h-4" />
-           <span>Download ZIP ({completedCount})</span>
-          </>
-         )}
-        </button>
-       )}
-      </div>
-
-      <div className="space-y-3">
-       {conversions.map((item) => (
-        <div key={item.id} className="flex items-center justify-between p-4 border border-gray-600 rounded-lg bg-gray-700">
-         <div className="flex-1">
-          <div className="flex items-center space-x-3">
-           <p className="font-medium text-gray-100 truncate max-w-xs">{item.name}</p>
-           <span className="text-xs px-2 py-1 bg-gray-600 text-gray-300 rounded">
-            {item.originalFormat} → {selectedFormat.toUpperCase()}
-           </span>
-          </div>
-          {item.error && <p className="text-xs text-red-400 mt-1">{item.error}</p>}
-         </div>
-
-         <div className="flex items-center space-x-3">
-          {item.status === 'pending' && <span className="text-gray-400 text-sm">Pending</span>}
-          {item.status === 'converting' && (
-           <div className="flex items-center space-x-2">
-            <div className="w-4 h-4 border-2 border-amber-500 border-t-transparent rounded-full animate-spin"></div>
-            <span className="text-amber-200 text-sm">Converting...</span>
-           </div>
-          )}
-          {item.status === 'completed' && (
-           <div className="flex items-center space-x-2">
-            <IconCheck className="w-4 h-4 text-green-400" />
-            <button
-             onClick={() => downloadFile(item)}
-             className="px-3 py-1 bg-green-700 text-green-100 text-sm rounded hover:bg-green-600 transition-colors"
-            >
-             Download
-            </button>
-           </div>
-          )}
-          {item.status === 'error' && (
-           <div className="flex items-center space-x-2">
-            <IconCircleX className="w-4 h-4 text-red-400" />
-            <span className="text-red-400 text-sm">Failed</span>
-           </div>
-          )}
-         </div>
-        </div>
-       ))}
-      </div>
-     </div>
-    )}
 
     {/* Help Text */}
     <div className="text-center mt-4">
