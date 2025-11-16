@@ -1,3 +1,7 @@
+<!-- Add Home page Screenshot -->
+
+[![JS Dev Tools Screenshot](./src/assets/home-ss.png)](https://js-devtools.vercel.app/)
+
 # Just For Fun
 
 Try it out: [https://js-devtools.vercel.app/](https://js-devtools.vercel.app/)
@@ -13,6 +17,7 @@ Tired of jumping between different websites for simple image tasks? Me too!
 - Need to compress images? → CompressJPG
 - Convert to Base64? → Base64 Guru
 - Change formats? → Convertio
+- Crop images? → iLoveIMG
 
 So I built them ALL in one place!
 
@@ -42,6 +47,14 @@ So I built them ALL in one place!
 - Real-time compression ratio display
 - Batch compression with progress tracking
 
+### Image Cropper
+
+- Crop and resize images with precision controls and transforms
+- Aspect ratio locking
+- Flip and rotate options
+- Real-time preview
+- Download cropped images in original format
+
 ## Tech Stack
 
 - React with TypeScript
@@ -53,6 +66,7 @@ So I built them ALL in one place!
 
 - `src/routes/ImageConverter.tsx`: Image format conversion component.
 - `src/routes/ImageCompressor.tsx`: Image compression component.
+- `src/routes/ImageCropper.tsx`: Image cropping component.
 - `src/components`: Reusable UI components.
 - `public`: Static assets.
 
