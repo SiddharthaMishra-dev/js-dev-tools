@@ -12,8 +12,11 @@ import { Link } from 'react-router';
 
 export default function Home() {
  return (
-  <div className="min-h-screen bg-gradient-to-br from-gray-800 to-slate-900 flex flex-col">
-   <header className="pt-16 pb-8 px-4">
+  <div className="min-h-screen bg-gradient-to-br from-gray-800 to-slate-900 flex flex-col font-sans relative overflow-hidden">
+   <div className="absolute inset-0 z-0">
+    <div className="absolute h-full w-full bg-[linear-gradient(to_right,#80808012_1px,transparent_1px),linear-gradient(to_bottom,#80808012_1px,transparent_1px)] bg-[size:40px_40px] [mask-image:radial-gradient(ellipse_60%_50%_at_50%_0%,#000_70%,transparent_100%)]"></div>
+   </div>
+   <header className="pt-16 pb-8 px-4 relative z-10">
     <div className="max-w-4xl mx-auto text-center">
      <h1 className="text-4xl md:text-5xl font-bold text-gray-100 mb-4">
       Dev<span className="text-amber-200">Tools</span>
@@ -44,7 +47,7 @@ export default function Home() {
     </div>
    </header>
 
-   <main className="flex-1 flex items-center justify-center px-4 pb-16">
+   <main className="flex-1 flex items-center justify-center px-4 pb-16 relative z-10">
     <div className="max-w-4xl w-full">
      <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
       <Link to="/image-to-base64" className="group bg-gray-800 rounded-xl shadow-lg hover:shadow-xl transition-all duration-300 p-8">
@@ -152,7 +155,7 @@ export default function Home() {
     </div>
    </main>
 
-   <footer className="pb-8 px-4">
+   <footer className="pb-8 px-4 relative z-10">
     <div className="max-w-4xl mx-auto text-center">
      <p className="text-gray-400 text-xs">
       Built for fun by{' '}

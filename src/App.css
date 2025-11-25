@@ -1,6 +1,6 @@
 @import 'tailwindcss';
-@import url('https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;600&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Libre+Franklin:ital,wght@0,100..900;1,100..900&display=swap');
 
 * {
- font-family: 'JetBrains Mono', monospace;
+ font-family: 'Libre Franklin', sans-serif;
 }
