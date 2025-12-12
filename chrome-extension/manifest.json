@@ -1,0 +1,16 @@
+{
+ "manifest_version": 3,
+ "name": "DevTools Image Helper",
+ "version": "1.0",
+ "description": "Right-click any image to copy its Base64 data URI or save in different formats",
+ "permissions": ["contextMenus", "downloads", "offscreen", "activeTab", "notifications", "clipboardWrite"],
+ "host_permissions": ["http://*/*", "https://*/*"],
+ "background": {
+  "service_worker": "background.js"
+ },
+ "icons": {
+  "16": "icons/icon-16.png",
+  "48": "icons/icon-48.png",
+  "128": "icons/icon-128.png"
+ }
+}
