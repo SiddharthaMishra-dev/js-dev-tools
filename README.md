@@ -70,6 +70,27 @@ So I built them ALL in one place!
 - `src/components`: Reusable UI components.
 - `public`: Static assets.
 
+## How to Install Chrome Extension Locally
+
+1. Clone the repository:
+   ```bash
+   git clone https://github.com/SiddharthaMishra-dev/js-dev-tools
+    cd js-dev-tools
+   ```
+2. Install dependencies:
+   ```bash
+   npm install
+   ```
+3. Build the project:
+   ```bash
+   npm run build
+   ```
+4. Load the extension in Chrome:
+   - Open Chrome and navigate to `chrome://extensions/`
+   - Enable "Developer mode" (toggle in the top right)
+   - Click "Load unpacked" and select the `chrome-extension` folder in the project directory
+5. The extension should now be loaded and ready to use!
+
 ## Contributing
 
 Contributions are welcome! Please open an issue or submit a pull request for any improvements or bug fixes.
