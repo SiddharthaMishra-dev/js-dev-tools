@@ -1,5 +1,6 @@
 import { IconCheck, IconCloudUpload, IconCopy } from '@tabler/icons-react';
 import { useRef, useState, useCallback } from 'react';
+import SEO, { seoConfig } from '../components/SEO';
 
 const ImageToBase64 = () => {
  const imageRef = useRef<HTMLInputElement>(null);
@@ -61,6 +62,7 @@ const ImageToBase64 = () => {
 
  return (
   <div className="min-h-screen bg-gradient-to-br from-gray-800 to-slate-900 py-8 px-4 flex flex-col items-center justify-between">
+   <SEO {...seoConfig.imageToBase64} />
    <div className="w-full max-w-5xl flex-1 flex flex-col items-center justify-center mx-auto">
     <div className="text-center mb-8">
      <h1 className="text-2xl font-bold text-gray-100 mb-2">

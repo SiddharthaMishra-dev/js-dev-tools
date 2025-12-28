@@ -1,0 +1,16 @@
+# JS DevTools - Developer Utilities
+
+# Allow all crawlers
+User-agent: *
+Allow: /
+
+# Sitemap location
+Sitemap: https://js-devtools.vercel.app/sitemap.xml
+
+# Slow down crawling to be respectful
+Crawl-delay: 1
+
+# Disallow accessing internal paths
+Disallow: /api/
+Disallow: /_next/
+Disallow: /static/

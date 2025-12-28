@@ -7,12 +7,15 @@ import {
  IconCrop,
  IconBrandGithub,
  IconStar,
+ IconBraces,
 } from '@tabler/icons-react';
 import { Link } from 'react-router';
+import SEO, { seoConfig } from '../components/SEO';
 
 export default function Home() {
  return (
   <div className="min-h-screen bg-gradient-to-br from-gray-800 to-slate-900 flex flex-col font-sans relative overflow-hidden">
+   <SEO {...seoConfig.home} />
    <div className="absolute inset-0 z-0">
     <div className="absolute h-full w-full bg-[linear-gradient(to_right,#80808012_1px,transparent_1px),linear-gradient(to_bottom,#80808012_1px,transparent_1px)] bg-[size:40px_40px] [mask-image:radial-gradient(ellipse_60%_50%_at_50%_0%,#000_70%,transparent_100%)]"></div>
    </div>
@@ -114,6 +117,24 @@ export default function Home() {
         <div className="flex-1">
          <h3 className="text-xl font-semibold text-gray-300 mb-2 group-hover:text-amber-200 transition-colors">Image Cropper</h3>
          <p className="text-gray-200 text-sm leading-relaxed">Crop and resize images with precision controls and transforms</p>
+         <div className="mt-4 flex items-center text-amber-200 text-sm font-medium">
+          <span>Try it now</span>
+          <IconChevronRight className="h-5 w-5 ml-1 group-hover:translate-x-1 transition-transform" />
+         </div>
+        </div>
+       </div>
+      </Link>
+
+      <Link to="/json-formatter" className="group bg-gray-800 rounded-xl shadow-lg hover:shadow-xl transition-all duration-300 p-8">
+       <div className="flex items-start space-x-4">
+        <div className="flex-shrink-0">
+         <div className="w-12 h-12 bg-amber-700 rounded-lg flex items-center justify-center group-hover:bg-amber-600 transition-colors">
+          <IconBraces className="text-amber-200" />
+         </div>
+        </div>
+        <div className="flex-1">
+         <h3 className="text-xl font-semibold text-gray-300 mb-2 group-hover:text-amber-200 transition-colors">JSON Formatter</h3>
+         <p className="text-gray-200 text-sm leading-relaxed">Format and validate JSON data with syntax highlighting and minification</p>
          <div className="mt-4 flex items-center text-amber-200 text-sm font-medium">
           <span>Try it now</span>
           <IconChevronRight className="h-5 w-5 ml-1 group-hover:translate-x-1 transition-transform" />

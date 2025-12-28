@@ -16,6 +16,7 @@
   "jszip": "^3.10.1",
   "react": "^19.1.1",
   "react-dom": "^19.1.1",
+  "react-helmet-async": "^2.0.5",
   "react-router-dom": "^7.9.3"
  },
  "devDependencies": {

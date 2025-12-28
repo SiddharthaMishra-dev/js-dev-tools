@@ -1,6 +1,7 @@
 import { IconCheck, IconCircleX, IconCloudUpload, IconDownload } from '@tabler/icons-react';
 import { useState, useRef } from 'react';
 import JSZip from 'jszip';
+import SEO, { seoConfig } from '../components/SEO';
 
 interface CompressedFile {
  id: string;
@@ -249,6 +250,7 @@ export default function ImageCompressor() {
 
  return (
   <div className="min-h-screen bg-gradient-to-br from-gray-800 to-slate-900 py-8 px-4 flex flex-col items-center justify-between">
+   <SEO {...seoConfig.imageCompressor} />
    <div className="w-full max-w-6xl flex-1 flex flex-col items-center justify-center mx-auto">
     <div className="text-center mb-8">
      <h1 className="text-2xl font-bold text-gray-100 mb-2">

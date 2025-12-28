@@ -2,6 +2,7 @@ import { useRef, useState, useCallback } from 'react';
 import type { ConversionItem } from '../types/ImageTypes';
 import { IconCheck, IconCircleX, IconCloudUpload, IconDownload } from '@tabler/icons-react';
 import JSZip from 'jszip';
+import SEO, { seoConfig } from '../components/SEO';
 
 // Extended ConversionItem to include blob and preview for layout consistency
 interface ExtendedConversionItem extends ConversionItem {
@@ -212,6 +213,7 @@ export default function ImageConverter() {
 
  return (
   <div className="min-h-screen bg-gradient-to-br from-gray-800 to-slate-900 py-8 px-4 flex flex-col items-center justify-between">
+   <SEO {...seoConfig.imageConverter} />
    <div className="w-full max-w-6xl flex-1 flex flex-col items-center justify-center mx-auto">
     {/* Header */}
     <div className="text-center mb-8">
