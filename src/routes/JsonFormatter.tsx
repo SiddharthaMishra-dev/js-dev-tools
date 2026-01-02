@@ -14,6 +14,7 @@ export default function JsonFormatter() {
  const [error, setError] = useState<string | null>(null);
  const [copySuccess, setCopySuccess] = useState(false);
  const [activeView, setActiveView] = useState<'formatted' | 'minified'>('formatted');
+ const [useSingleQuotes, setUseSingleQuotes] = useState(false);
 
  const { formattedJson, minifiedJson, tokens, parsedData } = useMemo(() => {
   if (!input.trim()) {
@@ -21,24 +22,57 @@ export default function JsonFormatter() {
   }
 
   try {
-   const parsed = JSON.parse(input);
+   const parsed = parseJsonWithFallback(input);
    setError(null);
+   const baseFormatted = JSON.stringify(parsed, null, 2);
+   const baseMinified = JSON.stringify(parsed);
+   const finalFormatted = useSingleQuotes ? convertToSingleQuotes(baseFormatted) : baseFormatted;
+   const finalMinified = useSingleQuotes ? convertToSingleQuotes(baseMinified) : baseMinified;
    return {
-    formattedJson: JSON.stringify(parsed, null, 2),
-    minifiedJson: JSON.stringify(parsed),
-    tokens: tokenizeJson(JSON.stringify(parsed, null, 2)),
+    formattedJson: finalFormatted,
+    minifiedJson: finalMinified,
+    tokens: tokenizeJson(finalFormatted),
     parsedData: parsed,
    };
   } catch (e) {
    setError((e as Error).message);
    return { formattedJson: '', minifiedJson: '', tokens: [], parsedData: null };
   }
- }, [input]);
+ }, [input, useSingleQuotes]);
+
+ function convertToSingleQuotes(json: string): string {
+  return json.replace(/"([^"\\]*(?:\\.[^"\\]*)*)"/g, "'$1'");
+ }
+
+ function convertSingleQuotesToDouble(text: string): string {
+  // Convert single quotes to double quotes while preserving escaped quotes
+  return text.replace(/'([^'\\]*(?:\\.[^'\\]*)*)'/g, '"$1"');
+ }
+
+ function parseJsonWithFallback(text: string): any {
+  try {
+   // First try parsing as standard JSON (double quotes)
+   return JSON.parse(text);
+  } catch (e) {
+   try {
+    // If that fails, try converting single quotes to double quotes and parse again
+    const convertedText = convertSingleQuotesToDouble(text);
+    return JSON.parse(convertedText);
+   } catch (e2) {
+    // If both fail, throw the original error
+    throw e;
+   }
+  }
+ }
 
  function tokenizeJson(json: string): Token[] {
   const tokens: Token[] = [];
-  const regex =
-   /("(?:\\.|[^"\\])*")\s*:|("(?:\\.|[^"\\])*")|(-?\d+\.?\d*(?:[eE][+-]?\d+)?)|(\btrue\b|\bfalse\b)|(\bnull\b)|([\[\]{}])|([,:])/g;
+  const quoteChar = useSingleQuotes ? "'" : '"';
+  const escapedQuote = useSingleQuotes ? "\\\\.|[^'\\\\]" : '\\\\.|[^"\\\\]';
+  const regex = new RegExp(
+   `(${quoteChar}(?:${escapedQuote})*${quoteChar})\\s*:|(${quoteChar}(?:${escapedQuote})*${quoteChar})|(-?\\d+\\.?\\d*(?:[eE][+-]?\\d+)?)|(\\btrue\\b|\\bfalse\\b)|(\\bnull\\b)|([\\[\\]{}])|([,:])`,
+   'g',
+  );
   let match;
   let lastIndex = 0;
 
@@ -208,6 +242,26 @@ export default function JsonFormatter() {
     {/* Toolbar */}
     <div className="bg-gray-800 rounded-xl shadow-lg p-4 mb-6">
      <div className="flex flex-wrap gap-3 justify-center">
+      <div className="inline-flex items-center gap-2 px-4 py-2 bg-gray-700 text-gray-100 rounded-lg">
+       <span className="text-sm font-medium">Quotes:</span>
+       <button
+        onClick={() => setUseSingleQuotes(false)}
+        className={`px-2 py-1 text-xs rounded transition-colors ${
+         !useSingleQuotes ? 'bg-amber-700 text-amber-100' : 'bg-gray-600 text-gray-300 hover:bg-gray-500'
+        }`}
+       >
+        "
+       </button>
+       <button
+        onClick={() => setUseSingleQuotes(true)}
+        className={`px-2 py-1 text-xs rounded transition-colors ${
+         useSingleQuotes ? 'bg-amber-700 text-amber-100' : 'bg-gray-600 text-gray-300 hover:bg-gray-500'
+        }`}
+       >
+        '
+       </button>
+      </div>
+
       <button
        onClick={formatInput}
        disabled={!input.trim() || !!error}
