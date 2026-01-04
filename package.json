@@ -3,6 +3,7 @@
  "version": "1.0.0",
  "private": true,
  "type": "module",
+ "license": "MIT",
  "scripts": {
   "build": "rsbuild build",
   "dev": "rsbuild dev --open",
