@@ -1,10 +1,10 @@
 <!-- Add Home page Screenshot -->
 
-[![JS Dev Tools Screenshot](./src/assets/home-ss.png)](https://js-devtools.vercel.app/)
+[![JS Dev Tools Screenshot](./src/assets/home-ss.png)](https://js-devtools.sidme.dev/)
 
 # Just For Fun
 
-Try it out: [https://js-devtools.vercel.app/](https://js-devtools.vercel.app/)
+Try it out: [https://js-devtools.sidme.dev/](https://js-devtools.sidme.dev/)
 
 ## JS Dev Tools
 
@@ -18,6 +18,7 @@ Tired of jumping between different websites for simple image tasks? Me too!
 - Convert to Base64? → Base64 Guru
 - Change formats? → Convertio
 - Crop images? → iLoveIMG
+- Format JSON? → JSON Formatter
 
 So I built them ALL in one place!
 
@@ -55,6 +56,14 @@ So I built them ALL in one place!
 - Real-time preview
 - Download cropped images in original format
 
+### JSON Formatter
+
+- Format, minify, and validate JSON online
+- Syntax highlighting with bracket matching
+- Convert JSON to CSV
+- Real-time syntax highlighting
+- Download formatted JSON
+
 ## Tech Stack
 
 - React with TypeScript
@@ -67,6 +76,7 @@ So I built them ALL in one place!
 - `src/routes/ImageConverter.tsx`: Image format conversion component.
 - `src/routes/ImageCompressor.tsx`: Image compression component.
 - `src/routes/ImageCropper.tsx`: Image cropping component.
+- `src/routes/JsonFormatter.tsx`: JSON formatting component.
 - `src/components`: Reusable UI components.
 - `public`: Static assets.
 

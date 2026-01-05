@@ -8,7 +8,7 @@ interface SEOProps {
  ogImage?: string;
 }
 
-const BASE_URL = 'https://js-devtools.vercel.app';
+const BASE_URL = 'https://js-devtools.sidme.dev';
 
 export default function SEO({ title, description, keywords, canonical, ogImage = '/screenshot.png' }: SEOProps) {
  const fullCanonical = canonical.startsWith('http') ? canonical : `${BASE_URL}${canonical}`;
