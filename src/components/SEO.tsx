@@ -16,14 +16,12 @@ export default function SEO({ title, description, keywords, canonical, ogImage =
 
  return (
   <Helmet>
-   {/* Primary Meta Tags */}
    <title>{title}</title>
    <meta name="title" content={title} />
    <meta name="description" content={description} />
    <meta name="keywords" content={keywords} />
    <link rel="canonical" href={fullCanonical} />
 
-   {/* Open Graph / Facebook */}
    <meta property="og:type" content="website" />
    <meta property="og:url" content={fullCanonical} />
    <meta property="og:title" content={title} />
@@ -32,7 +30,6 @@ export default function SEO({ title, description, keywords, canonical, ogImage =
    <meta property="og:site_name" content="JS DevTools" />
    <meta property="og:locale" content="en_US" />
 
-   {/* Twitter */}
    <meta name="twitter:card" content="summary_large_image" />
    <meta name="twitter:url" content={fullCanonical} />
    <meta name="twitter:title" content={title} />
@@ -42,7 +39,7 @@ export default function SEO({ title, description, keywords, canonical, ogImage =
  );
 }
 
-// SEO configurations for each page
+// SEO configurations for each
 export const seoConfig = {
  home: {
   title: 'JS DevTools | Free Image Processing & Developer Utilities',
