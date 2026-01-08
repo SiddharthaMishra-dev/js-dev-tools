@@ -6,7 +6,6 @@ import {
  IconPhoto,
  IconCrop,
  IconBrandGithub,
- IconStar,
  IconBraces,
 } from '@tabler/icons-react';
 import { Link } from 'react-router';
@@ -22,11 +21,20 @@ export default function Home() {
    <header className="pt-16 pb-8 px-4 relative z-10">
     <div className="max-w-4xl mx-auto text-center">
      <h1 className="text-4xl md:text-5xl font-bold text-gray-100 mb-4">
-      Dev<span className="text-amber-200">Tools</span>
+      Privacy-First <span className="text-amber-200">Dev Tools</span>
      </h1>
-     <p className="text-lg text-gray-200 max-w-2xl mx-auto mb-6">Simple, fast, and reliable development utilities built with React</p>
+     <p className="text-lg text-gray-200 max-w-2xl mx-auto mb-6">
+      Lightning-fast image and data tools. 100% client-side. No uploads. Your files never leave your browser.
+     </p>
 
      <div className="flex flex-col sm:flex-row items-center justify-center gap-3">
+      <a
+       href="#tools"
+       className="inline-flex items-center space-x-2 px-5 py-2.5 bg-amber-700 text-amber-100 rounded-lg hover:bg-amber-600 transition-colors duration-200 text-sm font-medium"
+      >
+       <span>Explore Tools</span>
+      </a>
+
       <a
        href="https://github.com/SiddharthaMishra-dev/js-dev-tools"
        target="_blank"
@@ -34,24 +42,14 @@ export default function Home() {
        className="inline-flex items-center space-x-2 px-4 py-2 bg-gray-700 text-gray-100 rounded-lg hover:bg-gray-600 transition-colors duration-200 text-sm font-medium"
       >
        <IconBrandGithub className="w-4 h-4" />
-       <span>View Source</span>
-      </a>
-
-      <a
-       href="https://github.com/SiddharthaMishra-dev/js-dev-tools"
-       target="_blank"
-       rel="noopener noreferrer"
-       className="inline-flex items-center space-x-2 px-4 py-2 bg-amber-700 text-amber-100 rounded-lg hover:bg-amber-600 transition-colors duration-200 text-sm font-medium"
-      >
-       <IconStar className="w-4 h-4" />
-       <span>Star on GitHub</span>
+       <span>View on GitHub</span>
       </a>
      </div>
     </div>
    </header>
 
    <main className="flex-1 flex items-center justify-center px-4 pb-16 relative z-10">
-    <div className="max-w-4xl w-full">
+    <div className="max-w-4xl w-full" id="tools">
      <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
       <Link to="/image-to-base64" className="group bg-gray-800 rounded-xl shadow-lg hover:shadow-xl transition-all duration-300 p-8">
        <div className="flex items-start space-x-4">
@@ -62,7 +60,7 @@ export default function Home() {
         </div>
         <div className="flex-1">
          <h3 className="text-xl font-semibold text-gray-300 mb-2 group-hover:text-amber-200 transition-colors">Image to Base64</h3>
-         <p className="text-gray-200 text-sm leading-relaxed">Convert images to Base64 format with drag & drop support</p>
+         <p className="text-gray-200 text-sm leading-relaxed">Convert any image to Base64 instantly. Drag & drop. 100% private.</p>
          <div className="mt-4 flex items-center text-amber-200 text-sm font-medium">
           <span>Try it now</span>
           <IconChevronRight className="h-5 w-5 ml-1 group-hover:translate-x-1 transition-transform" />
@@ -80,7 +78,7 @@ export default function Home() {
         </div>
         <div className="flex-1">
          <h3 className="text-xl font-semibold text-gray-300 mb-2 group-hover:text-amber-200 transition-colors">Format Converter</h3>
-         <p className="text-gray-200 text-sm leading-relaxed">Convert between PNG, JPEG, WebP, and AVIF formats</p>
+         <p className="text-gray-200 text-sm leading-relaxed">Convert PNG, JPEG, WebP & AVIF in seconds. Batch support. No uploads.</p>
          <div className="mt-4 flex items-center text-amber-200 text-sm font-medium">
           <span>Try it now</span>
           <IconChevronRight className="h-5 w-5 ml-1 group-hover:translate-x-1 transition-transform" />
@@ -98,7 +96,7 @@ export default function Home() {
         </div>
         <div className="flex-1">
          <h3 className="text-xl font-semibold text-gray-300 mb-2 group-hover:text-amber-200 transition-colors">Image Compressor</h3>
-         <p className="text-gray-200 text-sm leading-relaxed">Reduce file size with quality and dimension controls</p>
+         <p className="text-gray-200 text-sm leading-relaxed">Compress images up to 80% smaller. Preserve quality. Works offline.</p>
          <div className="mt-4 flex items-center text-amber-200 text-sm font-medium">
           <span>Try it now</span>
           <IconChevronRight className="h-5 w-5 ml-1 group-hover:translate-x-1 transition-transform" />
@@ -116,7 +114,7 @@ export default function Home() {
         </div>
         <div className="flex-1">
          <h3 className="text-xl font-semibold text-gray-300 mb-2 group-hover:text-amber-200 transition-colors">Image Cropper</h3>
-         <p className="text-gray-200 text-sm leading-relaxed">Crop and resize images with precision controls and transforms</p>
+         <p className="text-gray-200 text-sm leading-relaxed">Crop, resize, rotate & flip with precision. Privacy guaranteed.</p>
          <div className="mt-4 flex items-center text-amber-200 text-sm font-medium">
           <span>Try it now</span>
           <IconChevronRight className="h-5 w-5 ml-1 group-hover:translate-x-1 transition-transform" />
@@ -134,7 +132,9 @@ export default function Home() {
         </div>
         <div className="flex-1">
          <h3 className="text-xl font-semibold text-gray-300 mb-2 group-hover:text-amber-200 transition-colors">JSON Formatter</h3>
-         <p className="text-gray-200 text-sm leading-relaxed">Format and validate JSON data with syntax highlighting and minification</p>
+         <p className="text-gray-200 text-sm leading-relaxed">
+          Format, validate & minify JSON instantly. Export to CSV. Zero network calls.
+         </p>
          <div className="mt-4 flex items-center text-amber-200 text-sm font-medium">
           <span>Try it now</span>
           <IconChevronRight className="h-5 w-5 ml-1 group-hover:translate-x-1 transition-transform" />
@@ -146,22 +146,22 @@ export default function Home() {
 
      {/* Features Section */}
      <div className="mt-16 text-center">
-      <h2 className="text-2xl font-bold text-gray-100 mb-8">Why Choose DevTools?</h2>
-      <div className="grid grid-cols-1 md:grid-cols-3 gap-8 max-w-3xl mx-auto">
+      <h2 className="text-2xl font-bold text-gray-100 mb-8">Why Developers Trust JS DevTools</h2>
+      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 max-w-4xl mx-auto">
        <div className="space-y-3">
         <div className="w-12 h-12 bg-amber-700 rounded-lg flex items-center justify-center mx-auto">
          <IconBolt className="text-amber-200 w-6 h-6" />
         </div>
-        <h4 className="text-lg font-semibold text-gray-100">Lightning Fast</h4>
-        <p className="text-sm text-gray-300">Client-side processing means instant results with no server delays</p>
+        <h4 className="text-lg font-semibold text-gray-100">Instant Processing</h4>
+        <p className="text-sm text-gray-300">Everything runs in your browser—no waiting for uploads or downloads.</p>
        </div>
 
        <div className="space-y-3">
         <div className="w-12 h-12 bg-amber-700 rounded-lg flex items-center justify-center mx-auto">
          <IconLock className="text-amber-200 w-6 h-6" />
         </div>
-        <h4 className="text-lg font-semibold text-gray-100">100% Private</h4>
-        <p className="text-sm text-gray-300">Your files never leave your browser - complete privacy guaranteed</p>
+        <h4 className="text-lg font-semibold text-gray-100">Complete Privacy</h4>
+        <p className="text-sm text-gray-300">Your files are never uploaded. Zero data collection. Privacy is non-negotiable.</p>
        </div>
 
        <div className="space-y-3">
@@ -169,7 +169,15 @@ export default function Home() {
          <IconPhoto className="text-amber-200 w-6 h-6" />
         </div>
         <h4 className="text-lg font-semibold text-gray-100">All Formats</h4>
-        <p className="text-sm text-gray-300">Support for PNG, JPEG, WebP, AVIF and more image formats</p>
+        <p className="text-sm text-gray-300">PNG, JPEG, WebP, AVIF, GIF, SVG—virtually any image format supported.</p>
+       </div>
+
+       <div className="space-y-3">
+        <div className="w-12 h-12 bg-amber-700 rounded-lg flex items-center justify-center mx-auto">
+         <IconBrandGithub className="text-amber-200 w-6 h-6" />
+        </div>
+        <h4 className="text-lg font-semibold text-gray-100">100% Open Source</h4>
+        <p className="text-sm text-gray-300">Fully transparent codebase. Audit, fork, or contribute on GitHub.</p>
        </div>
       </div>
      </div>
@@ -179,14 +187,14 @@ export default function Home() {
    <footer className="pb-8 px-4 relative z-10">
     <div className="max-w-4xl mx-auto text-center">
      <p className="text-gray-400 text-xs">
-      Built for fun by{' '}
+      Crafted with care by{' '}
       <a
        href="https://sidme.vercel.app/"
        target="_blank"
        rel="noopener noreferrer"
        className="text-amber-200 hover:text-amber-300 transition-colors"
       >
-       <i>sidme</i>
+       sidme
       </a>{' '}
       •{' '}
       <a
@@ -195,7 +203,7 @@ export default function Home() {
        rel="noopener noreferrer"
        className="text-amber-200 hover:text-amber-300 transition-colors"
       >
-       View Source
+       Open Source on GitHub
       </a>
      </p>
     </div>

@@ -234,7 +234,7 @@ export default function JsonFormatter() {
     <h1 className="text-2xl font-bold text-gray-100 mb-2">
      JSON <span className="text-amber-200">Formatter</span>
     </h1>
-    <p className="text-md text-gray-200">Format, minify, and convert JSON with syntax highlighting</p>
+    <p className="text-md text-gray-200">Format, validate & minify JSON instantly. No data sent to servers—completely private.</p>
    </div>
 
    {/* Main Content */}
@@ -400,14 +400,14 @@ export default function JsonFormatter() {
    {/* Footer */}
    <footer className="mt-8 text-center">
     <p className="text-gray-400 text-xs">
-     Built for fun by{' '}
+     Crafted with care by{' '}
      <a
       href="https://sidme.vercel.app/"
       target="_blank"
       rel="noopener noreferrer"
       className="text-amber-200 hover:text-amber-300 transition-colors"
      >
-      <i>sidme</i>
+      sidme
      </a>
     </p>
    </footer>

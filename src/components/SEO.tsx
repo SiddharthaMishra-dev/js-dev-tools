@@ -39,50 +39,59 @@ export default function SEO({ title, description, keywords, canonical, ogImage =
  );
 }
 
-// SEO configurations for each
+// SEO configurations for each page - optimized for privacy-first messaging
 export const seoConfig = {
  home: {
-  title: 'JS DevTools - Free Image Processing & Developer Utilities Online',
-  description: 'Free developer tools: Image to Base64, Converter, Compressor, Cropper & JSON Formatter. 100% Client-side. Privacy-focused.',
-  keywords: 'developer tools, image converter, base64 encoder, image compressor, json formatter, png to jpeg, webp converter, online tools',
+  title: 'JS DevTools – Free Private Image Tools & JSON Formatter Online',
+  description:
+   'Free developer tools for image processing and JSON formatting. 100% client-side, no uploads, complete privacy. Instant Base64, compression, conversion & more.',
+  keywords:
+   'developer tools, image converter, base64 encoder, image compressor, json formatter, png to jpeg, webp converter, online tools, privacy, client-side, no upload',
   canonical: '/',
   ogImage: '/og/home.png',
  },
  imageToBase64: {
-  title: 'Image to Base64 Converter - Convert Images to Data URIs Online',
+  title: 'Image to Base64 Converter – Free, Private & Instant | JS DevTools',
   description:
-   'Convert images to Base64 instantly. Support for all formats. Drag & drop functionality. 100% client-side & secure processing.',
-  keywords: 'image to base64, base64 encoder, image encoder, convert image to base64, base64 converter, data uri generator',
+   'Convert any image to Base64 data URI instantly. No server uploads—processing happens in your browser. Free, fast, and 100% private. Supports all formats.',
+  keywords:
+   'image to base64, base64 encoder, image encoder, convert image to base64, base64 converter, data uri generator, private, no upload, client-side',
   canonical: '/image-to-base64',
   ogImage: '/og/image-to-base64.png',
  },
  imageConverter: {
-  title: 'Image Format Converter - Convert PNG, JPEG, WebP & AVIF Online',
-  description: 'Convert between PNG, JPEG, WebP & AVIF formats. Batch conversion support with ZIP download. Fast, free & private tool.',
-  keywords: 'image format converter, png to jpeg, jpeg to webp, webp to png, avif converter, batch image converter, online image converter',
+  title: 'PNG to WebP Converter – Free JPEG, AVIF Conversion | JS DevTools',
+  description:
+   'Convert images between PNG, JPEG, WebP, and AVIF formats instantly. Batch conversion with ZIP download. Free, private, no uploads. Works offline.',
+  keywords:
+   'image format converter, png to jpeg, jpeg to webp, webp to png, avif converter, batch image converter, online image converter, private, no upload',
   canonical: '/image-format-converter',
   ogImage: '/og/image-converter.png',
  },
  imageCompressor: {
-  title: 'Image Compressor - Reduce Image File Size Online Without Loss',
-  description: 'Compress images efficiently. Reduce file size while preserving quality. Resize & optimize PNG, JPEG & WebP images.',
+  title: 'Compress Images Online Free – No Upload, 100% Private | JS DevTools',
+  description:
+   'Compress PNG, JPEG, and WebP images without quality loss. Reduce file sizes up to 80%. 100% client-side—your images never leave your browser. Free forever.',
   keywords:
-   'image compressor, compress images online, reduce image size, image optimization, jpg compressor, png compressor, image size reducer',
+   'image compressor, compress images online, reduce image size, image optimization, jpg compressor, png compressor, image size reducer, private, no upload',
   canonical: '/image-compressor',
   ogImage: '/og/image-compressor.png',
  },
  imageCropper: {
-  title: 'Image Cropper - Crop, Resize, Rotate & Flip Images Online Free',
-  description: 'Free online image cropper. Crop, resize, rotate & flip photos. Precision controls for perfect editing. Secure privacy.',
-  keywords: 'image cropper, crop image online, resize image, image editor, rotate image, flip image, online image cropper',
+  title: 'Crop Images Online Free – Resize, Rotate & Flip | JS DevTools',
+  description:
+   'Crop, resize, rotate, and flip images online for free. Precision controls with aspect ratio presets. No uploads, 100% private browser-based tool.',
+  keywords:
+   'image cropper, crop image online, resize image, image editor, rotate image, flip image, online image cropper, private, no upload, client-side',
   canonical: '/image-cropper',
   ogImage: '/og/image-cropper.png',
  },
  jsonFormatter: {
-  title: 'JSON Formatter - Validate, Minify, Format & Convert JSON Data',
-  description: 'Format, validate & minify JSON. Syntax highlighting & error checking. Convert JSON to CSV instantly. Developer tool.',
+  title: 'JSON Formatter & Validator – Free Online Beautifier | JS DevTools',
+  description:
+   'Format, validate, and minify JSON online with syntax highlighting. Convert JSON to CSV. No data sent to servers—completely private. Free developer tool.',
   keywords:
-   'json formatter, json validator, json beautifier, json minifier, json to csv, format json online, prettify json, json syntax highlighter',
+   'json formatter, json validator, json beautifier, json minifier, json to csv, format json online, prettify json, json syntax highlighter, private, no upload',
   canonical: '/json-formatter',
   ogImage: '/og/json-formatter.png',
  },

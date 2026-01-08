@@ -220,7 +220,7 @@ export default function ImageConverter() {
      <h1 className="text-2xl font-bold text-gray-100 mb-2">
       Image <span className="text-amber-200">Format</span> Converter
      </h1>
-     <p className="text-md text-gray-200">Convert your images between different formats with ease</p>
+     <p className="text-md text-gray-200">Convert images between formats instantly. Batch support. No uploads—100% private.</p>
     </div>
 
     <div className="bg-gray-800 rounded-xl shadow-lg p-8 mb-6 w-full max-w-5xl">
@@ -249,6 +249,9 @@ export default function ImageConverter() {
          </div>
         </div>
        </div>
+       <p className="text-center text-gray-400 text-xs mt-3 flex items-center justify-center gap-1">
+        🔒 Your files stay on your device. Nothing is uploaded to any server.
+       </p>
 
        <input type="file" accept="image/*" ref={uploadRef} className="hidden" multiple onChange={handleFileUpload} />
       </>
@@ -376,7 +379,7 @@ export default function ImageConverter() {
     {/* Help Text */}
     <div className="text-center mt-4">
      <p className="text-gray-400 text-xs">
-      <sup>*</sup>Supports JPG, PNG, GIF, SVG, WebP, and AVIF formats
+      <sup>*</sup>All major formats supported: JPG, PNG, GIF, SVG, WebP & AVIF.
      </p>
     </div>
    </div>
@@ -384,14 +387,14 @@ export default function ImageConverter() {
    {/* Footer */}
    <div className="mt-8">
     <p className="text-gray-400 text-xs text-center">
-     Built for fun by{' '}
+     Crafted with care by{' '}
      <a
       href="https://sidme.vercel.app/"
       target="_blank"
       rel="noopener noreferrer"
       className="text-amber-200 hover:text-amber-300 transition-colors"
      >
-      <i>sidme</i>
+      sidme
      </a>
     </p>
    </div>

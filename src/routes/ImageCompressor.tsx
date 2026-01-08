@@ -256,7 +256,7 @@ export default function ImageCompressor() {
      <h1 className="text-2xl font-bold text-gray-100 mb-2">
       Image <span className="text-amber-200">Compressor</span>
      </h1>
-     <p className="text-md text-gray-200">Compress your images to reduce file size while maintaining quality</p>
+     <p className="text-md text-gray-200">Reduce file size up to 80% while preserving quality. 100% client-side—your files never leave.</p>
     </div>
 
     <div className="bg-gray-800 rounded-xl shadow-lg p-8 mb-6 w-full max-w-5xl">
@@ -284,6 +284,9 @@ export default function ImageCompressor() {
          </div>
         </div>
        </div>
+       <p className="text-center text-gray-400 text-xs mt-3 flex items-center justify-center gap-1">
+        🔒 Your files stay on your device. Nothing is uploaded to any server.
+       </p>
 
        <input type="file" accept="image/*" multiple ref={fileInputRef} className="hidden" onChange={handleFileChange} />
 
@@ -545,14 +548,14 @@ export default function ImageCompressor() {
 
    <div className="mt-8">
     <p className="text-gray-400 text-xs text-center">
-     Built for fun by{' '}
+     Crafted with care by{' '}
      <a
       href="https://sidme.vercel.app/"
       target="_blank"
       rel="noopener noreferrer"
       className="text-amber-200 hover:text-amber-300 transition-colors"
      >
-      <i>sidme</i>
+      sidme
      </a>
     </p>
    </div>

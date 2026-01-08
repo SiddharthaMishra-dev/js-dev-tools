@@ -68,7 +68,7 @@ const ImageToBase64 = () => {
      <h1 className="text-2xl font-bold text-gray-100 mb-2">
       Image to <span className="text-amber-200">Base64</span> Converter
      </h1>
-     <p className="text-md text-gray-200">Convert your images to Base64 format effortlessly with drag & drop</p>
+     <p className="text-md text-gray-200">Convert images to Base64 instantly. 100% private—no uploads, ever.</p>
     </div>
 
     <div className="bg-gray-800 rounded-xl shadow-lg p-8 mb-6">
@@ -89,11 +89,14 @@ const ImageToBase64 = () => {
          onClick={() => imageRef.current?.click()}
          className="text-sm px-3 py-2 bg-amber-700 text-amber-100 rounded-lg hover:bg-amber-600 transition-colors duration-200 font-medium shadow-md hover:shadow-lg"
         >
-         Choose File
+         Select Image
         </button>
        </div>
       </div>
      </div>
+     <p className="text-center text-gray-400 text-xs mt-3 flex items-center justify-center gap-1">
+      🔒 Your files stay on your device. Nothing is uploaded to any server.
+     </p>
 
      <input type="file" accept="image/*" ref={imageRef} className="hidden" onChange={handleFileChange} />
     </div>
@@ -134,21 +137,21 @@ const ImageToBase64 = () => {
 
     <div className="text-center mt-2">
      <p className="text-gray-400 text-xs">
-      <sup>*</sup>Supports JPG, PNG, GIF, SVG and other image formats
+      <sup>*</sup>All major formats supported: JPG, PNG, GIF, SVG, WebP & more.
      </p>
     </div>
    </div>
 
    <div>
     <p className="text-gray-400 text-xs text-center">
-     Built for fun by{' '}
+     Crafted with care by{' '}
      <a
       href="https://sidme.vercel.app/"
       target="_blank"
       rel="noopener noreferrer"
       className="text-amber-200 hover:text-amber-300 transition-colors"
      >
-      <i>sidme</i>
+      sidme
      </a>
     </p>
    </div>
