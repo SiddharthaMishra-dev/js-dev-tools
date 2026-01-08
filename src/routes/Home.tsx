@@ -8,8 +8,8 @@ import {
  IconBrandGithub,
  IconBraces,
 } from '@tabler/icons-react';
-import { Link } from 'react-router';
 import SEO, { seoConfig } from '../components/SEO';
+import GlowCard from '../components/ui/GlowCard';
 
 export default function Home() {
  return (
@@ -51,7 +51,7 @@ export default function Home() {
    <main className="flex-1 flex items-center justify-center px-4 pb-16 relative z-10">
     <div className="max-w-4xl w-full" id="tools">
      <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-      <Link to="/image-to-base64" className="group bg-gray-800 rounded-xl shadow-lg hover:shadow-xl transition-all duration-300 p-8">
+      <GlowCard to="/image-to-base64">
        <div className="flex items-start space-x-4">
         <div className="flex-shrink-0">
          <div className="w-12 h-12 bg-amber-700 rounded-lg flex items-center justify-center group-hover:bg-amber-600 transition-colors ease-in-out">
@@ -67,9 +67,9 @@ export default function Home() {
          </div>
         </div>
        </div>
-      </Link>
+      </GlowCard>
 
-      <Link to="/image-format-converter" className="group bg-gray-800 rounded-xl shadow-lg hover:shadow-xl transition-all duration-300 p-8">
+      <GlowCard to="/image-format-converter">
        <div className="flex items-start space-x-4">
         <div className="flex-shrink-0">
          <div className="w-12 h-12 bg-amber-700 rounded-lg flex items-center justify-center group-hover:bg-amber-600 transition-colors">
@@ -85,9 +85,9 @@ export default function Home() {
          </div>
         </div>
        </div>
-      </Link>
+      </GlowCard>
 
-      <Link to="/image-compressor" className="group bg-gray-800 rounded-xl shadow-lg hover:shadow-xl transition-all duration-300 p-8">
+      <GlowCard to="/image-compressor">
        <div className="flex items-start space-x-4">
         <div className="flex-shrink-0">
          <div className="w-12 h-12 bg-amber-700 rounded-lg flex items-center justify-center group-hover:bg-amber-600 transition-colors">
@@ -103,9 +103,9 @@ export default function Home() {
          </div>
         </div>
        </div>
-      </Link>
+      </GlowCard>
 
-      <Link to="/image-cropper" className="group bg-gray-800 rounded-xl shadow-lg hover:shadow-xl transition-all duration-300 p-8">
+      <GlowCard to="/image-cropper">
        <div className="flex items-start space-x-4">
         <div className="flex-shrink-0">
          <div className="w-12 h-12 bg-amber-700 rounded-lg flex items-center justify-center group-hover:bg-amber-600 transition-colors">
@@ -121,9 +121,9 @@ export default function Home() {
          </div>
         </div>
        </div>
-      </Link>
+      </GlowCard>
 
-      <Link to="/json-formatter" className="group bg-gray-800 rounded-xl shadow-lg hover:shadow-xl transition-all duration-300 p-8">
+      <GlowCard to="/json-formatter">
        <div className="flex items-start space-x-4">
         <div className="flex-shrink-0">
          <div className="w-12 h-12 bg-amber-700 rounded-lg flex items-center justify-center group-hover:bg-amber-600 transition-colors">
@@ -141,7 +141,7 @@ export default function Home() {
          </div>
         </div>
        </div>
-      </Link>
+      </GlowCard>
      </div>
 
      {/* Features Section */}
