@@ -95,4 +95,13 @@ export const seoConfig = {
   canonical: '/json-formatter',
   ogImage: '/og/json-formatter.png',
  },
+ imageToPdf: {
+  title: 'Images to PDF Converter – Free, Private & Secure | JS DevTools',
+  description:
+   'Convert multiple images to PDF document instantly. Rearrange pages, preview, and download. No uploads—100% private client-side processing.',
+  keywords:
+   'image to pdf, convert jpg to pdf, png to pdf, create pdf from images, combine images to pdf, private pdf converter, free online pdf tool, client-side',
+  canonical: '/image-to-pdf',
+  ogImage: '/og/image-to-pdf.png',
+ },
 };

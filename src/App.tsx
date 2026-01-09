@@ -9,6 +9,7 @@ import ImageConverter from './routes/ImageConverter';
 import ImageCompressor from './routes/ImageCompressor';
 import ImageCropper from './routes/ImageCropper';
 import JsonFormatter from './routes/JsonFormatter';
+import Image2Pdf from './routes/Image2Pdf';
 
 export default function App() {
  return (
@@ -21,6 +22,7 @@ export default function App() {
      <Route path="/image-compressor" element={<ImageCompressor />} />
      <Route path="/image-cropper" element={<ImageCropper />} />
      <Route path="/json-formatter" element={<JsonFormatter />} />
+     <Route path="/image-to-pdf" element={<Image2Pdf />} />
     </Routes>
    </BrowserRouter>
    <Analytics />
