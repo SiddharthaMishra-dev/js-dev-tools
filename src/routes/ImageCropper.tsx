@@ -405,7 +405,7 @@ export default function ImageCropper() {
  };
 
  return (
-  <div className="min-h-screen bg-gradient-to-br from-gray-800 to-slate-900 py-8 px-4 flex flex-col items-center justify-between">
+  <div className="min-h-screen bg-gradient-to-br from-gray-800 to-slate-900 pt-24 pb-8 px-4 flex flex-col items-center justify-between">
    <SEO {...seoConfig.imageCropper} />
    <div className="w-full max-w-6xl flex-1 flex flex-col items-center justify-center mx-auto">
     <div className="text-center mb-8">

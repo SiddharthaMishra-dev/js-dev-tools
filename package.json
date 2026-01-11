@@ -13,8 +13,11 @@
  },
  "dependencies": {
   "@tabler/icons-react": "^3.35.0",
+  "@types/jspdf": "^2.0.0",
   "@vercel/analytics": "^1.6.1",
+  "jspdf": "^4.0.0",
   "jszip": "^3.10.1",
+  "motion": "^12.25.0",
   "react": "^19.1.1",
   "react-dom": "^19.1.1",
   "react-helmet-async": "^2.0.5",
