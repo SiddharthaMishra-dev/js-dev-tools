@@ -227,7 +227,7 @@ export default function JsonFormatter() {
  };
 
  return (
-  <div className="min-h-screen bg-gradient-to-br from-gray-800 to-slate-900 py-8 px-4 flex flex-col">
+  <div className="min-h-screen bg-gradient-to-br from-gray-800 to-slate-900 pt-24 pb-8 px-4 flex flex-col">
    <SEO {...seoConfig.jsonFormatter} />
    {/* Header */}
    <div className="text-center mb-8">

@@ -1,6 +1,6 @@
 <!-- Add Home page Screenshot -->
 
-[![JS Dev Tools Screenshot](./src/assets/home-ss.png)](https://js-devtools.sidme.dev/)
+[![JS Dev Tools Screenshot](/public/screenshot.png)](https://js-devtools.sidme.dev/)
 
 # Just For Fun
 
