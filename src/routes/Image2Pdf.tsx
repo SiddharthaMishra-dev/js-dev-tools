@@ -1,4 +1,4 @@
-import React, { useState, useRef, useCallback } from 'react';
+import React, { useState, useRef, useCallback, useEffect } from 'react';
 import { Reorder } from 'motion/react';
 import { jsPDF } from 'jspdf';
 import { IconCloudUpload, IconFileTypePdf, IconTrash, IconX } from '@tabler/icons-react';
@@ -29,6 +29,12 @@ export default function Image2Pdf() {
 
   setFiles((prev) => [...prev, ...newFiles]);
  }, []);
+
+ useEffect(() => {
+  return () => {
+   files.forEach((file) => URL.revokeObjectURL(file.preview));
+  };
+ }, [files]);
 
  const handleFileChange = (event: React.ChangeEvent<HTMLInputElement>) => {
   if (event.target.files) {
