@@ -1,3 +1,4 @@
+import { useEffect } from 'react';
 import { Helmet } from 'react-helmet-async';
 
 interface SEOProps {
@@ -14,10 +15,33 @@ export default function SEO({ title, description, keywords, canonical, ogImage =
  const fullCanonical = canonical.startsWith('http') ? canonical : `${BASE_URL}${canonical}`;
  const fullOgImage = ogImage.startsWith('http') ? ogImage : `${BASE_URL}${ogImage}`;
 
+ // Fallback for meta tags if react-helmet-async fails to render them (observed in some environments)
+ useEffect(() => {
+  const updateMeta = (name: string, content: string, isProperty = false) => {
+   let meta = document.querySelector(`meta[${isProperty ? 'property' : 'name'}="${name}"]`);
+   if (!meta) {
+    meta = document.createElement('meta');
+    if (isProperty) meta.setAttribute('property', name);
+    else meta.setAttribute('name', name);
+    document.head.appendChild(meta);
+   }
+   meta.setAttribute('content', content);
+  };
+
+  updateMeta('description', description);
+  updateMeta('keywords', keywords);
+  updateMeta('og:title', title, true);
+  updateMeta('og:description', description, true);
+  updateMeta('og:image', fullOgImage, true);
+  updateMeta('og:url', fullCanonical, true);
+  updateMeta('twitter:title', title);
+  updateMeta('twitter:description', description);
+  updateMeta('twitter:image', fullOgImage);
+ }, [title, description, keywords, fullCanonical, fullOgImage]);
+
  return (
   <Helmet>
    <title>{title}</title>
-   <meta name="title" content={title} />
    <meta name="description" content={description} />
    <meta name="keywords" content={keywords} />
    <link rel="canonical" href={fullCanonical} />
@@ -42,65 +66,65 @@ export default function SEO({ title, description, keywords, canonical, ogImage =
 // SEO configurations for each page - optimized for privacy-first messaging
 export const seoConfig = {
  home: {
-  title: 'JS DevTools – Free Private Image Tools & JSON Formatter Online',
+  title: 'JS DevTools – 100% Private Online Image Tools & JSON Formatter',
   description:
-   'Free developer tools for image processing and JSON formatting. 100% client-side, no uploads, complete privacy. Instant Base64, compression, conversion & more.',
+   'Free, private developer tools for image processing and JSON formatting. 100% client-side, no uploads, secure & fast. Convert, compress, crop, and format JSON instantly in your browser.',
   keywords:
-   'developer tools, image converter, base64 encoder, image compressor, json formatter, png to jpeg, webp converter, online tools, privacy, client-side, no upload',
+   'free developer tools, online image tools, private image converter, json formatter online, base64 encoder, image compressor, client-side tools, no upload converter, web dev utilities, secure dev tools',
   canonical: '/',
   ogImage: '/og/home.png',
  },
  imageToBase64: {
-  title: 'Image to Base64 Converter – Free, Private & Instant | JS DevTools',
+  title: 'Free Image to Base64 Converter Online – 100% Private | JS DevTools',
   description:
-   'Convert any image to Base64 data URI instantly. No server uploads—processing happens in your browser. Free, fast, and 100% private. Supports all formats.',
+   'Convert JPG, PNG, WebP, SVG to Base64 data URI instantly. 100% private client-side conversion. Your images never leave your browser. Fast, free, and secure for developers.',
   keywords:
-   'image to base64, base64 encoder, image encoder, convert image to base64, base64 converter, data uri generator, private, no upload, client-side',
+   'image to base64, convert image to base64 online, base64 encoder, png to base64, jpg to base64, svg to base64, data uri generator, private base64 converter, client-side encoder',
   canonical: '/image-to-base64',
   ogImage: '/og/image-to-base64.png',
  },
  imageConverter: {
-  title: 'PNG to WebP Converter – Free JPEG, AVIF Conversion | JS DevTools',
+  title: 'Online Image Format Converter – Convert PNG, JPG, WebP, AVIF | JS DevTools',
   description:
-   'Convert images between PNG, JPEG, WebP, and AVIF formats instantly. Batch conversion with ZIP download. Free, private, no uploads. Works offline.',
+   'Batch convert images between PNG, JPEG, WebP, and AVIF formats instantly. Download as ZIP. 100% client-side, private, no uploads. Fast & free browser-based tool.',
   keywords:
-   'image format converter, png to jpeg, jpeg to webp, webp to png, avif converter, batch image converter, online image converter, private, no upload',
+   'image format converter online, png to webp, jpg to png, webp to avif, batch image converter, private image converter, no upload conversion, browser based image tool',
   canonical: '/image-format-converter',
   ogImage: '/og/image-converter.png',
  },
  imageCompressor: {
-  title: 'Compress Images Online Free – No Upload, 100% Private | JS DevTools',
+  title: 'Free Online Image Compressor – 100% Private & No Quality Loss | JS DevTools',
   description:
-   'Compress PNG, JPEG, and WebP images without quality loss. Reduce file sizes up to 80%. 100% client-side—your images never leave your browser. Free forever.',
+   'Compress PNG, JPEG, and WebP images by up to 80% without quality loss. 100% client-side processing—secure and private. Optimize your images for the web instantly.',
   keywords:
-   'image compressor, compress images online, reduce image size, image optimization, jpg compressor, png compressor, image size reducer, private, no upload',
+   'image compressor online, reduce image size, compress png privately, compress jpeg no quality loss, webp optimizer, private image size reducer, client-side image compression',
   canonical: '/image-compressor',
   ogImage: '/og/image-compressor.png',
  },
  imageCropper: {
-  title: 'Crop Images Online Free – Resize, Rotate & Flip | JS DevTools',
+  title: 'Free Online Image Cropper – Crop, Rotate & Flip 100% Privately | JS DevTools',
   description:
-   'Crop, resize, rotate, and flip images online for free. Precision controls with aspect ratio presets. No uploads, 100% private browser-based tool.',
+   'Crop, resize, rotate, and flip images with precision. Choose from aspect ratio presets. No server uploads—100% private and secure browser-based image editor.',
   keywords:
-   'image cropper, crop image online, resize image, image editor, rotate image, flip image, online image cropper, private, no upload, client-side',
+   'image cropper online, crop images for free, online image editor, rotate image online, flip image privately, resize image browser, private photo cropper',
   canonical: '/image-cropper',
   ogImage: '/og/image-cropper.png',
  },
  jsonFormatter: {
-  title: 'JSON Formatter & Validator – Free Online Beautifier | JS DevTools',
+  title: 'JSON Formatter, Validator & Beautifier – Free & 100% Private | JS DevTools',
   description:
-   'Format, validate, and minify JSON online with syntax highlighting. Convert JSON to CSV. No data sent to servers—completely private. Free developer tool.',
+   'Format, validate, and minify JSON with syntax highlighting. Convert JSON to CSV. 100% client-side, zero network calls. The most secure JSON tool for developers.',
   keywords:
-   'json formatter, json validator, json beautifier, json minifier, json to csv, format json online, prettify json, json syntax highlighter, private, no upload',
+   'json formatter online, json validator, beautify json, minify json, json to csv converter, secure json tool, private json formatter, developer utility',
   canonical: '/json-formatter',
   ogImage: '/og/json-formatter.png',
  },
  imageToPdf: {
-  title: 'Images to PDF Converter – Free, Private & Secure | JS DevTools',
+  title: 'Free Image to PDF Converter Online – 100% Private | JS DevTools',
   description:
-   'Convert multiple images to PDF document instantly. Rearrange pages, preview, and download. No uploads—100% private client-side processing.',
+   'Convert JPG, PNG, WebP to PDF instantly. Rearrange pages with drag-and-drop. 100% client-side, secure & private—no uploads. Best free online PDF tool for developers.',
   keywords:
-   'image to pdf, convert jpg to pdf, png to pdf, create pdf from images, combine images to pdf, private pdf converter, free online pdf tool, client-side',
+   'image to pdf, convert jpg to pdf, png to pdf, webp to pdf, convert image to pdf online, free image to pdf converter, private pdf converter, client-side image to pdf, batch image to pdf, reorder images to pdf, js devtools',
   canonical: '/image-to-pdf',
   ogImage: '/og/image-to-pdf.png',
  },
