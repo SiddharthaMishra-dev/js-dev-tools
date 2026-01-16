@@ -11,6 +11,55 @@ interface ImageItem {
  name: string;
 }
 
+const processImageForPdf = async (file: ImageItem): Promise<{ dataUrl: string; width: number; height: number; format: string }> => {
+ return new Promise((resolve, reject) => {
+  const img = new Image();
+  img.onload = () => {
+   let width = img.width;
+   let height = img.height;
+   const maxDim = 2000;
+
+   // Resize if larger than maxDim
+   if (width > maxDim || height > maxDim) {
+    const aspect = width / height;
+    if (width > height) {
+     width = maxDim;
+     height = width / aspect;
+    } else {
+     height = maxDim;
+     width = height * aspect;
+    }
+   }
+
+   const canvas = document.createElement('canvas');
+   canvas.width = width;
+   canvas.height = height;
+   const ctx = canvas.getContext('2d');
+   if (!ctx) {
+    reject(new Error('Failed to get canvas context'));
+    return;
+   }
+
+   // Draw image to canvas
+   ctx.drawImage(img, 0, 0, width, height);
+
+   let format = 'JPEG';
+   let mimeType = 'image/jpeg';
+
+   // Check for specific types that support transparency
+   if (file.file.type === 'image/png' || file.file.type === 'image/webp') {
+    format = 'PNG';
+    mimeType = 'image/png';
+   }
+
+   const dataUrl = canvas.toDataURL(mimeType, format === 'JPEG' ? 0.8 : undefined);
+   resolve({ dataUrl, width, height, format });
+  };
+  img.onerror = reject;
+  img.src = file.preview;
+ });
+};
+
 export default function Image2Pdf() {
  const [files, setFiles] = useState<ImageItem[]>([]);
  const [isDragging, setIsDragging] = useState(false);
@@ -94,26 +143,18 @@ export default function Image2Pdf() {
      doc.addPage();
     }
 
-    const img = await new Promise<HTMLImageElement>((resolve, reject) => {
-     const image = new Image();
-     image.onload = () => resolve(image);
-     image.onerror = reject;
-     image.src = file.preview;
-    });
-
-    const imgWidth = img.width;
-    const imgHeight = img.height;
+    const { dataUrl, width, height, format } = await processImageForPdf(file);
 
     // Calculate dimensions to fit the page while maintaining aspect ratio
-    const ratio = Math.min(pageWidth / imgWidth, pageHeight / imgHeight);
-    const finalWidth = imgWidth * ratio;
-    const finalHeight = imgHeight * ratio;
+    const ratio = Math.min(pageWidth / width, pageHeight / height);
+    const finalWidth = width * ratio;
+    const finalHeight = height * ratio;
 
     // Center the image
     const x = (pageWidth - finalWidth) / 2;
     const y = (pageHeight - finalHeight) / 2;
 
-    doc.addImage(img, 'JPEG', x, y, finalWidth, finalHeight);
+    doc.addImage(dataUrl, format, x, y, finalWidth, finalHeight);
    }
 
    doc.save('converted-images.pdf');
