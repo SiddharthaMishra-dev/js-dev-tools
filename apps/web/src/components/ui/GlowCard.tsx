@@ -1,13 +1,14 @@
 import { useRef, useState, useCallback } from 'react';
-import { Link } from 'react-router';
+import { Link } from 'react-router-dom';
 
 interface GlowCardProps {
  to: string;
  children: React.ReactNode;
  className?: string;
+ icon?: React.ElementType;
 }
 
-export default function GlowCard({ to, children, className = '' }: GlowCardProps) {
+export default function GlowCard({ to, children, className = '', icon: Icon }: GlowCardProps) {
  const cardRef = useRef<HTMLAnchorElement>(null);
  const [mousePosition, setMousePosition] = useState({ x: 0, y: 0 });
  const [isHovered, setIsHovered] = useState(false);
@@ -44,6 +45,26 @@ export default function GlowCard({ to, children, className = '' }: GlowCardProps
      : undefined,
    }}
   >
+   {/* Background Icon Static */}
+   {Icon && (
+    <div className="absolute -right-4 -bottom-4 text-white/[0.03] transition-colors duration-300 group-hover:text-white/[0.04]">
+     <Icon size={160} stroke={1.5} />
+    </div>
+   )}
+
+   {/* Background Icon Glow */}
+   {Icon && isHovered && (
+    <div
+     className="absolute -right-4 -bottom-4 text-amber-500/15 pointer-events-none transition-opacity duration-300"
+     style={{
+      maskImage: `radial-gradient(200px circle at ${mousePosition.x}px ${mousePosition.y}px, black, transparent)`,
+      WebkitMaskImage: `radial-gradient(200px circle at ${mousePosition.x}px ${mousePosition.y}px, black, transparent)`,
+     }}
+    >
+     <Icon size={160} stroke={1.5} />
+    </div>
+   )}
+
    {/* Glowing border effect */}
    <div
     className="absolute inset-0 rounded-xl pointer-events-none transition-opacity duration-300"
