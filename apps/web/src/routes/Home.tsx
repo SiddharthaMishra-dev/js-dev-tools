@@ -7,6 +7,7 @@ import {
  IconCrop,
  IconBrandGithub,
  IconBraces,
+ IconLink,
 } from '@tabler/icons-react';
 import SEO, { seoConfig } from '../components/SEO';
 import GlowCard from '../components/ui/GlowCard';
@@ -143,7 +144,7 @@ export default function Home() {
        </div>
       </GlowCard>
 
-      <GlowCard to="/image-to-pdf">
+      <GlowCard to="/image-to-pdf" icon={IconPhoto}>
        <div className="flex items-start space-x-4">
         <div className="flex-shrink-0">
          <div className="w-12 h-12 bg-amber-700 rounded-lg flex items-center justify-center group-hover:bg-amber-600 transition-colors">
@@ -162,6 +163,26 @@ export default function Home() {
         </div>
        </div>
       </GlowCard>
+
+      {/* <GlowCard to="/url-shortener" icon={IconLink}>
+       <div className="flex items-start space-x-4">
+        <div className="flex-shrink-0">
+         <div className="w-12 h-12 bg-amber-700 rounded-lg flex items-center justify-center group-hover:bg-amber-600 transition-colors">
+          <IconLink className="text-amber-200" />
+         </div>
+        </div>
+        <div className="flex-1">
+         <h3 className="text-xl font-semibold text-gray-300 mb-2 group-hover:text-amber-200 transition-colors">URL Shortener</h3>
+         <p className="text-gray-200 text-sm leading-relaxed">
+          Shorten long URLs instantly. Track clicks. Simple, fast, and privacy-focused.
+         </p>
+         <div className="mt-4 flex items-center text-amber-200 text-sm font-medium">
+          <span>Try it now</span>
+          <IconChevronRight className="h-5 w-5 ml-1 group-hover:translate-x-1 transition-transform" />
+         </div>
+        </div>
+       </div>
+      </GlowCard> */}
      </div>
 
      {/* Features Section */}
