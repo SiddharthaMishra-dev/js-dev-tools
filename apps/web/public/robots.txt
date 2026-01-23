@@ -13,4 +13,3 @@ Crawl-delay: 1
 # Disallow accessing internal paths
 Disallow: /api/
 Disallow: /_next/
-Disallow: /static/
