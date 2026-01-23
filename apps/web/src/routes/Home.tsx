@@ -164,7 +164,7 @@ export default function Home() {
        </div>
       </GlowCard>
 
-      <GlowCard to="/url-shortener" icon={IconLink}>
+      {/* <GlowCard to="/url-shortener" icon={IconLink}>
        <div className="flex items-start space-x-4">
         <div className="flex-shrink-0">
          <div className="w-12 h-12 bg-amber-700 rounded-lg flex items-center justify-center group-hover:bg-amber-600 transition-colors">
@@ -182,7 +182,7 @@ export default function Home() {
          </div>
         </div>
        </div>
-      </GlowCard>
+      </GlowCard> */}
      </div>
 
      {/* Features Section */}

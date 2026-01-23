@@ -101,6 +101,6 @@ app.get('/:shortCode', async (c) => {
 })
 
 export default { 
-  port: 5000, 
+  port: process.env.PORT || 5000, 
   fetch: app.fetch 
 }

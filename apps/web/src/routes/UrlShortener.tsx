@@ -16,7 +16,7 @@ export default function UrlShortener() {
   setShortUrl('');
 
   try {
-   const response = await fetch('http://localhost:5000/api/shorten', {
+   const response = await fetch((import.meta.env.PUBLIC_API_URL || 'http://localhost:5000') + '/api/shorten', {
     method: 'POST',
     headers: {
      'Content-Type': 'application/json',
@@ -30,7 +30,8 @@ export default function UrlShortener() {
     throw new Error(data.error || 'Something went wrong');
    }
 
-   setShortUrl(`http://localhost:3001/${data.shortCode}`);
+   const shortUrlBase = import.meta.env.PUBLIC_SHORT_URL_BASE || 'http://localhost:3001';
+    setShortUrl(`${shortUrlBase}/${data.shortCode}`);
   } catch (err: any) {
    setError(err.message);
   } finally {
