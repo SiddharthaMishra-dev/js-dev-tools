@@ -1,5 +1,5 @@
-import { IconCheck, IconCircleX, IconCloudUpload, IconDownload } from '@tabler/icons-react';
-import { useState, useRef } from 'react';
+import { IconCheck, IconCircleX, IconCloudUpload, IconDownload, IconLock } from '@tabler/icons-react';
+import { useState, useRef, useEffect } from 'react';
 import JSZip from 'jszip';
 import SEO, { seoConfig } from '../components/SEO';
 
@@ -159,14 +159,14 @@ export default function ImageCompressor() {
   });
  };
 
- const compressAll = async () => {
-  if (files.length === 0) return;
+ const compressAll = async (filesToCompress: CompressedFile[]) => {
+  if (filesToCompress.length === 0) return;
 
   setIsCompressing(true);
-  setFiles((prev) => prev.map((f) => ({ ...f, status: 'compressing' })));
 
-  for (const fileObj of files) {
+  for (const fileObj of filesToCompress) {
    try {
+    setFiles((prev) => prev.map((f) => (f.id === fileObj.id ? { ...f, status: 'compressing' } : f)));
     await compressImage(fileObj);
    } catch (error) {
     setFiles((prev) => prev.map((f) => (f.id === fileObj.id ? { ...f, status: 'error', error: (error as Error).message } : f)));
@@ -246,6 +246,19 @@ export default function ImageCompressor() {
   }
  };
 
+ useEffect(() => {
+  const readyFiles = files.filter((f) => f.status === 'ready');
+  if (readyFiles.length > 0 && !isCompressing) {
+   compressAll(readyFiles);
+  }
+ }, [files, isCompressing]);
+
+ useEffect(() => {
+  if (files.length > 0) {
+   setFiles((prev) => prev.map((f) => ({ ...f, status: 'ready' })));
+  }
+ }, [quality, maxWidth, maxHeight, preserveFormat]);
+
  const completedCount = files.filter((f) => f.status === 'completed').length;
 
  return (
@@ -259,7 +272,7 @@ export default function ImageCompressor() {
      <p className="text-md text-gray-200">Reduce file size up to 80% while preserving quality. 100% client-side—your files never leave.</p>
     </div>
 
-    <div className="bg-gray-800 rounded-xl shadow-lg p-8 mb-6 w-full max-w-5xl">
+    <div className="bg-gray-800 rounded-xl shadow-lg p-4 sm:p-8 mb-6 w-full max-w-5xl">
      {files.length === 0 ? (
       <>
        <div
@@ -285,79 +298,10 @@ export default function ImageCompressor() {
         </div>
        </div>
        <p className="text-center text-gray-400 text-xs mt-3 flex items-center justify-center gap-1">
-        🔒 Your files stay on your device. Nothing is uploaded to any server.
+        <IconLock className="w-4 h-4" /> Your files stay on your device. Nothing is uploaded to any server.
        </p>
 
        <input type="file" accept="image/*" multiple ref={fileInputRef} className="hidden" onChange={handleFileChange} />
-
-       {files.length > 0 && (
-        <div className="mt-6 pt-6 border-t border-gray-600">
-         <h3 className="text-lg font-semibold text-gray-100 mb-4">Compression Settings</h3>
-
-         {/* Format Preservation Toggle */}
-         <div className="mb-4">
-          <label className="flex items-center space-x-3 cursor-pointer">
-           <input
-            type="checkbox"
-            checked={preserveFormat}
-            onChange={(e) => setPreserveFormat(e.target.checked)}
-            className="w-4 h-4 text-amber-600 bg-gray-700 border-gray-600 rounded focus:ring-amber-500"
-           />
-           <span className="text-sm font-medium text-gray-200">Preserve original format</span>
-          </label>
-          <p className="text-xs text-gray-400 mt-1">
-           {preserveFormat ? 'Keep original file formats (PNG, JPEG, etc.)' : 'Convert all images to JPEG for better compression'}
-          </p>
-         </div>
-
-         {(!preserveFormat || files.some((f) => f.mimeType === 'image/jpeg')) && (
-          <div className="mb-4">
-           <div className="flex justify-between items-center mb-2">
-            <label className="text-sm font-medium text-gray-200">Quality {!preserveFormat ? '' : '(JPEG only)'}</label>
-            <span className="text-sm text-amber-200 font-medium">{Math.round(quality * 100)}%</span>
-           </div>
-           <input
-            type="range"
-            min="0.1"
-            max="1"
-            step="0.05"
-            value={quality}
-            onChange={(e) => setQuality(parseFloat(e.target.value))}
-            className="w-full h-2 bg-gray-600 rounded-lg appearance-none cursor-pointer slider"
-           />
-           <div className="flex justify-between text-xs text-gray-400 mt-1">
-            <span>Lower quality</span>
-            <span>Higher quality</span>
-           </div>
-          </div>
-         )}
-
-         <div className="grid grid-cols-1 md:grid-cols-2 gap-4 mb-6">
-          <div>
-           <label className="block text-sm font-medium text-gray-200 mb-1">Max Width (px)</label>
-           <input
-            type="number"
-            value={maxWidth}
-            onChange={(e) => setMaxWidth(parseInt(e.target.value) || 1920)}
-            min="100"
-            max="4000"
-            className="w-full px-3 py-2 border border-gray-600 rounded bg-gray-700 text-gray-100 text-sm focus:outline-none focus:ring-2 focus:ring-amber-500"
-           />
-          </div>
-          <div>
-           <label className="block text-sm font-medium text-gray-200 mb-1">Max Height (px)</label>
-           <input
-            type="number"
-            value={maxHeight}
-            onChange={(e) => setMaxHeight(parseInt(e.target.value) || 1080)}
-            min="100"
-            max="4000"
-            className="w-full px-3 py-2 border border-gray-600 rounded bg-gray-700 text-gray-100 text-sm focus:outline-none focus:ring-2 focus:ring-amber-500"
-           />
-          </div>
-         </div>
-        </div>
-       )}
       </>
      ) : (
       <>
@@ -431,26 +375,8 @@ export default function ImageCompressor() {
         <h3 className="text-xl font-semibold text-gray-100 mb-4">Files ({files.length})</h3>
         {files.length > 0 && (
          <div className="flex items-center gap-2">
-          <div className="flex space-x-2">
-           <button onClick={clearAll} className="px-4 py-2 text-red-400 hover:bg-red-900/20 rounded-lg transition-colors duration-200">
-            Clear All
-           </button>
-           {/* {files.some((f) => f.status === 'completed') && (
-            <button
-             onClick={downloadAll}
-             className="px-4 py-2 text-green-400 hover:bg-green-900/20 rounded-lg transition-colors duration-200"
-            >
-             Download All
-            </button>
-           )} */}
-          </div>
-
-          <button
-           onClick={compressAll}
-           disabled={isCompressing}
-           className="px-6 py-2 bg-amber-700 text-amber-100 rounded-lg hover:bg-amber-600 disabled:opacity-50 disabled:cursor-not-allowed transition-colors duration-200 font-medium shadow-md hover:shadow-lg"
-          >
-           {isCompressing ? 'Compressing...' : 'Compress All'}
+          <button onClick={clearAll} className="px-4 py-2 text-red-400 hover:bg-red-900/20 rounded-lg transition-colors duration-200">
+           Clear All
           </button>
          </div>
         )}
@@ -465,22 +391,17 @@ export default function ImageCompressor() {
           <div className="flex-1 min-w-0">
            <div className="flex items-center space-x-2 mb-1">
             <p className="font-medium text-gray-100 truncate">{file.name}</p>
-            <span className="text-xs px-2 py-1 bg-gray-600 text-gray-300 rounded uppercase">{file.ext}</span>
            </div>
            <div className="flex items-center space-x-4 mt-1 flex-wrap">
-            <span className="text-xs text-gray-400">Original: {formatFileSize(file.originalSize)}</span>
-            {file.compressedSize && (
-             <>
-              <span className="text-xs text-gray-400">Compressed: {formatFileSize(file.compressedSize)}</span>
-              <span
-               className={`text-xs px-2 py-1 rounded ${
-                file.compressionRatio && file.compressionRatio > 0 ? 'bg-green-900 text-green-300' : 'bg-yellow-900 text-yellow-300'
-               }`}
-              >
-               {file.compressionRatio && file.compressionRatio > 0 ? `${file.compressionRatio.toFixed(1)}% smaller` : 'No reduction'}
-              </span>
-             </>
-            )}
+            <span className="text-xs text-gray-400">
+             {formatFileSize(file.originalSize)} &rarr;
+             {file.compressedSize && (
+              <>
+               <span className="text-xs bg-green-900 text-green-300">{formatFileSize(file.compressedSize)}</span>
+              </>
+             )}
+            </span>
+
             {file.error && <span className="text-xs text-red-400">{file.error}</span>}
            </div>
           </div>
@@ -495,12 +416,12 @@ export default function ImageCompressor() {
            )}
            {file.status === 'completed' && (
             <div className="flex items-center space-x-2">
-             <IconCheck className="w-4 h-4 text-green-400" />
+             {/* <IconCheck className="w-4 h-4 text-green-400" /> */}
              <button
               onClick={() => downloadFile(file)}
               className="px-3 py-1 bg-green-700 text-green-100 text-sm rounded hover:bg-green-600 transition-colors"
              >
-              Download
+              <IconDownload className="w-4 h-4" />
              </button>
             </div>
            )}

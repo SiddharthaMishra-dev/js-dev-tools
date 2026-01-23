@@ -1,4 +1,4 @@
-import { useRef, useState, useCallback } from 'react';
+import { useRef, useState, useCallback, useEffect } from 'react';
 import type { ConversionItem } from '../types/ImageTypes';
 import { IconCheck, IconCircleX, IconCloudUpload, IconDownload } from '@tabler/icons-react';
 import JSZip from 'jszip';
@@ -123,13 +123,13 @@ export default function ImageConverter() {
   });
  };
 
- const handleConvertAll = async () => {
-  if (conversions.length === 0) return;
+ const handleConvertAll = async (itemsToConvert: ExtendedConversionItem[]) => {
+  if (itemsToConvert.length === 0) return;
 
   setIsConverting(true);
-  setConversions((prev) => prev.map((conv) => ({ ...conv, status: 'converting' as const })));
-  for (const item of conversions) {
+  for (const item of itemsToConvert) {
    try {
+    setConversions((prev) => prev.map((conv) => (conv.id === item.id ? { ...conv, status: 'converting' as const } : conv)));
     await convertImage(item);
    } catch (error) {
     setConversions((prev) =>
@@ -208,6 +208,23 @@ export default function ImageConverter() {
    uploadRef.current.value = '';
   }
  };
+ useEffect(() => {
+  const pendingItems = conversions.filter((item) => item.status === 'pending');
+  if (pendingItems.length > 0 && !isConverting) {
+   handleConvertAll(pendingItems);
+  }
+ }, [conversions, isConverting]);
+
+ useEffect(() => {
+  if (conversions.length > 0) {
+   setConversions((prev) =>
+    prev.map((item) => {
+     if (item.downloadUrl) URL.revokeObjectURL(item.downloadUrl);
+     return { ...item, status: 'pending', downloadUrl: undefined, blob: undefined };
+    }),
+   );
+  }
+ }, [selectedFormat]);
 
  const completedCount = conversions.filter((item) => item.status === 'completed').length;
 
@@ -223,7 +240,7 @@ export default function ImageConverter() {
      <p className="text-md text-gray-200">Convert images between formats instantly. Batch support. No uploads—100% private.</p>
     </div>
 
-    <div className="bg-gray-800 rounded-xl shadow-lg p-8 mb-6 w-full max-w-5xl">
+    <div className="bg-gray-800 rounded-xl shadow-lg p-4 sm:p-8 mb-6 w-full max-w-5xl">
      {conversions.length === 0 ? (
       <>
        {/* Upload Area */}
@@ -287,14 +304,6 @@ export default function ImageConverter() {
             Clear All
            </button>
           </div>
-
-          <button
-           onClick={handleConvertAll}
-           disabled={isConverting}
-           className="px-6 py-2 bg-amber-700 text-amber-100 rounded-lg hover:bg-amber-600 disabled:opacity-50 disabled:cursor-not-allowed transition-colors duration-200 font-medium shadow-md hover:shadow-lg"
-          >
-           {isConverting ? 'Converting...' : 'Convert All'}
-          </button>
          </div>
         )}
        </div>
@@ -330,12 +339,11 @@ export default function ImageConverter() {
            )}
            {item.status === 'completed' && (
             <div className="flex items-center space-x-2">
-             <IconCheck className="w-4 h-4 text-green-400" />
              <button
               onClick={() => downloadFile(item)}
               className="px-3 py-1 bg-green-700 text-green-100 text-sm rounded hover:bg-green-600 transition-colors"
              >
-              Download
+              <IconDownload className="w-4 h-4" />
              </button>
             </div>
            )}

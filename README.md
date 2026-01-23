@@ -1,6 +1,6 @@
 <!-- Add Home page Screenshot -->
 
-[![JS Dev Tools Screenshot](/public/screenshot.png)](https://js-devtools.sidme.dev/)
+[![JS Dev Tools Screenshot](/apps/web/public/screenshot.png)](https://js-devtools.sidme.dev/)
 
 # Just For Fun
 
@@ -103,7 +103,8 @@ So I built them ALL in one place!
 
 ## Contributing
 
-Contributions are welcome! Please open an issue or submit a pull request for any improvements or bug fixes.
+Contributions are welcome! Please open an issue or submit a pull request for any improvements or bug
+fixes.
 
 - Report Bugs
 - Suggest Features
