@@ -1,6 +1,17 @@
 import { useRef, useState, useEffect } from 'react';
-import { IconCloudUpload, IconDownload, IconRotateClockwise, IconFlipHorizontal, IconFlipVertical, IconCrop } from '@tabler/icons-react';
+import {
+ IconCloudUpload,
+ IconDownload,
+ IconRotateClockwise,
+ IconFlipHorizontal,
+ IconFlipVertical,
+ IconCrop,
+ IconLock,
+ IconMaximize,
+ IconArrowsMaximize,
+} from '@tabler/icons-react';
 import SEO, { seoConfig } from '../components/SEO';
+import ToolInfo from '../components/ToolInfo';
 
 interface CropArea {
  x: number;
@@ -561,11 +572,45 @@ export default function ImageCropper() {
      )}
     </div>
 
-    <div className="text-center mt-4">
-     <p className="text-gray-400 text-xs">
-      <sup>*</sup>Toggle crop mode to show/hide crop area. Click and drag to move the crop area. Drag the handles to resize.
-     </p>
-    </div>
+    <ToolInfo
+     title="Image Cropper"
+     description="Our Image Cropper provides professional-grade image editing capabilities directly in your browser. Easily crop to specific aspect ratios, rotate images for better alignment, or flip them horizontally and vertically to get the perfect composition."
+     features={[
+      {
+       title: 'Precision Editing',
+       description: 'Manually adjust crop coordinates and dimensions or use the intuitive on-canvas handles for visual editing.',
+       icon: IconCrop,
+      },
+      {
+       title: 'Transformation Tools',
+       description: 'Rotate images in 90-degree increments and flip them along both axes with a single click.',
+       icon: IconArrowsMaximize,
+      },
+      {
+       title: 'Zero Uploads',
+       description: 'Edit your photos with full confidence in your privacy. No data ever leaves your device.',
+       icon: IconLock,
+      },
+     ]}
+     steps={[
+      {
+       title: 'Upload Image',
+       description: 'Select an image from your device or use drag and drop to start editing.',
+      },
+      {
+       title: 'Toggle Crop',
+       description: 'Click "Show Crop" to activate the cropping boundary on your image.',
+      },
+      {
+       title: 'Adjust Boundary',
+       description: 'Drag the crop box or use the corner handles to select the area you want to keep.',
+      },
+      {
+       title: 'Save & Download',
+       description: 'Once satisfied, click the download button to save your perfectly cropped image.',
+      },
+     ]}
+    />
    </div>
 
    <div className="mt-8">

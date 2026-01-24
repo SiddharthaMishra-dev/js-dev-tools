@@ -7,11 +7,12 @@ interface SEOProps {
  keywords: string;
  canonical: string;
  ogImage?: string;
+ jsonLd?: Record<string, any>;
 }
 
 const BASE_URL = 'https://js-devtools.sidme.dev';
 
-export default function SEO({ title, description, keywords, canonical, ogImage = '/screenshot.png' }: SEOProps) {
+export default function SEO({ title, description, keywords, canonical, ogImage = '/screenshot.png', jsonLd }: SEOProps) {
  const fullCanonical = canonical.startsWith('http') ? canonical : `${BASE_URL}${canonical}`;
  const fullOgImage = ogImage.startsWith('http') ? ogImage : `${BASE_URL}${ogImage}`;
 
@@ -59,6 +60,7 @@ export default function SEO({ title, description, keywords, canonical, ogImage =
    <meta name="twitter:title" content={title} />
    <meta name="twitter:description" content={description} />
    <meta name="twitter:image" content={fullOgImage} />
+   {jsonLd && <script type="application/ld+json">{JSON.stringify(jsonLd)}</script>}
   </Helmet>
  );
 }
@@ -73,6 +75,20 @@ export const seoConfig = {
    'free developer tools, online image tools, private image converter, json formatter online, base64 encoder, image compressor, client-side tools, no upload converter, web dev utilities, secure dev tools',
   canonical: '/',
   ogImage: '/og/home.png',
+  jsonLd: {
+   '@context': 'https://schema.org',
+   '@type': 'WebApplication',
+   name: 'JS DevTools',
+   url: 'https://js-devtools.sidme.dev',
+   description: 'Free, private developer tools for image processing and JSON formatting. 100% client-side, no uploads, secure & fast.',
+   applicationCategory: 'DeveloperApplication, MultimediaApplication',
+   operatingSystem: 'Any',
+   offers: {
+    '@type': 'Offer',
+    price: '0',
+    priceCurrency: 'USD',
+   },
+  },
  },
  imageToBase64: {
   title: 'Free Image to Base64 Converter Online – 100% Private | JS DevTools',
@@ -82,6 +98,20 @@ export const seoConfig = {
    'image to base64, convert image to base64 online, base64 encoder, png to base64, jpg to base64, svg to base64, data uri generator, private base64 converter, client-side encoder',
   canonical: '/image-to-base64',
   ogImage: '/og/image-to-base64.png',
+  jsonLd: {
+   '@context': 'https://schema.org',
+   '@type': 'WebApplication',
+   name: 'Image to Base64 Converter',
+   url: 'https://js-devtools.sidme.dev/image-to-base64',
+   description: 'Convert images to Base64 data URI instantly and privately in your browser.',
+   applicationCategory: 'DeveloperApplication',
+   operatingSystem: 'Any',
+   offers: {
+    '@type': 'Offer',
+    price: '0',
+    priceCurrency: 'USD',
+   },
+  },
  },
  imageConverter: {
   title: 'Online Image Format Converter – Convert PNG, JPG, WebP, AVIF | JS DevTools',
@@ -91,6 +121,20 @@ export const seoConfig = {
    'image format converter online, png to webp, jpg to png, webp to avif, batch image converter, private image converter, no upload conversion, browser based image tool',
   canonical: '/image-format-converter',
   ogImage: '/og/image-converter.png',
+  jsonLd: {
+   '@context': 'https://schema.org',
+   '@type': 'WebApplication',
+   name: 'Image Format Converter',
+   url: 'https://js-devtools.sidme.dev/image-format-converter',
+   description: 'Batch convert images between PNG, JPEG, WebP, and AVIF formats instantly and privately.',
+   applicationCategory: 'MultimediaApplication',
+   operatingSystem: 'Any',
+   offers: {
+    '@type': 'Offer',
+    price: '0',
+    priceCurrency: 'USD',
+   },
+  },
  },
  imageCompressor: {
   title: 'Free Online Image Compressor – 100% Private & No Quality Loss | JS DevTools',
@@ -100,6 +144,20 @@ export const seoConfig = {
    'image compressor online, reduce image size, compress png privately, compress jpeg no quality loss, webp optimizer, private image size reducer, client-side image compression',
   canonical: '/image-compressor',
   ogImage: '/og/image-compressor.png',
+  jsonLd: {
+   '@context': 'https://schema.org',
+   '@type': 'WebApplication',
+   name: 'Image Compressor',
+   url: 'https://js-devtools.sidme.dev/image-compressor',
+   description: 'Compress PNG, JPEG, and WebP images privately in your browser with no quality loss.',
+   applicationCategory: 'MultimediaApplication',
+   operatingSystem: 'Any',
+   offers: {
+    '@type': 'Offer',
+    price: '0',
+    priceCurrency: 'USD',
+   },
+  },
  },
  imageCropper: {
   title: 'Free Online Image Cropper – Crop, Rotate & Flip 100% Privately | JS DevTools',
@@ -109,6 +167,20 @@ export const seoConfig = {
    'image cropper online, crop images for free, online image editor, rotate image online, flip image privately, resize image browser, private photo cropper',
   canonical: '/image-cropper',
   ogImage: '/og/image-cropper.png',
+  jsonLd: {
+   '@context': 'https://schema.org',
+   '@type': 'WebApplication',
+   name: 'Image Cropper',
+   url: 'https://js-devtools.sidme.dev/image-cropper',
+   description: 'Crop, resize, rotate, and flip images with precision 100% privately in your browser.',
+   applicationCategory: 'MultimediaApplication',
+   operatingSystem: 'Any',
+   offers: {
+    '@type': 'Offer',
+    price: '0',
+    priceCurrency: 'USD',
+   },
+  },
  },
  jsonFormatter: {
   title: 'JSON Formatter, Validator & Beautifier – Free & 100% Private | JS DevTools',
@@ -118,6 +190,20 @@ export const seoConfig = {
    'json formatter online, json validator, beautify json, minify json, json to csv converter, secure json tool, private json formatter, developer utility',
   canonical: '/json-formatter',
   ogImage: '/og/json-formatter.png',
+  jsonLd: {
+   '@context': 'https://schema.org',
+   '@type': 'WebApplication',
+   name: 'JSON Formatter & Validator',
+   url: 'https://js-devtools.sidme.dev/json-formatter',
+   description: 'Format, validate, and minify JSON with syntax highlighting 100% privately.',
+   applicationCategory: 'DeveloperApplication',
+   operatingSystem: 'Any',
+   offers: {
+    '@type': 'Offer',
+    price: '0',
+    priceCurrency: 'USD',
+   },
+  },
  },
  imageToPdf: {
   title: 'Free Image to PDF Converter Online – 100% Private | JS DevTools',
@@ -127,5 +213,19 @@ export const seoConfig = {
    'image to pdf, convert jpg to pdf, png to pdf, webp to pdf, convert image to pdf online, free image to pdf converter, private pdf converter, client-side image to pdf, batch image to pdf, reorder images to pdf, js devtools',
   canonical: '/image-to-pdf',
   ogImage: '/og/image-to-pdf.png',
+  jsonLd: {
+   '@context': 'https://schema.org',
+   '@type': 'WebApplication',
+   name: 'Image to PDF Converter',
+   url: 'https://js-devtools.sidme.dev/image-to-pdf',
+   description: 'Convert multiple images to a single PDF instantly and privately in your browser.',
+   applicationCategory: 'DeveloperApplication',
+   operatingSystem: 'Any',
+   offers: {
+    '@type': 'Offer',
+    price: '0',
+    priceCurrency: 'USD',
+   },
+  },
  },
 };

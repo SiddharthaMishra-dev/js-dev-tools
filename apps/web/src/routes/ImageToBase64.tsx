@@ -1,6 +1,7 @@
-import { IconCheck, IconCloudUpload, IconCopy } from '@tabler/icons-react';
-import { useRef, useState, useCallback } from 'react';
+import { IconBolt, IconCheck, IconCloudUpload, IconCopy, IconFileCode, IconLock } from '@tabler/icons-react';
+import { useCallback, useRef, useState } from 'react';
 import SEO, { seoConfig } from '../components/SEO';
+import ToolInfo from '../components/ToolInfo';
 
 const ImageToBase64 = () => {
  const imageRef = useRef<HTMLInputElement>(null);
@@ -142,7 +143,47 @@ const ImageToBase64 = () => {
     </div>
    </div>
 
-   <div>
+   <ToolInfo
+    title="Image to Base64"
+    description="Convert any image file into a Base64 encoded string effortlessly. Base64 encoding is widely used for embedding images directly into HTML, CSS, or JSON, reducing the number of HTTP requests and improving load times for small assets."
+    features={[
+     {
+      title: '100% Private',
+      description: 'All conversions happen locally in your browser. Your images are never uploaded to any server.',
+      icon: IconLock,
+     },
+     {
+      title: 'Instant Results',
+      description: 'Get your Base64 string immediately after dropping your image. No waiting for server processing.',
+      icon: IconBolt,
+     },
+     {
+      title: 'Format Agnostic',
+      description: 'Supports JPG, PNG, WebP, SVG, and GIF. Generates standard Data URIs compatible with all modern browsers.',
+      icon: IconFileCode,
+     },
+    ]}
+    steps={[
+     {
+      title: 'Select Image',
+      description: 'Drag and drop your image or click the select button to choose a file from your device.',
+     },
+     {
+      title: 'Auto-Conversion',
+      description: 'The tool automatically processes your image and generates the Base64 Data URI.',
+     },
+     {
+      title: 'Copy Result',
+      description: 'Click the copy button to save the Base64 string to your clipboard for use in your code.',
+     },
+     {
+      title: 'Use in Code',
+      description: 'Paste the string into your HTML src, CSS url(), or JSON data as needed.',
+     },
+    ]}
+   />
+
+   <div className="mt-8 text-center">
     <p className="text-gray-400 text-xs text-center">
      Crafted with care by{' '}
      <a

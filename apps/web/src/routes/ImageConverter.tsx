@@ -1,8 +1,9 @@
-import { useRef, useState, useCallback, useEffect } from 'react';
-import type { ConversionItem } from '../types/ImageTypes';
-import { IconCheck, IconCircleX, IconCloudUpload, IconDownload } from '@tabler/icons-react';
+import { IconCircleX, IconCloudUpload, IconDownload, IconBox, IconLock, IconArrowsExchange } from '@tabler/icons-react';
 import JSZip from 'jszip';
+import { useCallback, useEffect, useRef, useState } from 'react';
 import SEO, { seoConfig } from '../components/SEO';
+import ToolInfo from '../components/ToolInfo';
+import type { ConversionItem } from '../types/ImageTypes';
 
 // Extended ConversionItem to include blob and preview for layout consistency
 interface ExtendedConversionItem extends ConversionItem {
@@ -391,6 +392,46 @@ export default function ImageConverter() {
      </p>
     </div>
    </div>
+
+   <ToolInfo
+    title="Image Format Converter"
+    description="Our Image Format Converter allows you to seamlessly switch between popular image formats like JPEG, PNG, WebP, and AVIF. Whether you need to optimize for web performance with WebP/AVIF or maintain maximum compatibility with JPEG, this tool provides a fast and private solution directly in your browser."
+    features={[
+     {
+      title: 'Batch Processing',
+      description: 'Convert multiple images at once and download them all as a single ZIP file, saving you valuable time.',
+      icon: IconBox,
+     },
+     {
+      title: 'Client-Side Only',
+      description: 'Conversions are performed entirely on your machine. Your private images never touch our servers.',
+      icon: IconLock,
+     },
+     {
+      title: 'High Compatibility',
+      description: 'Convert between all modern web formats including PNG, JPG, WebP, and the next-gen AVIF format.',
+      icon: IconArrowsExchange,
+     },
+    ]}
+    steps={[
+     {
+      title: 'Upload Images',
+      description: 'Drag and drop one or more images into the upload area or click select.',
+     },
+     {
+      title: 'Select Target Format',
+      description: 'Choose your desired output format (PNG, JPEG, WebP, or AVIF) from the dropdown.',
+     },
+     {
+      title: 'Automatic Conversion',
+      description: 'The tool will instantly begin converting each image to your chosen format.',
+     },
+     {
+      title: 'Download Results',
+      description: 'Download individual converted images or grab everything at once as a ZIP archive.',
+     },
+    ]}
+   />
 
    {/* Footer */}
    <div className="mt-8">

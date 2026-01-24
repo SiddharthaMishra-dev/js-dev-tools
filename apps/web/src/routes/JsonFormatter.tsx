@@ -1,6 +1,7 @@
 import { useState, useMemo, useCallback } from 'react';
 import { IconCheck, IconCopy, IconDownload, IconBraces, IconArrowsMinimize, IconTrash, IconAlertCircle } from '@tabler/icons-react';
 import SEO, { seoConfig } from '../components/SEO';
+import ToolInfo from '../components/ToolInfo';
 
 type TokenType = 'bracket' | 'key' | 'string' | 'number' | 'boolean' | 'null' | 'punctuation';
 
@@ -395,9 +396,47 @@ export default function JsonFormatter() {
       )}
      </div>
     </div>
+    <ToolInfo
+     title="JSON Formatter & Validator"
+     description="Our JSON Formatter is a comprehensive suite for developers to clean, validate, and optimize JSON data. Whether you need to beautify deep nested objects for readability or minify data for production use, this tool provides a secure, client-side environment for all your JSON needs."
+     features={[
+      {
+       title: 'Smart Formatting',
+       description: 'Automatic indentation and syntax highlighting make scanning complex JSON structures effortless.',
+       icon: IconBraces,
+      },
+      {
+       title: 'Instant Minification',
+       description: 'Strip whitespaces and newlines to reduce payload size for API calls and configuration files.',
+       icon: IconArrowsMinimize,
+      },
+      {
+       title: 'CSV Export',
+       description: 'Convert arrays of JSON objects into CSV format instantly for spreadsheet analysis.',
+       icon: IconDownload,
+      },
+     ]}
+     steps={[
+      {
+       title: 'Paste JSON',
+       description: 'Input your raw JSON string into the left editor panel. It can even handle single quotes!',
+      },
+      {
+       title: 'Auto-Validate',
+       description: 'The tool immediately checks for syntax errors and provides helpful debugging messages.',
+      },
+      {
+       title: 'Apply View',
+       description: 'Switch between "Formatted" and "Minified" views to see your data in different contexts.',
+      },
+      {
+       title: 'Export Data',
+       description: 'Copy the result to your clipboard or download the data as a CSV file for external use.',
+      },
+     ]}
+    />
    </div>
 
-   {/* Footer */}
    <footer className="mt-8 text-center">
     <p className="text-gray-400 text-xs">
      Crafted with care by{' '}

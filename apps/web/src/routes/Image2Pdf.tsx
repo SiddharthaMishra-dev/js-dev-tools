@@ -1,8 +1,9 @@
-import React, { useState, useRef, useCallback, useEffect } from 'react';
-import { Reorder } from 'motion/react';
+import { IconArrowsSort, IconCloudUpload, IconFileTypePdf, IconLock, IconTrash, IconX } from '@tabler/icons-react';
 import { jsPDF } from 'jspdf';
-import { IconCloudUpload, IconFileTypePdf, IconTrash, IconX } from '@tabler/icons-react';
+import { Reorder } from 'motion/react';
+import React, { useCallback, useEffect, useRef, useState } from 'react';
 import SEO, { seoConfig } from '../components/SEO';
+import ToolInfo from '../components/ToolInfo';
 
 interface ImageItem {
  id: string;
@@ -274,8 +275,46 @@ export default function Image2Pdf() {
      )}
     </div>
    </div>
+   <ToolInfo
+    title="Image to PDF Converter"
+    description="Our Image to PDF Converter allows you to merge multiple images into a professional PDF document. Perfect for creating portfolios, combining receipts, or preparing documents for upload, all while maintaining complete privacy for your sensitive files."
+    features={[
+     {
+      title: 'Custom Page Order',
+      description: 'Intuitive drag-and-drop interface lets you rearrange pages to your exact specifications.',
+      icon: IconArrowsSort,
+     },
+     {
+      title: 'Universal Format',
+      description: 'Generates standard PDF files compatible with all devices and operating systems.',
+      icon: IconFileTypePdf,
+     },
+     {
+      title: 'Secure & Private',
+      description: 'The entire PDF generation process happens in your browser. No files are uploaded to any server.',
+      icon: IconLock,
+     },
+    ]}
+    steps={[
+     {
+      title: 'Add Images',
+      description: 'Upload all the images you want to include in your PDF document.',
+     },
+     {
+      title: 'Arrange Order',
+      description: 'Drag the thumbnails to change the order in which they appear in the final PDF.',
+     },
+     {
+      title: 'Convert Process',
+      description: 'Click "Convert to PDF" to start the local generation process. It takes only seconds.',
+     },
+     {
+      title: 'Save PDF',
+      description: 'Your browser will automatically prompt you to save the newly created PDF document.',
+     },
+    ]}
+   />
 
-   {/* Footer */}
    <div className="mt-8 text-center">
     <p className="text-gray-400 text-xs">
      Crafted with care by{' '}

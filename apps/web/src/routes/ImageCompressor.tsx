@@ -1,7 +1,17 @@
-import { IconCheck, IconCircleX, IconCloudUpload, IconDownload, IconLock } from '@tabler/icons-react';
+import {
+ IconCheck,
+ IconCircleX,
+ IconCloudUpload,
+ IconDownload,
+ IconLock,
+ IconBolt,
+ IconArrowsMinimize,
+ IconDeviceDesktop,
+} from '@tabler/icons-react';
 import { useState, useRef, useEffect } from 'react';
 import JSZip from 'jszip';
 import SEO, { seoConfig } from '../components/SEO';
+import ToolInfo from '../components/ToolInfo';
 
 interface CompressedFile {
  id: string;
@@ -460,11 +470,45 @@ export default function ImageCompressor() {
      )}
     </div>
 
-    <div className="text-center mt-4">
-     <p className="text-gray-400 text-xs">
-      <sup>*</sup>PNG files are compressed by resizing only. JPEG files support quality compression.
-     </p>
-    </div>
+    <ToolInfo
+     title="Image Compressor"
+     description="Our Image Compressor helps you significantly reduce the file size of your images without sacrificing visible quality. By utilizing advanced browser-based compression algorithms, you can optimize your PNG, JPEG, and WebP files for faster web loading and reduced storage usage."
+     features={[
+      {
+       title: 'Quality Control',
+       description: 'Fine-tune the compression level to find the perfect balance between file size and image clarity.',
+       icon: IconBolt,
+      },
+      {
+       title: 'Privacy Guaranteed',
+       description: 'Processing happens entirely in your browser. No images are ever uploaded to a server.',
+       icon: IconLock,
+      },
+      {
+       title: 'Bulk Compression',
+       description: 'Compress dozens of images simultaneously and download them all at once in a ZIP file.',
+       icon: IconArrowsMinimize,
+      },
+     ]}
+     steps={[
+      {
+       title: 'Add Images',
+       description: 'Drop your images into the compression zone or use the file picker to select them.',
+      },
+      {
+       title: 'Adjust Settings',
+       description: 'Set your desired quality and maximum dimensions to optimize your images further.',
+      },
+      {
+       title: 'Review Savings',
+       description: 'Instantly see how much space you have saved for each image after compression.',
+      },
+      {
+       title: 'Download All',
+       description: 'Download individual optimized images or grab the entire batch as a ZIP archive.',
+      },
+     ]}
+    />
    </div>
 
    <div className="mt-8">
