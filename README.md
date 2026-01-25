@@ -2,8 +2,6 @@
 
 [![JS Dev Tools Screenshot](/apps/web/public/screenshot.png)](https://js-devtools.sidme.dev/)
 
-# Just For Fun
-
 Try it out: [https://js-devtools.sidme.dev/](https://js-devtools.sidme.dev/)
 
 ## JS Dev Tools
@@ -64,6 +62,12 @@ So I built them ALL in one place!
 - Real-time syntax highlighting
 - Download formatted JSON
 
+### Image to PDF
+
+- Convert images to PDF format
+- Multiple images support
+- Downloadable PDF file
+
 ## Tech Stack
 
 - React with TypeScript
@@ -77,6 +81,8 @@ So I built them ALL in one place!
 - `src/routes/ImageCompressor.tsx`: Image compression component.
 - `src/routes/ImageCropper.tsx`: Image cropping component.
 - `src/routes/JsonFormatter.tsx`: JSON formatting component.
+- `src/routes/ImageToBase64.tsx`: Image to Base64 conversion component.
+- `src/routes/ImageToPdf.tsx`: Image to PDF conversion component.
 - `src/components`: Reusable UI components.
 - `public`: Static assets.
 
