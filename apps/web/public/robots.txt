@@ -1,15 +1,5 @@
-# JS DevTools - Developer Utilities
-
-# Allow all crawlers
+# https://www.robotstxt.org/robotstxt.html
 User-agent: *
-Allow: /
+Disallow:
 
-# Sitemap location
 Sitemap: https://js-devtools.sidme.dev/sitemap.xml
-
-# Slow down crawling to be respectful
-Crawl-delay: 1
-
-# Disallow accessing internal paths
-Disallow: /api/
-Disallow: /_next/
