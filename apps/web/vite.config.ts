@@ -32,7 +32,9 @@ const config = defineConfig({
         host: 'https://js-devtools.sidme.dev',
       },
     }),
-    nitro(),
+    nitro({
+      preset:'bun'
+    }),
     viteReact(),
   ],
 })
