@@ -24,8 +24,8 @@ const config = defineConfig({
     tailwindcss(),
     tanstackStart({
       prerender: {
-        enabled: true,
-        crawlLinks: true, // Discovers all linkable pages
+        enabled: false, // Disable prerendering for now to fix build
+        crawlLinks: false,
       },
       sitemap: {
         enabled: true,
@@ -33,7 +33,7 @@ const config = defineConfig({
       },
     }),
     nitro({
-      preset:'bun'
+      preset: 'vercel'
     }),
     viteReact(),
   ],
