@@ -8,8 +8,10 @@ import appCss from "../styles.css?url";
 
 export const Route = createRootRoute({
   head: () => ({
-    title: "JS DevTools | Privacy First | 100% Client-Side Utilities",
     meta: [
+      {
+        title: "JS DevTools | Privacy First | 100% Client-Side Utilities",
+      },
       {
         charSet: "utf-8",
       },

@@ -12,68 +12,28 @@ import { Link, createFileRoute } from "@tanstack/react-router";
 import GlowCard from "@/components/ui/GlowCard";
 import { tools } from "@/data/tools";
 
+import { getSeoMetadata } from "@/lib/seo";
+
 const featuredTools = tools.slice(0, 6);
 
 export const Route = createFileRoute("/")({
-  head: () => ({
-    title: "JS DevTools | Privacy-first online tools for everyone",
-    meta: [
-      {
-        name: "description",
-        content:
-          "All-in-one, privacy-first tools for images and data. Convert, compress, crop, format JSON, and more—100% client-side with zero uploads.",
-      },
-      {
-        name: "keywords",
-        content:
-          "online tools,image to base64,image compressor,image converter,json formatter,csv to xlsx,privacy-first tools,client-side utilities",
-      },
-      {
-        property: "og:title",
-        content: "JS DevTools | Privacy-first online tools for everyone",
-      },
-      {
-        property: "og:description",
-        content:
-          "Do more with secure, offline-friendly image and data tools. Everything runs in your browser.",
-      },
-      {
-        property: "og:url",
-        content: "https://js-devtools.sidme.dev/",
-      },
-      {
-        property: "og:image",
-        content: "https://js-devtools.sidme.dev/screenshot.png",
-      },
-      {
-        name: "twitter:card",
-        content: "summary_large_image",
-      },
-      {
-        name: "twitter:title",
-        content: "JS DevTools | Privacy-first online tools for everyone",
-      },
-      {
-        name: "twitter:description",
-        content:
-          "All your essential image and data tools in one place. Private by design, open source by default.",
-      },
-      {
-        name: "twitter:image",
-        content: "https://js-devtools.sidme.dev/screenshot.png",
-      },
-      {
-        name: "robots",
-        content: "index,follow",
-      },
-    ],
-    links: [
-      {
-        rel: "canonical",
-        href: "https://js-devtools.sidme.dev/",
-      },
-    ],
-  }),
+  head: () =>
+    getSeoMetadata({
+      title: "JS DevTools | Privacy-first online tools for everyone",
+      description:
+        "All-in-one, privacy-first tools for images and data. Convert, compress, crop, format JSON, and more—100% client-side with zero uploads.",
+      keywords: [
+        "online tools",
+        "image to base64",
+        "image compressor",
+        "image converter",
+        "json formatter",
+        "csv to xlsx",
+        "privacy-first tools",
+        "client-side utilities",
+      ],
+      url: "/",
+    }),
   component: App,
 });
 

@@ -17,6 +17,7 @@ Tired of jumping between different websites for simple image tasks? Me too!
 - Change formats? → Convertio
 - Crop images? → iLoveIMG
 - Format JSON? → JSON Formatter
+- Convert images to PDF? → Image to PDF
 
 So I built them ALL in one place!
 

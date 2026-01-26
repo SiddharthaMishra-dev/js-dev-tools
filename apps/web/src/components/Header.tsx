@@ -1,16 +1,11 @@
-import React, { useState } from "react";
+import React from "react";
 
-import { IconApps, IconHome, IconMenu2, IconX } from "@tabler/icons-react";
+import { IconApps } from "@tabler/icons-react";
 import { Link } from "@tanstack/react-router";
 
-const navItems = [
-  { path: "/", label: "Home", icon: <IconHome size={18} /> },
-  { path: "/tools", label: "Tools", icon: <IconApps size={18} /> },
-];
+const navItems = [{ path: "/tools", label: "Tools", icon: <IconApps size={18} /> }];
 
 const Header: React.FC = () => {
-  const [isMenuOpen, setIsMenuOpen] = useState(false);
-
   return (
     <nav className="fixed top-0 left-0 right-0 z-50 bg-slate-900/70 backdrop-blur-xl border-b border-white/5 shadow-lg">
       <div className="max-w-7xl mx-auto px-4 md:px-6">
@@ -23,7 +18,7 @@ const Header: React.FC = () => {
           </Link>
 
           {/* Desktop Navigation */}
-          <div className="hidden md:flex gap-1 lg:gap-2">
+          <div className="flex gap-1 lg:gap-2">
             {navItems.map((item) => (
               <Link
                 key={item.path}
@@ -37,17 +32,17 @@ const Header: React.FC = () => {
           </div>
 
           {/* Mobile Menu Toggle */}
-          <button
+          {/* <button
             className="block md:hidden bg-transparent border-none text-gray-100 cursor-pointer p-2 transition-colors hover:text-blue-400"
             onClick={() => setIsMenuOpen(!isMenuOpen)}
             aria-label="Toggle menu"
           >
             {isMenuOpen ? <IconX size={24} /> : <IconMenu2 size={24} />}
-          </button>
+          </button> */}
         </div>
 
         {/* Mobile Navigation */}
-        {isMenuOpen && (
+        {/* {isMenuOpen && (
           <div className="md:hidden flex flex-col gap-1 py-4 border-t border-white/5">
             {navItems.map((item) => (
               <Link
@@ -60,7 +55,7 @@ const Header: React.FC = () => {
               </Link>
             ))}
           </div>
-        )}
+        )} */}
       </div>
     </nav>
   );

@@ -12,7 +12,24 @@ import {
 } from "@tabler/icons-react";
 import ToolInfo from "@/components/ToolInfo";
 
+import { getSeoMetadata } from "@/lib/seo";
+
 export const Route = createFileRoute("/image-cropper")({
+  head: () =>
+    getSeoMetadata({
+      title: "Image Cropper | Crop, Rotate & Resize Images Online | JS DevTools",
+      description:
+        "Edit your images with precision. Crop, rotate, and flip images instantly in your browser. No uploads, total privacy, and pixel-perfect previews.",
+      keywords: [
+        "image cropper",
+        "crop photos online",
+        "rotate image",
+        "flip image",
+        "image editor",
+      ],
+      url: "/image-cropper",
+      type: "software",
+    }),
   component: RouteComponent,
 });
 
@@ -37,7 +54,6 @@ function RouteComponent() {
   const [isDragging, setIsDragging] = useState(false);
   const [isResizing, setIsResizing] = useState<string | null>(null);
   const [dragOffset, setDragOffset] = useState({ x: 0, y: 0 });
-  const [imageDimensions, setImageDimensions] = useState<ImageDimensions>({ width: 0, height: 0 });
   const [rotation, setRotation] = useState(0);
   const [flipHorizontal, setFlipHorizontal] = useState(false);
   const [flipVertical, setFlipVertical] = useState(false);
@@ -51,7 +67,6 @@ function RouteComponent() {
       const img = new Image();
       img.onload = () => {
         setImage(img);
-        setImageDimensions({ width: img.width, height: img.height });
 
         const initialSize = Math.min(img.width, img.height, 300);
         setCropArea({
@@ -85,7 +100,6 @@ function RouteComponent() {
       const img = new Image();
       img.onload = () => {
         setImage(img);
-        setImageDimensions({ width: img.width, height: img.height });
         const initialSize = Math.min(img.width, img.height, 300);
         setCropArea({
           x: (img.width - initialSize) / 2,

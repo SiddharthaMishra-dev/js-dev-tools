@@ -18,7 +18,18 @@ interface Token {
   value: string;
 }
 
+import { getSeoMetadata } from "@/lib/seo";
+
 export const Route = createFileRoute("/json-formatter")({
+  head: () =>
+    getSeoMetadata({
+      title: "JSON Formatter & Validator Online | JS DevTools",
+      description:
+        "Format, minify, and validate JSON data instantly. Support for single quotes and CSV export. 100% private, client-side, and secure.",
+      keywords: ["json formatter", "json validator", "minify json", "json to csv", "beautify json"],
+      url: "/json-formatter",
+      type: "software",
+    }),
   component: RouteComponent,
 });
 

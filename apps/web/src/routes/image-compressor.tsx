@@ -11,7 +11,24 @@ import { createFileRoute } from "@tanstack/react-router";
 import JSZip from "jszip";
 import { useEffect, useRef, useState } from "react";
 
+import { getSeoMetadata } from "@/lib/seo";
+
 export const Route = createFileRoute("/image-compressor")({
+  head: () =>
+    getSeoMetadata({
+      title: "Image Compressor | Reduce Image Size Online | JS DevTools",
+      description:
+        "Shrink image file sizes by up to 80% without losing quality. Support for PNG, JPEG, and WebP. 100% private, client-side, and free.",
+      keywords: [
+        "image compressor",
+        "reduce image size",
+        "compress png",
+        "compress jpeg",
+        "online image optimizer",
+      ],
+      url: "/image-compressor",
+      type: "software",
+    }),
   component: RouteComponent,
 });
 

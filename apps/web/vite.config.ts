@@ -22,16 +22,7 @@ const config = defineConfig({
       projects: ['./tsconfig.json'],
     }),
     tailwindcss(),
-    tanstackStart({
-      prerender: {
-        enabled: false, // Disable prerendering for now to fix build
-        crawlLinks: false,
-      },
-      sitemap: {
-        enabled: true,
-        host: 'https://js-devtools.sidme.dev',
-      },
-    }),
+    tanstackStart(),
     nitro({
       preset: 'vercel'
     }),

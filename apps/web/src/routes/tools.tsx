@@ -5,58 +5,26 @@ import GlowCard from "@/components/ui/GlowCard";
 import type { ToolDefinition } from "@/data/tools";
 import { tools } from "@/data/tools";
 
+import { getSeoMetadata } from "@/lib/seo";
+
 export const Route = createFileRoute("/tools")({
-  head: () => ({
-    title: "All Tools | JS DevTools",
-    meta: [
-      {
-        name: "description",
-        content:
-          "Browse every JS DevTools utility in one place. Image converters, compressors, croppers, JSON formatter, CSV to XLSX, and more—private and client-side.",
-      },
-      {
-        name: "keywords",
-        content:
-          "online tools,image tools,json formatter,csv to xlsx,image compressor,image converter,privacy-first tools,offline tools",
-      },
-      {
-        property: "og:title",
-        content: "All Tools | JS DevTools",
-      },
-      {
-        property: "og:description",
-        content:
-          "Explore every privacy-first tool from JS DevTools. No uploads, no accounts, fully open source.",
-      },
-      {
-        property: "og:url",
-        content: "https://js-devtools.sidme.dev/tools",
-      },
-      {
-        property: "og:image",
-        content: "https://js-devtools.sidme.dev/screenshot.png",
-      },
-      {
-        name: "twitter:card",
-        content: "summary_large_image",
-      },
-      {
-        name: "twitter:title",
-        content: "All Tools | JS DevTools",
-      },
-      {
-        name: "twitter:description",
-        content:
-          "Discover the full catalog of privacy-first image and data utilities by JS DevTools.",
-      },
-    ],
-    links: [
-      {
-        rel: "canonical",
-        href: "https://js-devtools.sidme.dev/tools",
-      },
-    ],
-  }),
+  head: () =>
+    getSeoMetadata({
+      title: "All Tools | JS DevTools",
+      description:
+        "Browse every JS DevTools utility in one place. Image converters, compressors, croppers, JSON formatter, CSV to XLSX, and more—private and client-side.",
+      keywords: [
+        "online tools",
+        "image tools",
+        "json formatter",
+        "csv to xlsx",
+        "image compressor",
+        "image converter",
+        "privacy-first tools",
+        "offline tools",
+      ],
+      url: "/tools",
+    }),
   component: ToolsPage,
 });
 

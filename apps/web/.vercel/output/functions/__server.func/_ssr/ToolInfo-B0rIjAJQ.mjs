@@ -1,5 +1,5 @@
 import { j as jsxRuntimeExports } from "../_chunks/_libs/react.mjs";
-import { o as IconLock } from "../_chunks/_libs/@tabler/icons-react.mjs";
+import { t as IconLock } from "../_chunks/_libs/@tabler/icons-react.mjs";
 function ToolInfo({
   title,
   description,

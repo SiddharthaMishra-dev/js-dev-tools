@@ -28,13 +28,11 @@ export default function ToolInfo({
 }: ToolInfoProps) {
   return (
     <div className="w-full max-w-5xl mx-auto mt-20 space-y-16 pb-16">
-      {/* Description Section */}
       <div className="text-center space-y-4">
         <h2 className="text-3xl font-bold text-gray-100">What is {title}?</h2>
         <p className="text-lg text-gray-300 max-w-3xl mx-auto leading-relaxed">{description}</p>
       </div>
 
-      {/* Features Grid */}
       <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
         {features.map((feature, index) => (
           <div

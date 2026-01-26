@@ -10,7 +10,18 @@ import { useCallback, useRef, useState } from "react";
 import { createFileRoute } from "@tanstack/react-router";
 import ToolInfo from "@/components/ToolInfo";
 
+import { getSeoMetadata } from "@/lib/seo";
+
 export const Route = createFileRoute("/image-to-base64")({
+  head: () =>
+    getSeoMetadata({
+      title: "Image to Base64 Converter | JS DevTools",
+      description:
+        "Convert any image file to a Base64 encoded string instantly and securely in your browser. No uploads, 100% private.",
+      keywords: ["image to base64", "base64 encoder", "data uri converter", "privacy-first tools"],
+      url: "/image-to-base64",
+      type: "software",
+    }),
   component: RouteComponent,
 });
 

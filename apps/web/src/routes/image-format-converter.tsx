@@ -13,7 +13,24 @@ import { useCallback, useEffect, useRef, useState } from "react";
 import ToolInfo from "../components/ToolInfo";
 import { ConversionItem } from "@/types/ImageTypes";
 
+import { getSeoMetadata } from "@/lib/seo";
+
 export const Route = createFileRoute("/image-format-converter")({
+  head: () =>
+    getSeoMetadata({
+      title: "Image Format Converter | PNG, JPG, WebP, AVIF | JS DevTools",
+      description:
+        "Convert images between PNG, JPEG, WebP, and AVIF formats instantly. Supports batch processing and ZIP downloads. 100% private and client-side.",
+      keywords: [
+        "image converter",
+        "png to webp",
+        "jpg to png",
+        "avif converter",
+        "batch image conversion",
+      ],
+      url: "/image-format-converter",
+      type: "software",
+    }),
   component: RouteComponent,
 });
 

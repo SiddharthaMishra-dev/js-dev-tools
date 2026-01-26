@@ -9,6 +9,7 @@
 // Additionally, you should also exclude this file from your linter and/or formatter to prevent it from being checked or modified.
 
 import { Route as rootRouteImport } from './routes/__root'
+import { Route as WordCounterRouteImport } from './routes/word-counter'
 import { Route as ToolsRouteImport } from './routes/tools'
 import { Route as JsonFormatterRouteImport } from './routes/json-formatter'
 import { Route as ImageToPdfRouteImport } from './routes/image-to-pdf'
@@ -19,6 +20,11 @@ import { Route as ImageCompressorRouteImport } from './routes/image-compressor'
 import { Route as CsvXlsxConverterRouteImport } from './routes/csv-xlsx-converter'
 import { Route as IndexRouteImport } from './routes/index'
 
+const WordCounterRoute = WordCounterRouteImport.update({
+  id: '/word-counter',
+  path: '/word-counter',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const ToolsRoute = ToolsRouteImport.update({
   id: '/tools',
   path: '/tools',
@@ -75,6 +81,7 @@ export interface FileRoutesByFullPath {
   '/image-to-pdf': typeof ImageToPdfRoute
   '/json-formatter': typeof JsonFormatterRoute
   '/tools': typeof ToolsRoute
+  '/word-counter': typeof WordCounterRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
@@ -86,6 +93,7 @@ export interface FileRoutesByTo {
   '/image-to-pdf': typeof ImageToPdfRoute
   '/json-formatter': typeof JsonFormatterRoute
   '/tools': typeof ToolsRoute
+  '/word-counter': typeof WordCounterRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
@@ -98,6 +106,7 @@ export interface FileRoutesById {
   '/image-to-pdf': typeof ImageToPdfRoute
   '/json-formatter': typeof JsonFormatterRoute
   '/tools': typeof ToolsRoute
+  '/word-counter': typeof WordCounterRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
@@ -111,6 +120,7 @@ export interface FileRouteTypes {
     | '/image-to-pdf'
     | '/json-formatter'
     | '/tools'
+    | '/word-counter'
   fileRoutesByTo: FileRoutesByTo
   to:
     | '/'
@@ -122,6 +132,7 @@ export interface FileRouteTypes {
     | '/image-to-pdf'
     | '/json-formatter'
     | '/tools'
+    | '/word-counter'
   id:
     | '__root__'
     | '/'
@@ -133,6 +144,7 @@ export interface FileRouteTypes {
     | '/image-to-pdf'
     | '/json-formatter'
     | '/tools'
+    | '/word-counter'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
@@ -145,10 +157,18 @@ export interface RootRouteChildren {
   ImageToPdfRoute: typeof ImageToPdfRoute
   JsonFormatterRoute: typeof JsonFormatterRoute
   ToolsRoute: typeof ToolsRoute
+  WordCounterRoute: typeof WordCounterRoute
 }
 
 declare module '@tanstack/react-router' {
   interface FileRoutesByPath {
+    '/word-counter': {
+      id: '/word-counter'
+      path: '/word-counter'
+      fullPath: '/word-counter'
+      preLoaderRoute: typeof WordCounterRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/tools': {
       id: '/tools'
       path: '/tools'
@@ -225,6 +245,7 @@ const rootRouteChildren: RootRouteChildren = {
   ImageToPdfRoute: ImageToPdfRoute,
   JsonFormatterRoute: JsonFormatterRoute,
   ToolsRoute: ToolsRoute,
+  WordCounterRoute: WordCounterRoute,
 }
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)

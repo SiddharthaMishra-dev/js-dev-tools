@@ -1,4 +1,4 @@
-import { type TablerIconsProps, IconBolt, IconBraces, IconCrop, IconFileSpreadsheet, IconFileTypePdf, IconNumber64Small, IconPhoto } from "@tabler/icons-react";
+import { type TablerIconsProps, IconBolt, IconBraces, IconCrop, IconFileSpreadsheet, IconFileTypePdf, IconNumber64Small, IconPhoto, IconTypography } from "@tabler/icons-react";
 
 export type ToolDefinition = {
   slug: string;
@@ -73,5 +73,14 @@ export const tools: ToolDefinition[] = [
     icon: IconFileSpreadsheet,
     category: "Data",
     keywords: ["csv", "xlsx", "excel", "convert"],
+  },
+  {
+    slug: "word-counter",
+    name: "Word Counter",
+    href: "/word-counter",
+    description: "Count words, characters, and sentences in real-time with reading time estimation.",
+    icon: IconTypography,
+    category: "Data",
+    keywords: ["word count", "character count", "letters", "reading time"],
   },
 ];

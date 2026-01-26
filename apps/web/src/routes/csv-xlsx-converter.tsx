@@ -12,7 +12,24 @@ import { useCallback, useEffect, useRef, useState } from "react";
 import * as XLSX from "xlsx";
 import ToolInfo from "../components/ToolInfo";
 
+import { getSeoMetadata } from "@/lib/seo";
+
 export const Route = createFileRoute("/csv-xlsx-converter")({
+  head: () =>
+    getSeoMetadata({
+      title: "CSV to Excel (XLSX) Converter Online | JS DevTools",
+      description:
+        "Convert CSV to Excel and XLSX to CSV instantly in your browser. Batch support and 100% private. No data uploads, secure and fast.",
+      keywords: [
+        "csv to xlsx",
+        "excel to csv",
+        "csv to excel",
+        "convert xlsx to csv",
+        "online spreadsheed converter",
+      ],
+      url: "/csv-xlsx-converter",
+      type: "software",
+    }),
   component: RouteComponent,
 });
 
@@ -106,7 +123,6 @@ function RouteComponent() {
           let outputFileName: string;
 
           if (item.targetFormat === "xlsx") {
-            // CSV to XLSX
             const workbook = XLSX.read(data, { type: "binary" });
             const excelBuffer = XLSX.write(workbook, {
               bookType: "xlsx",
@@ -117,7 +133,6 @@ function RouteComponent() {
             });
             outputFileName = item.name.replace(/\.csv$/i, ".xlsx");
           } else {
-            // XLSX to CSV
             const workbook = XLSX.read(data, { type: "array" });
             const firstSheetName = workbook.SheetNames[0];
             const worksheet = workbook.Sheets[firstSheetName];
@@ -209,8 +224,6 @@ function RouteComponent() {
       handleConvertAll(pendingItems);
     }
   }, [conversions, isConverting]);
-
-  const completedCount = conversions.filter((item) => item.status === "completed").length;
 
   return (
     <div className="min-h-screen bg-gradient-to-br from-gray-800 to-slate-900 pt-24 pb-8 px-4 flex flex-col items-center justify-between">

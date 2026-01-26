@@ -19,7 +19,24 @@ interface ImageItem {
   name: string;
 }
 
+import { getSeoMetadata } from "@/lib/seo";
+
 export const Route = createFileRoute("/image-to-pdf")({
+  head: () =>
+    getSeoMetadata({
+      title: "Image to PDF Converter | Combine Images to PDF | JS DevTools",
+      description:
+        "Merge multiple images into a single PDF document perfectly. Drag and drop to reorder pages. 100% private and client-side PDF generation.",
+      keywords: [
+        "image to pdf",
+        "combine images to pdf",
+        "png to pdf",
+        "jpg to pdf",
+        "offline pdf converter",
+      ],
+      url: "/image-to-pdf",
+      type: "software",
+    }),
   component: RouteComponent,
 });
 

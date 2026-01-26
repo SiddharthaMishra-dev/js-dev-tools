@@ -1,6 +1,6 @@
 import { r as reactExports, j as jsxRuntimeExports } from "../_chunks/_libs/react.mjs";
 import { T as ToolInfo } from "./ToolInfo-B0rIjAJQ.mjs";
-import { l as IconCloudUpload, u as IconRotateClockwise, v as IconFlipHorizontal, w as IconFlipVertical, x as IconCrop, i as IconDownload, y as IconArrowsMaximize, o as IconLock } from "../_chunks/_libs/@tabler/icons-react.mjs";
+import { p as IconCloudUpload, z as IconRotateClockwise, A as IconFlipHorizontal, B as IconFlipVertical, C as IconCrop, n as IconDownload, D as IconArrowsMaximize, t as IconLock } from "../_chunks/_libs/@tabler/icons-react.mjs";
 function RouteComponent() {
   const canvasRef = reactExports.useRef(null);
   const fileInputRef = reactExports.useRef(null);
