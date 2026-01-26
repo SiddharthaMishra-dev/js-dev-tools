@@ -285,7 +285,7 @@ function RouteComponent() {
       <div className="w-full max-w-6xl flex-1 flex flex-col items-center justify-center mx-auto">
         <div className="text-center mb-8">
           <h1 className="text-2xl font-bold text-gray-100 mb-2">
-            Image <span className="text-amber-200">Compressor</span>
+            Image <span className="text-brand-primary">Compressor</span>
           </h1>
           <p className="text-md text-gray-200">
             Reduce file size up to 80% while preserving quality. 100% client-side—your files never
@@ -302,13 +302,13 @@ function RouteComponent() {
                 onDrop={handleDrop}
                 className={`border-3 border-dashed rounded-lg p-12 text-center transition-all duration-300 ${
                   isDragging
-                    ? "border-amber-500 bg-amber-900/20"
-                    : "border-gray-600 hover:border-amber-400 hover:bg-gray-700"
+                    ? "border-brand-primary bg-brand-primary/20"
+                    : "border-gray-600 hover:border-brand-primary/40 hover:bg-gray-700"
                 }`}
               >
                 <div className="flex flex-col items-center space-y-4">
                   <IconCloudUpload
-                    className={`w-16 h-16 ${isDragging ? "text-amber-500" : "text-gray-400"} transition-colors`}
+                    className={`w-16 h-16 ${isDragging ? "text-brand-primary" : "text-gray-400"} transition-colors`}
                   />
                   <div>
                     <p className="text-xl font-medium text-gray-100 mb-2">
@@ -317,7 +317,7 @@ function RouteComponent() {
                     <p className="text-gray-400 mb-4">or</p>
                     <button
                       onClick={() => fileInputRef.current?.click()}
-                      className="text-sm px-3 py-2 bg-amber-700 text-amber-100 rounded-lg hover:bg-amber-600 transition-colors duration-200 font-medium shadow-md hover:shadow-lg"
+                      className="text-sm px-3 py-2 bg-brand-primary text-white rounded-lg hover:bg-brand-hover transition-colors duration-200 font-medium shadow-md hover:shadow-lg"
                     >
                       Choose Files
                     </button>
@@ -350,7 +350,7 @@ function RouteComponent() {
                       type="checkbox"
                       checked={preserveFormat}
                       onChange={(e) => setPreserveFormat(e.target.checked)}
-                      className="w-4 h-4 text-amber-600 bg-gray-700 border-gray-600 rounded focus:ring-amber-500"
+                      className="w-4 h-4 text-brand-primary bg-gray-700 border-gray-600 rounded focus:ring-brand-primary"
                     />
                     <span className="text-sm font-medium text-gray-200">
                       Preserve original format
@@ -369,7 +369,7 @@ function RouteComponent() {
                       <label className="text-sm font-medium text-gray-200">
                         Quality {!preserveFormat ? "" : "(JPEG only)"}
                       </label>
-                      <span className="text-sm text-amber-200 font-medium">
+                      <span className="text-sm text-brand-primary font-medium">
                         {Math.round(quality * 100)}%
                       </span>
                     </div>
@@ -400,7 +400,7 @@ function RouteComponent() {
                       onChange={(e) => setMaxWidth(parseInt(e.target.value) || 1920)}
                       min="100"
                       max="4000"
-                      className="w-full px-3 py-2 border border-gray-600 rounded bg-gray-700 text-gray-100 text-sm focus:outline-none focus:ring-2 focus:ring-amber-500"
+                      className="w-full px-3 py-2 border border-gray-600 rounded bg-gray-700 text-gray-100 text-sm focus:outline-none focus:ring-2 focus:ring-brand-primary"
                     />
                   </div>
                   <div>
@@ -413,7 +413,7 @@ function RouteComponent() {
                       onChange={(e) => setMaxHeight(parseInt(e.target.value) || 1080)}
                       min="100"
                       max="4000"
-                      className="w-full px-3 py-2 border border-gray-600 rounded bg-gray-700 text-gray-100 text-sm focus:outline-none focus:ring-2 focus:ring-amber-500"
+                      className="w-full px-3 py-2 border border-gray-600 rounded bg-gray-700 text-gray-100 text-sm focus:outline-none focus:ring-2 focus:ring-brand-primary"
                     />
                   </div>
                 </div>
@@ -471,8 +471,8 @@ function RouteComponent() {
                       )}
                       {file.status === "compressing" && (
                         <div className="flex items-center space-x-2">
-                          <div className="w-4 h-4 border-2 border-amber-500 border-t-transparent rounded-full animate-spin"></div>
-                          <span className="text-amber-200 text-sm">Compressing...</span>
+                          <div className="w-4 h-4 border-2 border-brand-primary border-t-transparent rounded-full animate-spin"></div>
+                          <span className="text-brand-primary text-sm">Compressing...</span>
                         </div>
                       )}
                       {file.status === "completed" && (
@@ -576,7 +576,7 @@ function RouteComponent() {
             href="https://sidme.vercel.app/"
             target="_blank"
             rel="noopener noreferrer"
-            className="text-amber-200 hover:text-amber-300 transition-colors"
+            className="text-brand-primary hover:text-brand-hover transition-colors"
           >
             sidme
           </a>
@@ -589,14 +589,14 @@ function RouteComponent() {
           height: 20px;
           width: 20px;
           border-radius: 50%;
-          background: #f59e0b;
+          background: var(--brand-primary);
           cursor: pointer;
         }
         .slider::-moz-range-thumb {
           height: 20px;
           width: 20px;
           border-radius: 50%;
-          background: #f59e0b;
+          background: var(--brand-primary);
           cursor: pointer;
           border: none;
         }

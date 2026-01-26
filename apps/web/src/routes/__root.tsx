@@ -8,6 +8,7 @@ import appCss from "../styles.css?url";
 
 export const Route = createRootRoute({
   head: () => ({
+    title: "JS DevTools | Privacy First | 100% Client-Side Utilities",
     meta: [
       {
         charSet: "utf-8",
@@ -17,29 +18,35 @@ export const Route = createRootRoute({
         content: "width=device-width, initial-scale=1",
       },
       {
-        title: "JS DevTools | Privacy First | 100% Client-Side Web Utilities",
-      },
-      {
         name: "description",
         content:
-          "Free, private, and fast developer tools. Convert images to Base64, compress, crop, and convert formats, format JSON and convert image to pdf instantly. 100% client-side—your data never leaves your browser.",
+          "Free, private, and fast everyday tools. Convert images to Base64, compress, crop, and convert formats, format JSON and convert image to pdf instantly. 100% client-side—your data never leaves your browser.",
       },
       {
-        meta: "og:type",
+        name: "keywords",
+        content:
+          "image to base64, image converter, json formatter, image compressor, csv to xlsx, online tools, offline tools, privacy first",
+      },
+      {
+        name: "robots",
+        content: "index,follow,max-snippet:-1,max-image-preview:large,max-video-preview:-1",
+      },
+      {
+        property: "og:type",
         content: "website",
       },
       {
-        meth: "og:url",
+        property: "og:url",
         content: "https://js-devtools.sidme.dev/",
       },
       {
         property: "og:title",
-        content: "JS DevTools | Privacy First | 100% Client-Side Web Utilities",
+        content: "JS DevTools | Privacy First | 100% Client-Side Utilities",
       },
       {
         property: "og:description",
         content:
-          "Free, private, and fast developer tools. 100% client-side—your data never leaves your browser.",
+          "Free, private, and fast tools. 100% client-side—your data never leaves your browser.",
       },
       {
         property: "og:image",
@@ -51,16 +58,20 @@ export const Route = createRootRoute({
       },
       {
         name: "twitter:title",
-        content: "JS DevTools | Privacy First | 100% Client-Side Web Utilities",
+        content: "JS DevTools | Privacy First | 100% Client-Side Utilities",
       },
       {
         name: "twitter:description",
         content:
-          "Free, private, and fast developer tools. 100% client-side—your data never leaves your browser.",
+          "Free, private, and fast tools. 100% client-side—your data never leaves your browser.",
       },
       {
         name: "twitter:image",
         content: "https://js-devtools.sidme.dev/screenshot.png",
+      },
+      {
+        name: "theme-color",
+        content: "#0f172a",
       },
     ],
     links: [

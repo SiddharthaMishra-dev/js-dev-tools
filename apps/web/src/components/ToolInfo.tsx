@@ -39,10 +39,10 @@ export default function ToolInfo({
         {features.map((feature, index) => (
           <div
             key={index}
-            className="bg-gray-800/50 border border-gray-700 rounded-xl p-6 hover:border-amber-500/50 transition-colors group"
+            className="bg-gray-800/50 border border-gray-700 rounded-xl p-6 hover:border-brand-primary/50 transition-colors group"
           >
-            <div className="w-12 h-12 bg-amber-700/20 rounded-lg flex items-center justify-center mb-4 group-hover:bg-amber-700/30 transition-colors">
-              <feature.icon className="text-amber-400 w-6 h-6" />
+            <div className="w-12 h-12 bg-brand-dark/20 rounded-lg flex items-center justify-center mb-4 group-hover:bg-brand-dark/30 transition-colors">
+              <feature.icon className="text-brand-primary w-6 h-6" />
             </div>
             <h3 className="text-xl font-semibold text-gray-100 mb-2">{feature.title}</h3>
             <p className="text-gray-400 text-sm leading-relaxed">{feature.description}</p>
@@ -53,7 +53,7 @@ export default function ToolInfo({
       {/* How it Works */}
       <div className="bg-gray-800/30 border border-gray-700/50 rounded-2xl p-8 md:p-12">
         <div className="flex items-center space-x-3 mb-8">
-          <div className="w-10 h-10 bg-amber-700 rounded-full flex items-center justify-center text-amber-100 font-bold">
+          <div className="w-10 h-10 bg-brand-primary rounded-full flex items-center justify-center text-white font-bold">
             ?
           </div>
           <h2 className="text-2xl font-bold text-gray-100">How to use {title}</h2>
@@ -80,10 +80,10 @@ export default function ToolInfo({
       </div>
 
       {/* Privacy & Security */}
-      <div className="flex flex-col md:flex-row items-center justify-between gap-8 p-8 bg-amber-900/10 border border-amber-900/20 rounded-2xl">
+      <div className="flex flex-col md:flex-row items-center justify-between gap-8 p-8 bg-brand-dark/10 border border-brand-dark/20 rounded-2xl">
         <div className="flex items-start space-x-4">
           <div className="mt-1">
-            <IconLock className="text-amber-500 w-8 h-8" />
+            <IconLock className="text-brand-primary w-8 h-8" />
           </div>
           <div>
             <h3 className="text-xl font-bold text-gray-100 mb-2">100% Client-Side & Private</h3>
@@ -94,7 +94,7 @@ export default function ToolInfo({
           </div>
         </div>
         <div className="flex-shrink-0">
-          <div className="px-6 py-3 bg-amber-700/20 text-amber-400 rounded-full text-sm font-semibold border border-amber-700/30">
+          <div className="px-6 py-3 bg-brand-dark/20 text-brand-primary rounded-full text-sm font-semibold border border-brand-dark/30">
             Privacy Guaranteed
           </div>
         </div>

@@ -185,7 +185,7 @@ function RouteComponent() {
       <div className="w-full max-w-4xl flex-1 flex flex-col items-center justify-center mx-auto">
         <div className="text-center mb-8">
           <h1 className="text-3xl font-bold text-gray-100 mb-2">
-            Image to <span className="text-amber-200">PDF</span> Converter
+            Image to <span className="text-blue-400">PDF</span> Converter
           </h1>
           <p className="text-md text-gray-200">
             Convert multiple images into a single PDF. Drag and drop to reorder pages. 100% private.
@@ -200,13 +200,13 @@ function RouteComponent() {
             onDrop={handleDrop}
             className={`border-3 border-dashed rounded-xl p-8 text-center transition-all duration-300 mb-6 ${
               isDragging
-                ? "border-amber-500 bg-amber-900/20"
-                : "border-gray-600 hover:border-amber-400 hover:bg-gray-700/50"
+                ? "border-blue-500 bg-blue-900/20"
+                : "border-gray-600 hover:border-blue-400 hover:bg-gray-700/50"
             }`}
           >
             <div className="flex flex-col items-center space-y-4">
               <IconCloudUpload
-                className={`w-16 h-16 ${isDragging ? "text-amber-500" : "text-gray-400"} transition-colors`}
+                className={`w-16 h-16 ${isDragging ? "text-blue-500" : "text-gray-400"} transition-colors`}
               />
               <div>
                 <p className="text-xl font-medium text-gray-100 mb-2">
@@ -215,7 +215,7 @@ function RouteComponent() {
                 <p className="text-gray-400 mb-4 text-sm">Supports JPG, PNG, WebP, etc.</p>
                 <button
                   onClick={() => uploadRef.current?.click()}
-                  className="px-6 py-2.5 bg-amber-700 text-amber-100 rounded-lg hover:bg-amber-600 transition-colors duration-200 font-medium shadow-lg hover:shadow-xl transform hover:-translate-y-0.5"
+                  className="px-6 py-2.5 bg-blue-700 text-blue-100 rounded-lg hover:bg-blue-600 transition-colors duration-200 font-medium shadow-lg hover:shadow-xl transform hover:-translate-y-0.5"
                 >
                   Select Images
                 </button>
@@ -247,7 +247,7 @@ function RouteComponent() {
                   <button
                     onClick={handleConvertToPdf}
                     disabled={isGenerating}
-                    className="px-6 py-2 bg-amber-600 text-white rounded-lg hover:bg-amber-500 transition-colors font-medium shadow-md flex items-center gap-2 disabled:opacity-50 disabled:cursor-not-allowed"
+                    className="px-6 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-500 transition-colors font-medium shadow-md flex items-center gap-2 disabled:opacity-50 disabled:cursor-not-allowed"
                   >
                     {isGenerating ? (
                       <>
@@ -368,7 +368,7 @@ function RouteComponent() {
             href="https://sidme.vercel.app/"
             target="_blank"
             rel="noopener noreferrer"
-            className="text-amber-200 hover:text-amber-300 transition-colors"
+            className="text-blue-400 hover:text-blue-300 transition-colors"
           >
             sidme
           </a>

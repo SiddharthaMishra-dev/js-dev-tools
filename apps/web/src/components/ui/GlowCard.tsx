@@ -41,7 +41,7 @@ export default function GlowCard({ to, children, className = "", icon: Icon }: G
       onMouseLeave={handleMouseLeave}
       style={{
         background: isHovered
-          ? `radial-gradient(400px circle at ${mousePosition.x}px ${mousePosition.y}px, rgba(251, 191, 36, 0.06), transparent 40%), rgb(31 41 55)`
+          ? `radial-gradient(400px circle at ${mousePosition.x}px ${mousePosition.y}px, rgba(37, 99, 235, 0.06), transparent 40%), rgb(31 41 55)`
           : undefined,
       }}
     >
@@ -58,7 +58,7 @@ export default function GlowCard({ to, children, className = "", icon: Icon }: G
       {/* Background Icon Glow */}
       {Icon && isHovered && (
         <div
-          className="absolute -right-4 -bottom-4 text-amber-500/15 pointer-events-none transition-opacity duration-300"
+          className="absolute -right-4 -bottom-4 text-blue-500/15 pointer-events-none transition-opacity duration-300"
           style={{
             maskImage: `radial-gradient(200px circle at ${mousePosition.x}px ${mousePosition.y}px, black, transparent)`,
             WebkitMaskImage: `radial-gradient(200px circle at ${mousePosition.x}px ${mousePosition.y}px, black, transparent)`,
@@ -76,7 +76,7 @@ export default function GlowCard({ to, children, className = "", icon: Icon }: G
         className="absolute inset-0 rounded-xl pointer-events-none transition-opacity duration-300"
         style={{
           opacity: isHovered ? 1 : 0,
-          background: `radial-gradient(600px circle at ${mousePosition.x}px ${mousePosition.y}px, rgba(251, 191, 36, 0.15), transparent 40%)`,
+          background: `radial-gradient(600px circle at ${mousePosition.x}px ${mousePosition.y}px, rgba(37, 99, 235, 0.15), transparent 40%)`,
         }}
       />
 
@@ -86,7 +86,7 @@ export default function GlowCard({ to, children, className = "", icon: Icon }: G
         style={{
           opacity: isHovered ? 1 : 0,
           padding: "1px",
-          background: `radial-gradient(400px circle at ${mousePosition.x}px ${mousePosition.y}px, rgba(251, 191, 36, 0.4), transparent 40%)`,
+          background: `radial-gradient(400px circle at ${mousePosition.x}px ${mousePosition.y}px, rgba(37, 99, 235, 0.4), transparent 40%)`,
           mask: "linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0)",
           maskComposite: "xor",
           WebkitMaskComposite: "xor",

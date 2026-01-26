@@ -128,7 +128,7 @@ function RouteComponent() {
   function getTokenClass(type: TokenType): string {
     switch (type) {
       case "bracket":
-        return "text-amber-400 font-bold";
+        return "text-blue-400 font-bold";
       case "key":
         return "text-cyan-400";
       case "string":
@@ -246,7 +246,7 @@ function RouteComponent() {
       {/* Header */}
       <div className="text-center mb-8">
         <h1 className="text-2xl font-bold text-gray-100 mb-2">
-          JSON <span className="text-amber-200">Formatter</span>
+          JSON <span className="text-blue-400">Formatter</span>
         </h1>
         <p className="text-md text-gray-200">
           Format, validate & minify JSON instantly. No data sent to servers—completely private.
@@ -264,7 +264,7 @@ function RouteComponent() {
                 onClick={() => setUseSingleQuotes(false)}
                 className={`px-2 py-1 text-xs rounded transition-colors ${
                   !useSingleQuotes
-                    ? "bg-amber-700 text-amber-100"
+                    ? "bg-blue-700 text-blue-100"
                     : "bg-gray-600 text-gray-300 hover:bg-gray-500"
                 }`}
               >
@@ -274,7 +274,7 @@ function RouteComponent() {
                 onClick={() => setUseSingleQuotes(true)}
                 className={`px-2 py-1 text-xs rounded transition-colors ${
                   useSingleQuotes
-                    ? "bg-amber-700 text-amber-100"
+                    ? "bg-blue-700 text-blue-100"
                     : "bg-gray-600 text-gray-300 hover:bg-gray-500"
                 }`}
               >
@@ -285,7 +285,7 @@ function RouteComponent() {
             <button
               onClick={formatInput}
               disabled={!input.trim() || !!error}
-              className="inline-flex items-center gap-2 px-4 py-2 bg-amber-700 text-amber-100 rounded-lg hover:bg-amber-600 transition-colors duration-200 font-medium disabled:opacity-50 disabled:cursor-not-allowed"
+              className="inline-flex items-center gap-2 px-4 py-2 bg-blue-700 text-blue-100 rounded-lg hover:bg-blue-600 transition-colors duration-200 font-medium disabled:opacity-50 disabled:cursor-not-allowed"
             >
               <IconBraces className="w-4 h-4" />
               <span>Format</span>
@@ -294,7 +294,7 @@ function RouteComponent() {
             <button
               onClick={minifyInput}
               disabled={!input.trim() || !!error}
-              className="inline-flex items-center gap-2 px-4 py-2 bg-amber-700 text-amber-100 rounded-lg hover:bg-amber-600 transition-colors duration-200 font-medium disabled:opacity-50 disabled:cursor-not-allowed"
+              className="inline-flex items-center gap-2 px-4 py-2 bg-blue-700 text-blue-100 rounded-lg hover:bg-blue-600 transition-colors duration-200 font-medium disabled:opacity-50 disabled:cursor-not-allowed"
             >
               <IconArrowsMinimize className="w-4 h-4" />
               <span>Minify</span>
@@ -362,7 +362,7 @@ function RouteComponent() {
               value={input}
               onChange={(e) => setInput(e.target.value)}
               placeholder='Paste your JSON here, e.g., {"name": "John", "age": 30}'
-              className={`w-full h-96 p-4 border rounded-lg bg-gray-700 text-gray-100 font-mono text-sm resize-none focus:outline-none focus:ring-2 focus:ring-amber-500 ${
+              className={`w-full h-96 p-4 border rounded-lg bg-gray-700 text-gray-100 font-mono text-sm resize-none focus:outline-none focus:ring-2 focus:ring-blue-500 ${
                 error ? "border-red-500" : "border-gray-600"
               }`}
               spellCheck={false}
@@ -383,7 +383,7 @@ function RouteComponent() {
                   onClick={() => setActiveView("formatted")}
                   className={`px-3 py-1 text-sm rounded-lg transition-colors ${
                     activeView === "formatted"
-                      ? "bg-amber-700 text-amber-100"
+                      ? "bg-blue-700 text-blue-100"
                       : "bg-gray-700 text-gray-300 hover:bg-gray-600"
                   }`}
                 >
@@ -393,7 +393,7 @@ function RouteComponent() {
                   onClick={() => setActiveView("minified")}
                   className={`px-3 py-1 text-sm rounded-lg transition-colors ${
                     activeView === "minified"
-                      ? "bg-amber-700 text-amber-100"
+                      ? "bg-blue-700 text-blue-100"
                       : "bg-gray-700 text-gray-300 hover:bg-gray-600"
                   }`}
                 >
@@ -490,7 +490,7 @@ function RouteComponent() {
             href="https://sidme.vercel.app/"
             target="_blank"
             rel="noopener noreferrer"
-            className="text-amber-200 hover:text-amber-300 transition-colors"
+            className="text-brand-primary hover:text-brand-hover transition-colors"
           >
             sidme
           </a>

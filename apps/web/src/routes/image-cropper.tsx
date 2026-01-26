@@ -179,13 +179,13 @@ function RouteComponent() {
     ctx.restore();
 
     // Draw crop border
-    ctx.strokeStyle = "#f59e0b";
+    ctx.strokeStyle = "#3b82f6"; // brand-primary
     ctx.lineWidth = 2;
     ctx.strokeRect(cropX, cropY, cropWidth, cropHeight);
 
     // Draw resize handles
     const handleSize = 10;
-    ctx.fillStyle = "#f59e0b";
+    ctx.fillStyle = "#3b82f6"; // brand-primary
 
     // Corner handles
     ctx.fillRect(cropX - handleSize / 2, cropY - handleSize / 2, handleSize, handleSize);
@@ -488,7 +488,7 @@ function RouteComponent() {
       <div className="w-full max-w-6xl flex-1 flex flex-col items-center justify-center mx-auto">
         <div className="text-center mb-8">
           <h1 className="text-2xl font-bold text-gray-100 mb-2">
-            Image <span className="text-amber-200">Cropper</span>
+            Image <span className="text-brand-primary">Cropper</span>
           </h1>
           <p className="text-md text-gray-200">
             Crop, resize, rotate & flip with precision. 100% private—nothing leaves your browser.
@@ -504,13 +504,13 @@ function RouteComponent() {
                 onDrop={handleDrop}
                 className={`border-3 border-dashed rounded-lg p-12 text-center transition-all duration-300 ${
                   isDragging
-                    ? "border-amber-500 bg-amber-900/20"
-                    : "border-gray-600 hover:border-amber-400 hover:bg-gray-700"
+                    ? "border-brand-primary bg-brand-primary/20"
+                    : "border-gray-600 hover:border-brand-primary/40 hover:bg-gray-700"
                 }`}
               >
                 <div className="flex flex-col items-center space-y-4">
                   <IconCloudUpload
-                    className={`w-16 h-16 ${isDragging ? "text-amber-500" : "text-gray-400"} transition-colors`}
+                    className={`w-16 h-16 ${isDragging ? "text-brand-primary" : "text-gray-400"} transition-colors`}
                   />
                   <div>
                     <p className="text-xl font-medium text-gray-100 mb-2">
@@ -520,7 +520,7 @@ function RouteComponent() {
                     <button
                       onClick={() => fileInputRef.current?.click()}
                       disabled={isUploading}
-                      className="text-sm px-3 py-2 bg-amber-700 text-amber-100 rounded-lg hover:bg-amber-600 disabled:opacity-50 transition-colors duration-200 font-medium shadow-md hover:shadow-lg"
+                      className="text-sm px-3 py-2 bg-brand-primary text-white rounded-lg hover:bg-brand-hover disabled:opacity-50 transition-colors duration-200 font-medium shadow-md hover:shadow-lg"
                     >
                       {isUploading ? "Loading..." : "Choose Image"}
                     </button>
@@ -557,7 +557,7 @@ function RouteComponent() {
                     onClick={() => setFlipHorizontal(!flipHorizontal)}
                     className={`flex items-center space-x-2 px-3 py-2 rounded-lg transition-colors ${
                       flipHorizontal
-                        ? "bg-amber-700 text-amber-100"
+                        ? "bg-brand-primary text-white"
                         : "bg-gray-700 text-gray-100 hover:bg-gray-600"
                     }`}
                   >
@@ -569,7 +569,7 @@ function RouteComponent() {
                     onClick={() => setFlipVertical(!flipVertical)}
                     className={`flex items-center space-x-2 px-3 py-2 rounded-lg transition-colors ${
                       flipVertical
-                        ? "bg-amber-700 text-amber-100"
+                        ? "bg-brand-primary text-white"
                         : "bg-gray-700 text-gray-100 hover:bg-gray-600"
                     }`}
                   >
@@ -580,7 +580,7 @@ function RouteComponent() {
                     onClick={handleCropVisible}
                     className={`flex items-center space-x-2 px-3 py-2 rounded-lg transition-colors ${
                       isCrop
-                        ? "bg-amber-700 text-amber-100"
+                        ? "bg-brand-primary text-white"
                         : "bg-gray-700 text-gray-100 hover:bg-gray-600"
                     }`}
                   >
@@ -736,7 +736,7 @@ function RouteComponent() {
             href="https://sidme.vercel.app/"
             target="_blank"
             rel="noopener noreferrer"
-            className="text-amber-200 hover:text-amber-300 transition-colors"
+            className="text-brand-primary hover:text-brand-hover transition-colors"
           >
             sidme
           </a>

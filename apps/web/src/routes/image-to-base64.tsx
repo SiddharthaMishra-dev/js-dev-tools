@@ -76,8 +76,8 @@ function RouteComponent() {
     <div className="min-h-screen bg-gradient-to-br from-gray-800 to-slate-900 pt-24 pb-8 px-4 flex flex-col items-center justify-between">
       <div className="w-full max-w-5xl flex-1 flex flex-col items-center justify-center mx-auto">
         <div className="text-center mb-8">
-          <h1 className="text-2xl font-bold text-gray-100 mb-2">
-            Image to <span className="text-amber-200">Base64</span> Converter
+          <h1 className="text-4xl font-bold text-gray-100 mb-2">
+            Image to <span className="text-blue-400">Base64</span> Converter
           </h1>
           <p className="text-md text-gray-200">
             Convert images to Base64 instantly. 100% private—no uploads, ever.
@@ -91,13 +91,13 @@ function RouteComponent() {
             onDrop={handleDrop}
             className={`border-3 border-dashed rounded-lg p-12 text-center transition-all duration-300 ${
               isDragging
-                ? "border-amber-500 bg-amber-900/20"
-                : "border-gray-600 hover:border-amber-400 hover:bg-gray-700"
+                ? "border-blue-500 bg-blue-900/20"
+                : "border-gray-600 hover:border-blue-400 hover:bg-gray-700"
             }`}
           >
             <div className="flex flex-col items-center space-y-4">
               <IconCloudUpload
-                className={`w-16 h-16 ${isDragging ? "text-amber-500" : "text-gray-400"} transition-colors`}
+                className={`w-16 h-16 ${isDragging ? "text-blue-500" : "text-gray-400"} transition-colors`}
               />
               <div>
                 <p className="text-xl font-medium text-gray-100 mb-2">
@@ -106,7 +106,7 @@ function RouteComponent() {
                 <p className="text-gray-400 mb-4">or</p>
                 <button
                   onClick={() => imageRef.current?.click()}
-                  className="text-sm px-3 py-2 bg-amber-700 text-amber-100 rounded-lg hover:bg-amber-600 transition-colors duration-200 font-medium shadow-md hover:shadow-lg"
+                  className="text-sm px-3 py-2 bg-blue-700 text-blue-100 rounded-lg hover:bg-blue-600 transition-colors duration-200 font-medium shadow-md hover:shadow-lg"
                 >
                   Select Image
                 </button>
@@ -135,7 +135,7 @@ function RouteComponent() {
                 className={`px-4 py-2 rounded-lg font-medium transition-all duration-200 ${
                   copySuccess
                     ? "bg-green-800 text-green-200"
-                    : "bg-amber-700 text-amber-100 hover:bg-amber-600 shadow-md hover:shadow-lg"
+                    : "bg-blue-700 text-blue-100 hover:bg-blue-600 shadow-md hover:shadow-lg"
                 }`}
               >
                 {copySuccess ? (
@@ -155,7 +155,7 @@ function RouteComponent() {
               value={base64Result}
               readOnly
               rows={8}
-              className="w-full p-4 border border-gray-600 rounded-lg bg-gray-700 text-gray-100 font-mono text-sm resize-none focus:outline-none focus:ring-2 focus:ring-amber-500"
+              className="w-full p-4 border border-gray-600 rounded-lg bg-gray-700 text-gray-100 font-mono text-sm resize-none focus:outline-none focus:ring-2 focus:ring-blue-500"
               placeholder="Base64 data will appear here..."
             />
             <p className="text-sm text-gray-400 mt-2">
@@ -224,7 +224,7 @@ function RouteComponent() {
             href="https://sidme.vercel.app/"
             target="_blank"
             rel="noopener noreferrer"
-            className="text-amber-200 hover:text-amber-300 transition-colors"
+            className="text-brand-primary hover:text-brand-hover transition-colors"
           >
             sidme
           </a>

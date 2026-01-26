@@ -260,7 +260,7 @@ function RouteComponent() {
         {/* Header */}
         <div className="text-center mb-8">
           <h1 className="text-2xl font-bold text-gray-100 mb-2">
-            Image <span className="text-amber-200">Format</span> Converter
+            Image <span className="text-brand-primary">Format</span> Converter
           </h1>
           <p className="text-md text-gray-200">
             Convert images between formats instantly. Batch support. No uploads—100% private.
@@ -277,13 +277,13 @@ function RouteComponent() {
                 onDrop={handleDrop}
                 className={`border-3 border-dashed rounded-lg p-12 text-center transition-all duration-300 ${
                   isDragging
-                    ? "border-amber-500 bg-amber-900/20"
-                    : "border-gray-600 hover:border-amber-400 hover:bg-gray-700"
+                    ? "border-brand-primary bg-brand-primary/20"
+                    : "border-gray-600 hover:border-brand-primary/40 hover:bg-gray-700"
                 }`}
               >
                 <div className="flex flex-col items-center space-y-4">
                   <IconCloudUpload
-                    className={`w-16 h-16 ${isDragging ? "text-amber-500" : "text-gray-400"} transition-colors`}
+                    className={`w-16 h-16 ${isDragging ? "text-brand-primary" : "text-gray-400"} transition-colors`}
                   />
                   <div>
                     <p className="text-xl font-medium text-gray-100 mb-2">
@@ -292,7 +292,7 @@ function RouteComponent() {
                     <p className="text-gray-400 mb-4">or</p>
                     <button
                       onClick={() => uploadRef.current?.click()}
-                      className="text-sm px-3 py-2 bg-amber-700 text-amber-100 rounded-lg hover:bg-amber-600 transition-colors duration-200 font-medium shadow-md hover:shadow-lg"
+                      className="text-sm px-3 py-2 bg-brand-primary text-white rounded-lg hover:bg-brand-hover transition-colors duration-200 font-medium shadow-md hover:shadow-lg"
                     >
                       Choose Files
                     </button>
@@ -325,7 +325,7 @@ function RouteComponent() {
                   <select
                     value={selectedFormat}
                     onChange={(e) => setSelectedFormat(e.target.value)}
-                    className="px-3 py-2 border border-gray-600 rounded-lg bg-gray-700 text-gray-100 focus:outline-none focus:ring-2 focus:ring-amber-500"
+                    className="px-3 py-2 border border-gray-600 rounded-lg bg-gray-700 text-gray-100 focus:outline-none focus:ring-2 focus:ring-brand-primary"
                   >
                     {supportedFormats.map((format) => (
                       <option
@@ -393,8 +393,8 @@ function RouteComponent() {
                       )}
                       {item.status === "converting" && (
                         <div className="flex items-center space-x-2">
-                          <div className="w-4 h-4 border-2 border-amber-500 border-t-transparent rounded-full animate-spin"></div>
-                          <span className="text-amber-200 text-sm">Converting...</span>
+                          <div className="w-4 h-4 border-2 border-brand-primary border-t-transparent rounded-full animate-spin"></div>
+                          <span className="text-brand-primary text-sm">Converting...</span>
                         </div>
                       )}
                       {item.status === "completed" && (
@@ -506,7 +506,7 @@ function RouteComponent() {
             href="https://sidme.vercel.app/"
             target="_blank"
             rel="noopener noreferrer"
-            className="text-amber-200 hover:text-amber-300 transition-colors"
+            className="text-brand-primary hover:text-brand-hover transition-colors"
           >
             sidme
           </a>

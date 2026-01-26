@@ -9,14 +9,21 @@
 // Additionally, you should also exclude this file from your linter and/or formatter to prevent it from being checked or modified.
 
 import { Route as rootRouteImport } from './routes/__root'
+import { Route as ToolsRouteImport } from './routes/tools'
 import { Route as JsonFormatterRouteImport } from './routes/json-formatter'
 import { Route as ImageToPdfRouteImport } from './routes/image-to-pdf'
 import { Route as ImageToBase64RouteImport } from './routes/image-to-base64'
 import { Route as ImageFormatConverterRouteImport } from './routes/image-format-converter'
 import { Route as ImageCropperRouteImport } from './routes/image-cropper'
 import { Route as ImageCompressorRouteImport } from './routes/image-compressor'
+import { Route as CsvXlsxConverterRouteImport } from './routes/csv-xlsx-converter'
 import { Route as IndexRouteImport } from './routes/index'
 
+const ToolsRoute = ToolsRouteImport.update({
+  id: '/tools',
+  path: '/tools',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const JsonFormatterRoute = JsonFormatterRouteImport.update({
   id: '/json-formatter',
   path: '/json-formatter',
@@ -47,6 +54,11 @@ const ImageCompressorRoute = ImageCompressorRouteImport.update({
   path: '/image-compressor',
   getParentRoute: () => rootRouteImport,
 } as any)
+const CsvXlsxConverterRoute = CsvXlsxConverterRouteImport.update({
+  id: '/csv-xlsx-converter',
+  path: '/csv-xlsx-converter',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const IndexRoute = IndexRouteImport.update({
   id: '/',
   path: '/',
@@ -55,74 +67,95 @@ const IndexRoute = IndexRouteImport.update({
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
+  '/csv-xlsx-converter': typeof CsvXlsxConverterRoute
   '/image-compressor': typeof ImageCompressorRoute
   '/image-cropper': typeof ImageCropperRoute
   '/image-format-converter': typeof ImageFormatConverterRoute
   '/image-to-base64': typeof ImageToBase64Route
   '/image-to-pdf': typeof ImageToPdfRoute
   '/json-formatter': typeof JsonFormatterRoute
+  '/tools': typeof ToolsRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
+  '/csv-xlsx-converter': typeof CsvXlsxConverterRoute
   '/image-compressor': typeof ImageCompressorRoute
   '/image-cropper': typeof ImageCropperRoute
   '/image-format-converter': typeof ImageFormatConverterRoute
   '/image-to-base64': typeof ImageToBase64Route
   '/image-to-pdf': typeof ImageToPdfRoute
   '/json-formatter': typeof JsonFormatterRoute
+  '/tools': typeof ToolsRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
+  '/csv-xlsx-converter': typeof CsvXlsxConverterRoute
   '/image-compressor': typeof ImageCompressorRoute
   '/image-cropper': typeof ImageCropperRoute
   '/image-format-converter': typeof ImageFormatConverterRoute
   '/image-to-base64': typeof ImageToBase64Route
   '/image-to-pdf': typeof ImageToPdfRoute
   '/json-formatter': typeof JsonFormatterRoute
+  '/tools': typeof ToolsRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
   fullPaths:
     | '/'
+    | '/csv-xlsx-converter'
     | '/image-compressor'
     | '/image-cropper'
     | '/image-format-converter'
     | '/image-to-base64'
     | '/image-to-pdf'
     | '/json-formatter'
+    | '/tools'
   fileRoutesByTo: FileRoutesByTo
   to:
     | '/'
+    | '/csv-xlsx-converter'
     | '/image-compressor'
     | '/image-cropper'
     | '/image-format-converter'
     | '/image-to-base64'
     | '/image-to-pdf'
     | '/json-formatter'
+    | '/tools'
   id:
     | '__root__'
     | '/'
+    | '/csv-xlsx-converter'
     | '/image-compressor'
     | '/image-cropper'
     | '/image-format-converter'
     | '/image-to-base64'
     | '/image-to-pdf'
     | '/json-formatter'
+    | '/tools'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
+  CsvXlsxConverterRoute: typeof CsvXlsxConverterRoute
   ImageCompressorRoute: typeof ImageCompressorRoute
   ImageCropperRoute: typeof ImageCropperRoute
   ImageFormatConverterRoute: typeof ImageFormatConverterRoute
   ImageToBase64Route: typeof ImageToBase64Route
   ImageToPdfRoute: typeof ImageToPdfRoute
   JsonFormatterRoute: typeof JsonFormatterRoute
+  ToolsRoute: typeof ToolsRoute
 }
 
 declare module '@tanstack/react-router' {
   interface FileRoutesByPath {
+    '/tools': {
+      id: '/tools'
+      path: '/tools'
+      fullPath: '/tools'
+      preLoaderRoute: typeof ToolsRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/json-formatter': {
       id: '/json-formatter'
       path: '/json-formatter'
@@ -165,6 +198,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof ImageCompressorRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/csv-xlsx-converter': {
+      id: '/csv-xlsx-converter'
+      path: '/csv-xlsx-converter'
+      fullPath: '/csv-xlsx-converter'
+      preLoaderRoute: typeof CsvXlsxConverterRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/': {
       id: '/'
       path: '/'
@@ -177,12 +217,14 @@ declare module '@tanstack/react-router' {
 
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
+  CsvXlsxConverterRoute: CsvXlsxConverterRoute,
   ImageCompressorRoute: ImageCompressorRoute,
   ImageCropperRoute: ImageCropperRoute,
   ImageFormatConverterRoute: ImageFormatConverterRoute,
   ImageToBase64Route: ImageToBase64Route,
   ImageToPdfRoute: ImageToPdfRoute,
   JsonFormatterRoute: JsonFormatterRoute,
+  ToolsRoute: ToolsRoute,
 }
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)
