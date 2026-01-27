@@ -1,5 +1,5 @@
 {
-  "date": "2026-01-26T18:38:04.815Z",
+  "date": "2026-01-27T17:55:41.152Z",
   "preset": "vercel",
   "framework": {
     "name": "nitro",
@@ -16,7 +16,7 @@
     "vercel": {
       "skewProtection": false,
       "functions": {
-        "runtime": "bun1.x"
+        "runtime": "nodejs20.x"
       }
     }
   }

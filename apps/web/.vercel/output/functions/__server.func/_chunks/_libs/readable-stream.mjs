@@ -6,7 +6,7 @@ import require$$2 from "events";
 import { r as requireSafeBuffer } from "./safe-buffer.mjs";
 import { r as requireUtil } from "../../_libs/core-util-is.mjs";
 import { r as requireInherits } from "../../_libs/inherits.mjs";
-import require$$1 from "util";
+import require$$0$1 from "util";
 import { r as requireNode } from "../../_libs/util-deprecate.mjs";
 import require$$11 from "node:string_decoder";
 var readable = { exports: {} };
@@ -30,7 +30,7 @@ function requireBufferList() {
       }
     }
     var Buffer = requireSafeBuffer().Buffer;
-    var util = require$$1;
+    var util = require$$0$1;
     function copyBuffer(src, target, offset) {
       src.copy(target, offset);
     }
@@ -707,7 +707,7 @@ function require_stream_readable() {
   }
   var util = Object.create(/* @__PURE__ */ requireUtil());
   util.inherits = /* @__PURE__ */ requireInherits();
-  var debugUtil = require$$1;
+  var debugUtil = require$$0$1;
   var debug = void 0;
   if (debugUtil && debugUtil.debuglog) {
     debug = debugUtil.debuglog("stream");

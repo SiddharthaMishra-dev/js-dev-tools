@@ -3,5 +3,5 @@
   "launcherType": "Nodejs",
   "shouldAddHelpers": false,
   "supportsResponseStreaming": true,
-  "runtime": "bun1.x"
+  "runtime": "nodejs20.x"
 }

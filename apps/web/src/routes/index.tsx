@@ -58,7 +58,7 @@ function App() {
           <div className="flex flex-col sm:flex-row items-center justify-center gap-3">
             <Link
               to="/tools"
-              className="inline-flex items-center space-x-2 px-5 py-2.5 bg-brand-primary text-white rounded-lg hover:bg-brand-hover transition-colors duration-200 text-sm font-medium"
+              className=" inline-flex items-center space-x-2 px-5 py-2.5 bg-brand-primary shadow-[0px_0px_2px_1px_rgba(255, 255, 255,0.2)_inset] text-shadow-sm text-shadow-white/10 ring ring-white/20 text-white rounded-lg hover:bg-brand-hover transition-colors duration-200 text-sm font-medium"
             >
               <span>Browse all tools</span>
               <IconChevronRight className="h-4 w-4" />
@@ -68,7 +68,7 @@ function App() {
               href="https://github.com/SiddharthaMishra-dev/js-dev-tools"
               target="_blank"
               rel="noopener noreferrer"
-              className="inline-flex items-center space-x-2 px-4 py-2 bg-gray-700 text-gray-100 rounded-lg hover:bg-gray-600 transition-colors duration-200 text-sm font-medium"
+              className="inline-flex items-center space-x-2 px-4 py-2 shadow-[0px_0px_2px_1px_rgba(255, 255, 255,0.2)_inset] text-shadow-sm text-shadow-white/10 ring ring-white/20 bg-gray-700 text-gray-100 rounded-lg hover:bg-gray-600 transition-colors duration-200 text-sm font-medium"
             >
               <IconBrandGithub className="w-4 h-4" />
               <span>Star on GitHub</span>
@@ -195,13 +195,13 @@ function App() {
           <div className="mt-6 flex flex-col sm:flex-row justify-center gap-3">
             <Link
               to="/tools"
-              className="px-5 py-2.5 bg-brand-primary text-white rounded-lg text-sm font-semibold hover:bg-brand-hover transition-colors"
+              className="px-5 py-2.5 shadow-[0px_0px_2px_1px_rgba(255, 255, 255,0.2)_inset] text-shadow-sm text-shadow-white/10 ring ring-white/20 bg-brand-primary text-white rounded-lg text-sm font-semibold hover:bg-brand-hover transition-colors"
             >
               Go to tools page
             </Link>
             <a
               href="#tools"
-              className="px-5 py-2.5 bg-white/10 text-white rounded-lg text-sm font-semibold hover:bg-white/20 transition-colors"
+              className="px-5 py-2.5 shadow-[0px_0px_2px_1px_rgba(255, 255, 255,0.2)_inset] text-shadow-sm text-shadow-white/10 ring ring-white/20 bg-white/10 text-white rounded-lg text-sm font-semibold hover:bg-white/20 transition-colors"
             >
               Explore featured tools
             </a>

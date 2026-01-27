@@ -1,6 +1,6 @@
 globalThis.__nitro_main__ = import.meta.url;
 import { d as defineLazyEventHandler, H as H3Core, a as HTTPError, t as toRequest } from "./_libs/h3.mjs";
-import { a as FastResponse } from "./_libs/srvx.mjs";
+import { N as NodeResponse } from "./_libs/srvx.mjs";
 import "./_libs/rou3.mjs";
 function lazyService(loader) {
   let promise, mod;
@@ -22,7 +22,7 @@ const services = {
 globalThis.__nitro_vite_envs__ = services;
 const errorHandler$1 = (error, event) => {
   const res = defaultHandler(error, event);
-  return new FastResponse(typeof res.body === "string" ? res.body : JSON.stringify(res.body, null, 2), res);
+  return new NodeResponse(typeof res.body === "string" ? res.body : JSON.stringify(res.body, null, 2), res);
 };
 function defaultHandler(error, event, opts) {
   const isSensitive = error.unhandled;

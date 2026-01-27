@@ -5,7 +5,11 @@ import { o as defineHandlerCallback } from "../_chunks/_libs/@tanstack/router-co
 import "../_libs/tiny-warning.mjs";
 import "../_libs/tiny-invariant.mjs";
 import "node:stream";
-import "../_libs/react-dom.mjs";
+import "../_chunks/_libs/react-dom.mjs";
+import "util";
+import "crypto";
+import "async_hooks";
+import "stream";
 import "../_libs/isbot.mjs";
 import "../_chunks/_libs/@tanstack/history.mjs";
 import "node:stream/web";
@@ -3106,7 +3110,106 @@ const FastURL = /* @__PURE__ */ (() => {
   Object.setPrototypeOf(FastURL$1, NativeURL);
   return FastURL$1;
 })();
-const FastResponse = Response;
+const NodeResponse = /* @__PURE__ */ (() => {
+  const NativeResponse = globalThis.Response;
+  const STATUS_CODES = globalThis.process?.getBuiltinModule?.("node:http")?.STATUS_CODES || {};
+  class NodeResponse$1 {
+    #body;
+    #init;
+    #headers;
+    #response;
+    constructor(body, init) {
+      this.#body = body;
+      this.#init = init;
+    }
+    static [Symbol.hasInstance](val) {
+      return val instanceof NativeResponse;
+    }
+    get status() {
+      return this.#response?.status || this.#init?.status || 200;
+    }
+    get statusText() {
+      return this.#response?.statusText || this.#init?.statusText || STATUS_CODES[this.status] || "";
+    }
+    get headers() {
+      if (this.#response) return this.#response.headers;
+      if (this.#headers) return this.#headers;
+      const initHeaders = this.#init?.headers;
+      return this.#headers = initHeaders instanceof Headers ? initHeaders : new Headers(initHeaders);
+    }
+    get ok() {
+      if (this.#response) return this.#response.ok;
+      const status = this.status;
+      return status >= 200 && status < 300;
+    }
+    get _response() {
+      if (this.#response) return this.#response;
+      this.#response = new NativeResponse(this.#body, this.#headers ? {
+        ...this.#init,
+        headers: this.#headers
+      } : this.#init);
+      this.#init = void 0;
+      this.#headers = void 0;
+      this.#body = void 0;
+      return this.#response;
+    }
+    _toNodeResponse() {
+      const status = this.status;
+      const statusText = this.statusText;
+      let body;
+      let contentType;
+      let contentLength;
+      if (this.#response) body = this.#response.body;
+      else if (this.#body) if (this.#body instanceof ReadableStream) body = this.#body;
+      else if (typeof this.#body === "string") {
+        body = this.#body;
+        contentType = "text/plain; charset=UTF-8";
+        contentLength = Buffer.byteLength(this.#body);
+      } else if (this.#body instanceof ArrayBuffer) {
+        body = Buffer.from(this.#body);
+        contentLength = this.#body.byteLength;
+      } else if (this.#body instanceof Uint8Array) {
+        body = this.#body;
+        contentLength = this.#body.byteLength;
+      } else if (this.#body instanceof DataView) {
+        body = Buffer.from(this.#body.buffer);
+        contentLength = this.#body.byteLength;
+      } else if (this.#body instanceof Blob) {
+        body = this.#body.stream();
+        contentType = this.#body.type;
+        contentLength = this.#body.size;
+      } else if (typeof this.#body.pipe === "function") body = this.#body;
+      else body = this._response.body;
+      const headers = [];
+      const initHeaders = this.#init?.headers;
+      const headerEntries = this.#response?.headers || this.#headers || (initHeaders ? Array.isArray(initHeaders) ? initHeaders : initHeaders?.entries ? initHeaders.entries() : Object.entries(initHeaders).map(([k2, v2]) => [k2.toLowerCase(), v2]) : void 0);
+      let hasContentTypeHeader;
+      let hasContentLength;
+      if (headerEntries) for (const [key, value] of headerEntries) {
+        if (Array.isArray(value)) for (const v2 of value) headers.push([key, v2]);
+        else headers.push([key, value]);
+        if (key === "content-type") hasContentTypeHeader = true;
+        else if (key === "content-length") hasContentLength = true;
+      }
+      if (contentType && !hasContentTypeHeader) headers.push(["content-type", contentType]);
+      if (contentLength && !hasContentLength) headers.push(["content-length", String(contentLength)]);
+      this.#init = void 0;
+      this.#headers = void 0;
+      this.#response = void 0;
+      this.#body = void 0;
+      return {
+        status,
+        statusText,
+        headers,
+        body
+      };
+    }
+  }
+  lazyInherit(NodeResponse$1.prototype, NativeResponse.prototype, "_response");
+  Object.setPrototypeOf(NodeResponse$1, NativeResponse);
+  Object.setPrototypeOf(NodeResponse$1.prototype, NativeResponse.prototype);
+  return NodeResponse$1;
+})();
 const kEventNS = "h3.internal.event.";
 const kEventRes = /* @__PURE__ */ Symbol.for(`${kEventNS}res`);
 const kEventResHeaders = /* @__PURE__ */ Symbol.for(`${kEventNS}res.headers`);
@@ -3269,7 +3372,7 @@ var HTTPResponse = class {
   }
 };
 function prepareResponse(val, event, config, nested) {
-  if (val === kHandled) return new FastResponse(null);
+  if (val === kHandled) return new NodeResponse(null);
   if (val === kNotFound) val = new HTTPError({
     status: 404,
     message: `Cannot find any route matching [${event.req.method}] ${event.url}`
@@ -3291,7 +3394,7 @@ function prepareResponse(val, event, config, nested) {
   if (!(val instanceof Response)) {
     const res = prepareResponseBody(val, event, config);
     const status = res.status || preparedRes?.status;
-    return new FastResponse(nullBody(event.req.method, status) ? null : res.body, {
+    return new NodeResponse(nullBody(event.req.method, status) ? null : res.body, {
       status,
       statusText: res.statusText || preparedRes?.statusText,
       headers: res.headers && preparedHeaders ? mergeHeaders$1(res.headers, preparedHeaders) : res.headers || preparedHeaders
@@ -3302,7 +3405,7 @@ function prepareResponse(val, event, config, nested) {
     mergeHeaders$1(val.headers, preparedHeaders, val.headers);
     return val;
   } catch {
-    return new FastResponse(nullBody(event.req.method, val.status) ? null : val.body, {
+    return new NodeResponse(nullBody(event.req.method, val.status) ? null : val.body, {
       status: val.status,
       statusText: val.statusText,
       headers: mergeHeaders$1(val.headers, preparedHeaders)
@@ -3368,7 +3471,7 @@ function nullBody(method, status) {
   return method === "HEAD" || status === 100 || status === 101 || status === 102 || status === 204 || status === 205 || status === 304;
 }
 function errorResponse(error, debug) {
-  return new FastResponse(JSON.stringify({
+  return new NodeResponse(JSON.stringify({
     ...error.toJSON(),
     stack: debug && error.stack ? error.stack.split("\n").map((l) => l.trim()) : void 0
   }, void 0, debug ? 2 : void 0), {
@@ -3450,7 +3553,7 @@ function getResponse() {
   return event.res;
 }
 async function getStartManifest(matchedRoutes) {
-  const { tsrStartManifest } = await import("./_tanstack-start-manifest_v-BEGf1_8n.mjs");
+  const { tsrStartManifest } = await import("./_tanstack-start-manifest_v-BZat8lpK.mjs");
   const startManifest = tsrStartManifest();
   const rootRoute = startManifest.routes[rootRouteId] = startManifest.routes[rootRouteId] || {};
   rootRoute.assets = rootRoute.assets || [];
@@ -3922,7 +4025,7 @@ function getStartResponseHeaders(opts) {
 let entriesPromise;
 let manifestPromise;
 async function loadEntries() {
-  const routerEntry = await import("./router-EYBqgctR.mjs");
+  const routerEntry = await import("./router-DC73B4hQ.mjs");
   const startEntry = await import("./start-HYkvq4Ni.mjs");
   return { startEntry, routerEntry };
 }
