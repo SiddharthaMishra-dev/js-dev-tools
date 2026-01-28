@@ -11,6 +11,7 @@ import {
 import { useCallback, useEffect, useRef, useState } from "react";
 import * as XLSX from "xlsx";
 import ToolInfo from "../components/ToolInfo";
+import RelatedTools from "@/components/RelatedTools";
 
 import { getSeoMetadata } from "@/lib/seo";
 
@@ -388,6 +389,11 @@ function RouteComponent() {
             description: "Download your converted files individually with a single click.",
           },
         ]}
+      />
+
+      <RelatedTools
+        currentToolSlug="csv-xlsx-converter"
+        category="Data"
       />
 
       <div className="mt-8">

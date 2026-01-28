@@ -11,6 +11,7 @@ import {
 import JSZip from "jszip";
 import { useCallback, useEffect, useRef, useState } from "react";
 import ToolInfo from "../components/ToolInfo";
+import RelatedTools from "@/components/RelatedTools";
 import { ConversionItem } from "@/types/ImageTypes";
 
 import { getSeoMetadata } from "@/lib/seo";
@@ -513,6 +514,11 @@ function RouteComponent() {
               "Download individual converted images or grab everything at once as a ZIP archive.",
           },
         ]}
+      />
+
+      <RelatedTools
+        currentToolSlug="image-format-converter"
+        category="Images"
       />
 
       {/* Footer */}

@@ -12,8 +12,13 @@ const Header: React.FC = () => {
         <div className="flex items-center justify-between h-16">
           <Link
             to="/"
-            className="no-underline text-xl font-bold text-gray-100"
+            className="flex items-center no-underline text-xl font-bold text-gray-100"
           >
+            <img
+              src="/logo192.png"
+              alt="Logo"
+              className="inline-block mr-2 w-8 h-8"
+            />
             JS<span className="text-blue-400">DevTools</span>
           </Link>
 

@@ -11,6 +11,7 @@ import {
   IconArrowsMaximize,
 } from "@tabler/icons-react";
 import ToolInfo from "@/components/ToolInfo";
+import RelatedTools from "@/components/RelatedTools";
 
 import { getSeoMetadata } from "@/lib/seo";
 
@@ -742,6 +743,11 @@ function RouteComponent() {
           ]}
         />
       </div>
+
+      <RelatedTools
+        currentToolSlug="image-cropper"
+        category="Images"
+      />
 
       <div className="mt-8">
         <p className="text-gray-400 text-xs text-center">

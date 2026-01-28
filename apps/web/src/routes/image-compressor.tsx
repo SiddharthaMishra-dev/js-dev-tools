@@ -1,4 +1,5 @@
 import ToolInfo from "@/components/ToolInfo";
+import RelatedTools from "@/components/RelatedTools";
 import {
   IconArrowsMinimize,
   IconBolt,
@@ -585,6 +586,11 @@ function RouteComponent() {
           ]}
         />
       </div>
+
+      <RelatedTools
+        currentToolSlug="image-compressor"
+        category="Images"
+      />
 
       <div className="mt-8">
         <p className="text-gray-400 text-xs text-center">

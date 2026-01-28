@@ -9,6 +9,7 @@ import {
 import { useCallback, useRef, useState } from "react";
 import { createFileRoute } from "@tanstack/react-router";
 import ToolInfo from "@/components/ToolInfo";
+import RelatedTools from "@/components/RelatedTools";
 
 import { getSeoMetadata } from "@/lib/seo";
 
@@ -226,6 +227,11 @@ function RouteComponent() {
             description: "Paste the string into your HTML src, CSS url(), or JSON data as needed.",
           },
         ]}
+      />
+
+      <RelatedTools
+        currentToolSlug="image-to-base64"
+        category="Images"
       />
 
       <div className="mt-8 text-center">

@@ -11,6 +11,7 @@ import { jsPDF } from "jspdf";
 import { Reorder } from "motion/react";
 import React, { useCallback, useEffect, useRef, useState } from "react";
 import ToolInfo from "../components/ToolInfo";
+import RelatedTools from "@/components/RelatedTools";
 
 interface ImageItem {
   id: string;
@@ -376,6 +377,11 @@ function RouteComponent() {
               "Your browser will automatically prompt you to save the newly created PDF document.",
           },
         ]}
+      />
+
+      <RelatedTools
+        currentToolSlug="image-to-pdf"
+        category="Images"
       />
 
       <div className="mt-8 text-center">

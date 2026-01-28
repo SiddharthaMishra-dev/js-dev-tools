@@ -52,7 +52,7 @@ export const Route = createRootRoute({
       },
       {
         property: "og:image",
-        content: "https://js-devtools.sidme.dev/screenshot.png",
+        content: "https://js-devtools.sidme.dev/og.png",
       },
       {
         name: "twitter:card",
@@ -69,7 +69,7 @@ export const Route = createRootRoute({
       },
       {
         name: "twitter:image",
-        content: "https://js-devtools.sidme.dev/screenshot.png",
+        content: "https://js-devtools.sidme.dev/og.png",
       },
       {
         name: "theme-color",

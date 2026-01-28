@@ -10,6 +10,7 @@ import {
   IconAlertCircle,
 } from "@tabler/icons-react";
 import ToolInfo from "@/components/ToolInfo";
+import RelatedTools from "@/components/RelatedTools";
 
 type TokenType = "bracket" | "key" | "string" | "number" | "boolean" | "null" | "punctuation";
 
@@ -493,6 +494,11 @@ function RouteComponent() {
           ]}
         />
       </div>
+
+      <RelatedTools
+        currentToolSlug="json-formatter"
+        category="Data"
+      />
 
       <footer className="mt-8 text-center">
         <p className="text-gray-400 text-xs">

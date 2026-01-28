@@ -13,6 +13,7 @@ import {
   IconHash,
 } from "@tabler/icons-react";
 import ToolInfo from "@/components/ToolInfo";
+import RelatedTools from "@/components/RelatedTools";
 
 import { getSeoMetadata } from "@/lib/seo";
 
@@ -283,6 +284,11 @@ function WordCounterComponent() {
           ]}
         />
       </div>
+
+      <RelatedTools
+        currentToolSlug="word-counter"
+        category="Data"
+      />
 
       <footer className="mt-12 text-center">
         <p className="text-gray-400 text-xs">

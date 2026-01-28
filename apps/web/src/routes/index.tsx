@@ -19,18 +19,24 @@ const featuredTools = tools.slice(0, 6);
 export const Route = createFileRoute("/")({
   head: () =>
     getSeoMetadata({
-      title: "JS DevTools | Privacy-first online tools for everyone",
+      title: "Free Online Image & Data Tools | 100% Private, Client-Side Processing | JS DevTools",
       description:
-        "All-in-one, privacy-first tools for images and data. Convert, compress, crop, format JSON, and more—100% client-side with zero uploads.",
+        "Free online tools for developers and creators: Convert images to Base64, compress images, format JSON, convert CSV to Excel, and more. All processing happens in your browser—no uploads, no tracking, complete privacy. Fast, secure, and open-source.",
       keywords: [
-        "online tools",
-        "image to base64",
-        "image compressor",
-        "image converter",
-        "json formatter",
-        "csv to xlsx",
+        "free online tools",
+        "image to base64 converter",
+        "image compressor online",
+        "image format converter",
+        "json formatter validator",
+        "csv to xlsx converter",
+        "image to pdf converter",
         "privacy-first tools",
-        "client-side utilities",
+        "client-side processing",
+        "offline image tools",
+        "free developer tools",
+        "browser-based utilities",
+        "no upload file converter",
+        "secure online tools",
       ],
       url: "/",
     }),
@@ -47,12 +53,12 @@ function App() {
       <section className="pt-24 pb-12 px-4 relative z-10">
         <div className="max-w-5xl mx-auto text-center space-y-6">
           <h1 className="text-4xl md:text-5xl font-bold text-gray-100 leading-tight">
-            Get things done faster with <span className="text-brand-primary">client-side</span>{" "}
-            tools
+            Free Online Tools for Image Conversion, Compression & Data Formatting
           </h1>
           <p className="text-lg text-gray-200 max-w-3xl mx-auto">
-            Lightning-fast image and data utilities for everyone. Zero uploads, zero tracking, and
-            metadata tuned for better search visibility.
+            Professional-grade online tools that work entirely in your browser. Convert images to
+            Base64, compress photos, format JSON, convert CSV to Excel, and more—all without
+            uploading files to any server. Fast, secure, and 100% free.
           </p>
 
           <div className="flex flex-col sm:flex-row items-center justify-center gap-3">
@@ -77,13 +83,16 @@ function App() {
 
           <div className="flex flex-wrap justify-center gap-2 text-xs text-gray-300">
             <span className="rounded-full border border-white/10 bg-white/5 px-3 py-1">
-              100% client-side
+              ✓ 100% Browser-Based Processing
             </span>
             <span className="rounded-full border border-white/10 bg-white/5 px-3 py-1">
-              No account. No uploads.
+              ✓ No File Uploads Required
             </span>
             <span className="rounded-full border border-white/10 bg-white/5 px-3 py-1">
-              Open source & auditable
+              ✓ Complete Privacy Protection
+            </span>
+            <span className="rounded-full border border-white/10 bg-white/5 px-3 py-1">
+              ✓ Free & Open Source
             </span>
           </div>
         </div>
@@ -97,12 +106,14 @@ function App() {
           <div className="flex items-center justify-between gap-4 mb-6 flex-wrap">
             <div>
               <p className="text-sm text-brand-light font-semibold uppercase tracking-wide">
-                Featured tools
+                Popular Tools
               </p>
-              <h2 className="text-2xl font-bold text-gray-100">Get the essentials in one place</h2>
+              <h2 className="text-2xl font-bold text-gray-100">
+                Most Used Image & Data Conversion Tools
+              </h2>
               <p className="text-sm text-gray-300 mt-1">
-                Clear descriptions, privacy-first defaults, and instant results right in your
-                browser.
+                Powerful online utilities for converting images, compressing files, and formatting
+                data. All tools process files locally in your browser for maximum privacy and speed.
               </p>
             </div>
             <Link
@@ -156,41 +167,41 @@ function App() {
         </section>
 
         <section className="max-w-6xl mx-auto mt-16 text-center">
-          <h2 className="text-2xl font-bold text-gray-100 mb-8">Why people trust JS DevTools</h2>
+          <h2 className="text-2xl font-bold text-gray-100 mb-8">Why Choose Our Online Tools?</h2>
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
             <FeatureCard
               icon={<IconBolt className="text-brand-light w-6 h-6" />}
-              title="Instant processing"
-              description="Runs entirely in your browser for near-zero latency."
+              title="Lightning-Fast Performance"
+              description="All processing happens instantly in your browser—no server delays, no waiting for uploads."
             />
             <FeatureCard
               icon={<IconLock className="text-brand-light w-6 h-6" />}
-              title="Complete privacy"
-              description="No uploads or accounts. Your files never leave your device."
+              title="Complete Privacy & Security"
+              description="Your files never leave your device. No uploads, no cloud storage, no data collection."
             />
             <FeatureCard
               icon={<IconBrandGithub className="text-brand-light w-6 h-6" />}
-              title="Open source"
-              description="Inspect, fork, and contribute. Transparency by default."
+              title="100% Free & Open Source"
+              description="All tools are free to use forever. Inspect the code, contribute, or fork on GitHub."
             />
             <FeatureCard
               icon={<IconSearch className="text-brand-light w-6 h-6" />}
-              title="SEO friendly"
-              description="Structured content and clear copy to help tools rank."
+              title="Works Offline"
+              description="Client-side processing means tools work without internet connection after initial load."
             />
           </div>
         </section>
 
         <section className="max-w-5xl mx-auto mt-16 bg-white/5 border border-white/10 rounded-2xl p-8 text-center">
-          <p className="text-sm text-brand-light uppercase tracking-wide">
-            Build once, reuse everywhere
-          </p>
+          <p className="text-sm text-brand-light uppercase tracking-wide">All-In-One Tool Suite</p>
           <h3 className="text-2xl font-semibold text-gray-100 mt-2">
-            A dedicated tools page keeps everything indexable and easy to discover
+            Everything You Need for Image Processing & Data Conversion
           </h3>
           <p className="text-gray-300 mt-3">
-            Every tool gets focused copy, keywords, and internal links to improve crawlability while
-            keeping the experience fast and privacy-first.
+            From converting images to Base64 encoding, compressing photos to reduce file size,
+            formatting JSON data, to converting spreadsheets—our comprehensive suite handles all
+            your file conversion and processing needs with professional results, all in your
+            browser.
           </p>
           <div className="mt-6 flex flex-col sm:flex-row justify-center gap-3">
             <Link
